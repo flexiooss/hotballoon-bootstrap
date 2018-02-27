@@ -1,0 +1,7 @@
+export const TOKEN_APP_INITIALISED = 'TOKEN_APP_INITIALISED'
+export const TOKEN_INCREMENT = 'TOKEN_INCREMENT'
+
+export const DEMO_STORE = 'DEMO_STORE'
+
+export const ACTION_APP = 'ACTION_APP'
+export const ACTION_DEMO = 'ACTION_DEMO'
