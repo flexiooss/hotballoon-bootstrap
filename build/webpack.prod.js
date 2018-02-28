@@ -9,7 +9,7 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 const webpackBase = require('./webpack.base')
 const config = require('./config')
 
-config.entry.app = ['babel-polyfill', './src/js/bootstrap.js', './src/css/main.css']
+config.entry.app = ['babel-polyfill', './src/js/bootstrap.js']
 
 webpackBase.devtool = false
 webpackBase.output.filename = '[name].js'
@@ -20,21 +20,9 @@ webpackBase.plugins.push(
   new ExtractTextPlugin('all.css'),
   new UglifyJsPlugin({
     test: /\.js($|\?)/i
-    // uglifyOptions: {
-    // compress: {
-    //   keep_classnames: true,
-    //   keep_fnames: true
-    // },
-    // mangle: {
-    //   keep_classnames: true
-    // keep_fnames: true
-    // }
-    // toplevel: false,
-    // keep_classnames: true,
-    // keep_fnames: true
-    // }
   }),
   new webpack.DefinePlugin({
+    __DEVELOPPEMENT__: false,
     'process.env.NODE_ENV': JSON.stringify('production')
   })
 )

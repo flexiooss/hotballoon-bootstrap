@@ -5,13 +5,21 @@ const webpackBase = require('./webpack.base')
 const config = require('./config')
 const CircularDependencyPlugin = require('circular-dependency-plugin')
 
-config.entry.app = ['./src/js/_before.js', './src/js/bootstrap.js', './src/js/_after.js', './src/css/main.css']
+config.entry.app = ['./src/js/_before.js', './src/js/bootstrap.js', './src/js/_after.js']
 
 webpackBase.devtool = 'cheap-module-eval-source-map'
 webpackBase.output.publicPath = 'http://localhost:' + config.port + config.dist_url
 
+webpackBase.devServer = {
+  headers: {
+    'Access-Control-Allow-Origin': '*'
+  }
+}
+
 webpackBase.plugins.push(
   new webpack.DefinePlugin({
+    __DEVELOPPEMENT__: true,
+    __ASSERT__: true,
     'process.env.NODE_ENV': JSON.stringify('development')
   }),
   new webpack.NamedModulesPlugin(),

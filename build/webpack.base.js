@@ -42,12 +42,7 @@ let webpackBase = {
     }
     ]
   },
-  plugins: [],
-  devServer: {
-    headers: {
-      'Access-Control-Allow-Origin': '*'
-    }
-  }
+  plugins: []
 }
 
 if (config.stylelint) {

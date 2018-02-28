@@ -6,14 +6,15 @@ import {
 } from './app/AppDispatcher'
 
 import {
-  ApplicationComponent
-} from './modules/application'
+  DemoComponent,
+  ACTION_APP
+} from './modules/DemoComponent'
 
 const APP = new MaSuperApp();
 (function(app) {
   app.setDispatcher(new AppDispatcher())
-  const applicationComponent = app.addComponent(ApplicationComponent)
-  let action = applicationComponent.Action('AppActions')
+  const applicationComponent = app.addComponent(DemoComponent, document.body)
+  let action = applicationComponent.Action(ACTION_APP)
   app.createAction(action, action.type('APP_INITIALIZED'), {
     message: 'HEY YOUR APPLICATION IS READY, ENJOY !!'
   })

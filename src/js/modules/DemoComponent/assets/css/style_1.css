@@ -1,0 +1,15 @@
+.wrapper {
+  width: 50%;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+#curent {
+  padding: 1rem;
+  width: 5rem;
+  display: inline-block;
+}
+
+.bordered {
+  border: 1px solid #ddd;
+}

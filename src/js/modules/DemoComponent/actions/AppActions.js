@@ -7,8 +7,9 @@ const TYPES = {
 }
 
 export class AppActions extends Action {
-  _types() {
-    return TYPES
+  constructor(dispatcher, componentId) {
+    super(dispatcher, componentId)
+    this._types = TYPES
   }
 
   newAction(type, payload) {
@@ -18,7 +19,7 @@ export class AppActions extends Action {
         this.dispatch(
           this.type('APP_INITIALIZED'), {
             type: this.type('APP_INITIALIZED'),
-            payload: payload
+            message: payload.message
           }
         )
         break
