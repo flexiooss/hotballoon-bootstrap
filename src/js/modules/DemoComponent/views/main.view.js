@@ -5,6 +5,7 @@ import {
 import {
   ACTION_DEMO
 } from '../component/_KEYS'
+import Even from './Even.view'
 
 class Main extends View {
   constructor(id, viewContainer, props) {
@@ -15,6 +16,7 @@ class Main extends View {
       console.log('DemoComponent:View:Main will updated')
       // this._privateState.set('incr', (Myclass % 2 === 0) ? Myclass : Myclass - 1)
     }
+    this.registerSubView('even', new Even('even', this.ViewContainer(), props))
   }
 
   view() {
@@ -31,7 +33,16 @@ class Main extends View {
         }),
         this.html('button#decrement', '-1', {
           nodeRef: 'decrementButton'
-        })
+        }),
+        this.html('div#balloon',
+          '(_)', {
+            style: {
+              position: 'absolute',
+              top: this.getProp('demoNumber') + 'rem',
+              left: '5%'
+            }
+          }),
+        this._subViews.get('even').view()
       )
     )
 
