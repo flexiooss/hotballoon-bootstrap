@@ -22,7 +22,7 @@ webpackBase.plugins.push(
     test: /\.js($|\?)/i
   }),
   new webpack.DefinePlugin({
-    __DEVELOPPEMENT__: false,
+    'window.__DEVELOPPEMENT__': JSON.stringify(false),
     'process.env.NODE_ENV': JSON.stringify('production')
   })
 )
