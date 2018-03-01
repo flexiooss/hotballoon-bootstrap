@@ -1,7 +1,36 @@
-.wrapper {
-  width: 50%;
-  margin: 0 auto;
-  padding: 2rem;
+#header,
+#main,
+#evenContainer,
+#footer {
+  position: relative;
+}
+
+#header {
+  background-color: #fff;
+}
+
+#header::before {
+  content: 'header';
+}
+
+#main {
+  text-align: center;
+}
+
+#main::before {
+  content: 'main';
+}
+
+#evenContainer::before {
+  content: 'evenContainer';
+}
+
+#footer {
+  font-size: 10px;
+}
+
+#footer::before {
+  content: 'footer';
 }
 
 #curent {
@@ -11,12 +40,6 @@
 }
 
 #balloon {
-  color: palevioletred;
-  font-size: 20px;
-  font-weight: bold;
-  background-color: #fff;
-}
-
-.bordered {
-  border: 1px solid #ddd;
+  content: url(../img/balloon.svg);
+  left: -150px;
 }

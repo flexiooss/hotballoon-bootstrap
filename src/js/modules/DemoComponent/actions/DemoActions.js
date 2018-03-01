@@ -4,7 +4,8 @@ import {
 
 const TYPES = {
   INCREMENT: 'INCREMENT',
-  DECREMENT: 'DECREMENT'
+  DECREMENT: 'DECREMENT',
+  CHANGE_STEP: 'CHANGE_STEP'
 }
 
 export class DemoActions extends Action {
@@ -29,6 +30,15 @@ export class DemoActions extends Action {
           this.type('DECREMENT'), {
             type: this.type('DECREMENT'),
             payload: payload
+          }
+        )
+        break
+
+      case this.type('CHANGE_STEP'):
+        this.dispatch(
+          this.type('CHANGE_STEP'), {
+            type: this.type('CHANGE_STEP'),
+            step: payload.step
           }
         )
         break

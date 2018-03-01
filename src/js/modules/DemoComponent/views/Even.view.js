@@ -7,25 +7,38 @@ class Even extends View {
     super(id, viewContainer, props)
     this._privateState.set('even', this.getProp('demoNumber'))
 
-    this.onUpdate = () => {
-      console.log('DemoComponent:View:Even will updated')
+    this.onPropsChanged = () => {
+      console.log('DemoComponent:View:Even will onPropsChange')
+
+      /**
+       * Abort automatic node Reconciliation for : STATE_CHANGE
+       * well played it's more optimized
+       */
+      this._shouldUpdate = false
 
       /**
        * play with _privateState
        */
-      this._privateState.set('even', (this.getProp('demoNumber') % 2 === 0) ? this.getProp('demoNumber') : this.getProp('demoNumber') - 1)
-
-      this.nodeRef('h5').innerHTML = this._formatTitle()
+      this._setPrivateStateProp(
+        'even',
+        (this.getProp('demoNumber') % 2 === 0) ? this.getProp('demoNumber') : this.getProp('demoNumber') - 1
+      )
 
       /**
-       * Abort automatic node Reconciliation : well played it's more optimized
+       * Abort automatic node Reconciliation for : PROPS_CHANGE
+       * well played it's more optimized
        */
       this._shouldUpdate = false
+    }
+
+    this.onStateChanged = () => {
+      console.log('DemoComponent:View:Even will onStateChanged')
+      this.nodeRef('h5').innerHTML = this._formatTitle()
     }
   }
 
   view() {
-    return this.html('div#evenContainer.wrapper.bordered', {
+    return this.html('div#evenContainer.wrapper.bordered.tag', {
       style: {
         textAlign: 'center'
       }
@@ -37,7 +50,7 @@ class Even extends View {
   }
 
   _formatTitle() {
-    return `Do you like only even number ? (${this._privateState.get('even')})`
+    return `Do you like only even number ? (${this._getPrivateStateProp('even')})`
   }
 }
 

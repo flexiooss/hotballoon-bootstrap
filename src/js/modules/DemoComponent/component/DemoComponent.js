@@ -22,6 +22,7 @@ import {
   TOKEN_APP_INITIALISED,
   TOKEN_INCREMENT,
   TOKEN_DECREMENT,
+  TOKEN_CHANGE_STEP,
   ACTION_APP,
   ACTION_DEMO,
   DEMO_VIEWCONTAINER
@@ -91,6 +92,13 @@ export class DemoComponent extends Component {
         (payload) => {
           this._decrement(payload)
         }))
+
+    this.dispatcherListenerTokens.set(
+      TOKEN_CHANGE_STEP,
+      this.Dispatcher().addEventListener(this.Action(ACTION_DEMO).type('CHANGE_STEP'),
+        (payload) => {
+          this._changeStep(payload)
+        }))
   }
 
   /**
@@ -122,12 +130,14 @@ export class DemoComponent extends Component {
   }
 
   _increment(payload) {
-    console.log(payload)
     this.Store(this.storesKey.get(DEMO_STORE)).increment()
   }
 
   _decrement(payload) {
-    console.log(payload)
     this.Store(this.storesKey.get(DEMO_STORE)).decrement()
+  }
+
+  _changeStep(payload) {
+    this.Store(this.storesKey.get(DEMO_STORE)).changeStep(payload.step)
   }
 }

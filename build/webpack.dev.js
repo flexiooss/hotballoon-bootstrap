@@ -18,8 +18,8 @@ webpackBase.devServer = {
 
 webpackBase.plugins.push(
   new webpack.DefinePlugin({
-    __DEVELOPPEMENT__: true,
-    __ASSERT__: true,
+    'window.__DEVELOPPEMENT__': JSON.stringify(true),
+    'window.__ASSERT__': JSON.stringify(true),
     'process.env.NODE_ENV': JSON.stringify('development')
   }),
   new webpack.NamedModulesPlugin(),

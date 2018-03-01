@@ -6,7 +6,7 @@ import * as demoComponentPackage
 
 class Footer extends View {
   view() {
-    return this.html('footer#cestLePied.wrapper', 'DemoComponent version : ' + demoComponentPackage.version)
+    return this.html('footer#footer.wrapper.tag', 'DemoComponent version : ' + demoComponentPackage.version)
   }
 }
 

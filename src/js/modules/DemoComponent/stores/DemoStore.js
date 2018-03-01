@@ -4,7 +4,8 @@ import {
 } from 'hotballoon'
 
 const STORE = storeBases.Storage.create({
-  demoNumber: 0
+  demoNumber: 0,
+  step: 1
 })
 
 export class DemoStore extends Store {
@@ -13,14 +14,20 @@ export class DemoStore extends Store {
   }
 
   increment() {
-    let number = this._get()
-    number.demoNumber++
-    this.set(number)
+    let state = this._get()
+    state.demoNumber = state.demoNumber + state.step
+    this.set(state)
   }
 
   decrement() {
-    let number = this._get()
-    number.demoNumber--
-    this.set(number)
+    let state = this._get()
+    state.demoNumber = state.demoNumber - state.step
+    this.set(state)
+  }
+
+  changeStep(step) {
+    let state = this._get()
+    state.step = parseInt(step)
+    this.set(state)
   }
 }
