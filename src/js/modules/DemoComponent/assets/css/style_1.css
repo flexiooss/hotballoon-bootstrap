@@ -39,7 +39,7 @@
   display: inline-block;
 }
 
-#balloon {
+#balloon::before {
   content: url(../img/balloon.svg);
   left: -150px;
 }
