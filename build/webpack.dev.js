@@ -8,7 +8,7 @@ const CircularDependencyPlugin = require('circular-dependency-plugin')
 config.entry.app = ['./src/js/_before.js', './src/js/bootstrap.js', './src/js/_after.js']
 
 webpackBase.devtool = 'cheap-module-eval-source-map'
-webpackBase.output.publicPath = 'http://localhost:' + config.port + config.dist_url
+webpackBase.output.publicPath = 'https://localhost:' + config.port + config.dist_url
 
 webpackBase.devServer = {
   headers: {
