@@ -7,14 +7,14 @@ class Even extends View {
     super(id, viewContainer, props)
     this._privateState.set('even', this.getProp('demoNumber'))
 
-    this.onPropsChange = (newProps) => {
+    this.onPropsChanged = (oldProps) => {
       /**
        * Abort automatic node Reconciliation for : STATE_CHANGE
        * well played it's more optimized
        */
       this._shouldUpdate = false
 
-      if (newProps.demoNumber !== this.getProp('demoNumber')) {
+      if (oldProps.demoNumber !== this.getProp('demoNumber')) {
         console.log('DemoComponent:View:Even will onPropsChange')
         /**
          * play with _privateState
