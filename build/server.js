@@ -9,7 +9,8 @@ const options = {
   contentBase: config.dist_path,
   hot: true,
   host: 'localhost',
-  historyApiFallback: true
+  historyApiFallback: true,
+  https: true
 
 }
 WebpackDevServer.addDevServerEntrypoints(webpackDev, options)

@@ -18,10 +18,10 @@ $ yarn install
 $ yarn --check-files
 $ yarn run dev
 ```
-- Enjoy with [localhost:8080](http://localhost8080)
+- Enjoy with [localhost:8080](https://localhost8080)
 
 ## Development Yarn commands
-- **Run development server in [localhost:8080](http://localhost8080)**
+- **Run development server in [localhost:8080](https://localhost8080)**
 ```sh
 $ yarn run dev
 ```
