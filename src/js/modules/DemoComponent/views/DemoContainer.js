@@ -24,7 +24,7 @@ export class DemoContainer extends ViewContainer {
   registerViews(nav) {
     const demoStore = this.Store(this.storesKey.get(DEMO_STORE))
 
-    this.addView(new Header('Header', this, demoStore.state()), demoStore._ID, STORE_CHANGED)
+    this.addView(new Header('Header', this, demoStore.state()))
     this.addView(new Main('Main', this, demoStore.state()), demoStore._ID, STORE_CHANGED)
     this.addView(new Footer('Footer', this, demoStore.state()))
   }
