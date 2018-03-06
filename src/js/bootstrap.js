@@ -10,11 +10,10 @@ import {
   ACTION_APP
 } from './modules/DemoComponent'
 
-const APP = new MaSuperApp();
+const APP = new MaSuperApp(new AppDispatcher());
 (function(app) {
-  app.setDispatcher(new AppDispatcher())
-  const applicationComponent = app.addComponent(DemoComponent, document.body)
-  let action = applicationComponent.Action(ACTION_APP)
+  const applicationComponentToken = app.addComponent(DemoComponent, document.body)
+  let action = app.Component(applicationComponentToken).Action(ACTION_APP)
   app.createAction(action, action.type('APP_INITIALIZED'), {
     message: 'HEY YOUR APPLICATION IS READY, ENJOY !!'
   })
