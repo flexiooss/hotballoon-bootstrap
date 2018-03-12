@@ -126,7 +126,7 @@ export class DemoComponent extends Component {
     /**
      * Mount DemoContainer into the parentNode
      */
-    demoContainer.render(this._parentNode)
+    demoContainer.renderAndMount(this._parentNode)
   }
 
   _increment(payload) {
