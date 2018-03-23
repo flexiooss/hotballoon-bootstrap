@@ -1,22 +1,32 @@
-import {
-  Component
-} from 'hotballoon'
+'use strict'
 import {
   isNode,
   assert
 } from 'flexio-jshelpers'
+
+import {
+  Component
+} from 'hotballoon'
+
 import {
   DemoStore
 } from '../stores/DemoStore'
+
 import {
-  AppActions
+  AppActions,
+  APP_INITIALIZED as ACTION_APP_APP_INITIALIZED
 } from '../actions/AppActions'
 import {
-  DemoActions
+  DemoActions,
+  INCREMENT as ACTION_DEMO_INCREMENT,
+  DECREMENT as ACTION_DEMO_DECREMENT,
+  CHANGE_STEP as ACTION_DEMO_CHANGE_STEP
 } from '../actions/DemoActions'
+
 import {
   DemoContainer
 } from '../views/DemoContainer'
+
 import {
   DEMO_STORE,
   TOKEN_APP_INITIALISED,
@@ -53,12 +63,14 @@ export class DemoComponent extends Component {
   }
 
   _initStores() {
-    const myDemoStore = this.addStore(DemoStore)
+    const tokenMydemoStore = this.nextID()
+    const myDemoStore = new DemoStore(tokenMydemoStore)
+    this.addStore(tokenMydemoStore, myDemoStore)
 
     /**
      * Keep the token for select the store
      */
-    this.storesKey.set(DEMO_STORE, myDemoStore._ID)
+    this.storesKey.set(DEMO_STORE, tokenMydemoStore)
   }
 
   _initDispatcherListeners() {
@@ -66,7 +78,7 @@ export class DemoComponent extends Component {
      *  register action APP_INITIALIZED
      */
     const myTokenAppInitialised = this.Dispatcher().addEventListener(
-      this.Action(ACTION_APP).type('APP_INITIALIZED'),
+      ACTION_APP_APP_INITIALIZED,
       (payload) => {
         this._appInitialized(payload)
       })
@@ -81,21 +93,21 @@ export class DemoComponent extends Component {
      */
     this.dispatcherListenerTokens.set(
       TOKEN_INCREMENT,
-      this.Dispatcher().addEventListener(this.Action(ACTION_DEMO).type('INCREMENT'),
+      this.Dispatcher().addEventListener(ACTION_DEMO_INCREMENT,
         (payload) => {
           this._increment(payload)
         }))
 
     this.dispatcherListenerTokens.set(
       TOKEN_DECREMENT,
-      this.Dispatcher().addEventListener(this.Action(ACTION_DEMO).type('DECREMENT'),
+      this.Dispatcher().addEventListener(ACTION_DEMO_DECREMENT,
         (payload) => {
           this._decrement(payload)
         }))
 
     this.dispatcherListenerTokens.set(
       TOKEN_CHANGE_STEP,
-      this.Dispatcher().addEventListener(this.Action(ACTION_DEMO).type('CHANGE_STEP'),
+      this.Dispatcher().addEventListener(ACTION_DEMO_CHANGE_STEP,
         (payload) => {
           this._changeStep(payload)
         }))
@@ -113,16 +125,17 @@ export class DemoComponent extends Component {
     /**
      * Add ViewContainer:DemoContainer into the component
      */
-    const demoContainer = this.addViewContainer(
-      DemoContainer,
-      new Map([
-        [DEMO_STORE, this.storesKey.get(DEMO_STORE)]
-      ]))
+    const tokenDemoContainer = this.nextID()
+    const demoContainer = new DemoContainer(this, tokenDemoContainer, new Map([
+      [DEMO_STORE, this.storesKey.get(DEMO_STORE)]
+    ]))
+
+    this.addViewContainer(tokenDemoContainer, demoContainer)
 
     /**
      * Keep the token for retrive later
      */
-    this.viewContainersKey.set(DEMO_VIEWCONTAINER, demoContainer._ID)
+    this.viewContainersKey.set(DEMO_VIEWCONTAINER, tokenDemoContainer)
     /**
      * Mount DemoContainer into the parentNode
      */

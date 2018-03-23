@@ -4,8 +4,13 @@ import {
 } from 'hotballoon'
 
 import {
-  ACTION_DEMO
+  ACTION_DEMO as ACTION_DEMO_KEY
 } from '../component/_KEYS'
+
+import {
+  INCREMENT as ACTION_DEMO_INCREMENT,
+  DECREMENT as ACTION_DEMO_DECREMENT
+} from '../actions/DemoActions'
 
 import Even from './Even.view'
 
@@ -19,6 +24,8 @@ class Main extends View {
   }
 
   view() {
+    const ACTION_DEMO = this.Action(ACTION_DEMO_KEY)
+
     const elements = this.html(
       'main#main.wrapper.tag',
       this.html('button#decrement', '-' + this.getProp('step'), {
@@ -44,14 +51,14 @@ class Main extends View {
     $$(this.nodeRef('incrementButton'))
       .on('click', () => {
         this.newAction(
-          this.Action(ACTION_DEMO),
-          this.Action(ACTION_DEMO).type('INCREMENT'), {})
+          ACTION_DEMO,
+          ACTION_DEMO_INCREMENT, {})
       }, false)
     $$(this.nodeRef('decrementButton'))
       .on('click', () => {
         this.newAction(
-          this.Action(ACTION_DEMO),
-          this.Action(ACTION_DEMO).type('DECREMENT'), {})
+          ACTION_DEMO,
+          ACTION_DEMO_DECREMENT, {})
       }, false)
 
     return elements

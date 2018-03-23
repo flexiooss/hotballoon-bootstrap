@@ -1,6 +1,6 @@
 import {
   ViewContainer,
-  Store
+  storeEvents
 } from 'hotballoon'
 
 import Header from './header.view'
@@ -14,7 +14,7 @@ import {
   DEMO_STORE
 } from '../component/_KEYS'
 
-const STORE_CHANGED = Store.eventType('CHANGED')
+const STORE_CHANGED = storeEvents.CHANGED
 
 /**
  * Container of view for the demo
