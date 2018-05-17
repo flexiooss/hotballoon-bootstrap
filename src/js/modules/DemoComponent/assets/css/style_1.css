@@ -1,35 +1,35 @@
-#header,
-#main,
-#evenContainer,
-#footer {
+header,
+main,
+.evenContainer,
+footer {
   position: relative;
 }
 
-#header {
+header {
   background-color: #fff;
 }
 
-#header::before {
+header::before {
   content: 'header';
 }
 
-#main {
+main {
   text-align: center;
 }
 
-#main::before {
+main::before {
   content: 'main';
 }
 
-#evenContainer::before {
+.evenContainer::before {
   content: 'evenContainer';
 }
 
-#footer {
+footer {
   font-size: 10px;
 }
 
-#footer::before {
+footer::before {
   content: 'footer';
 }
 
@@ -39,7 +39,7 @@
   display: inline-block;
 }
 
-#balloon::before {
+.balloon::before {
   content: url(../img/balloon.svg);
   left: -150px;
 }

@@ -3,11 +3,8 @@ import {
   selectAttributeHandler as $$
 } from 'hotballoon'
 import {
-  ACTION_DEMO as ACTION_DEMO_KEY
-} from '../component/_KEYS'
-
-import {
-  CHANGE_STEP as ACTION_DEMO_CHANGE_STEP
+  DEMO_ACTIONS,
+  DEMO_ACTIONS_CHANGE_STEP
 } from '../actions/DemoActions'
 
 import logo
@@ -15,8 +12,6 @@ import logo
 
 class Header extends View {
   view() {
-    const ACTION_DEMO = this.Action(ACTION_DEMO_KEY)
-
     const el = this.html('header#header.wrapper.bordered.tag', {
       style: {
         textAlign: 'center'
@@ -26,13 +21,11 @@ class Header extends View {
       src: logo
     }),
     this.html('h1#theTitle', 'Hello Flexionaute', {
-      title: 'theTitle',
-      nodeRef: 'h1'
+      title: 'theTitle'
     }),
     this.html(
       'label', 'step :  ',
       this.html('input#stepInput', {
-        nodeRef: 'stepInput',
         placeholder: 'step',
         value: this.getProp('step', 1)
       })
@@ -41,9 +34,8 @@ class Header extends View {
 
     $$(this.nodeRef('stepInput'))
       .on('change', (e) => {
-        this.newAction(
-          ACTION_DEMO,
-          ACTION_DEMO_CHANGE_STEP, {
+        this.Action(DEMO_ACTIONS).trigger(
+          DEMO_ACTIONS_CHANGE_STEP, {
             step: e.target.value
           })
       }, false)

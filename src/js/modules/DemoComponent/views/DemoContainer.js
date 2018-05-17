@@ -12,7 +12,9 @@ import '../assets/css/style_2.css'
 
 import {
   DEMO_STORE
-} from '../component/_KEYS'
+} from '../stores/DemoStore'
+
+export const DEMO_VIEWCONTAINER = 'DEMO_VIEWCONTAINER'
 
 const STORE_CHANGED = storeEvents.CHANGED
 

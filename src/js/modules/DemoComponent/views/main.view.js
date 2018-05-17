@@ -4,12 +4,9 @@ import {
 } from 'hotballoon'
 
 import {
-  ACTION_DEMO as ACTION_DEMO_KEY
-} from '../component/_KEYS'
-
-import {
-  INCREMENT as ACTION_DEMO_INCREMENT,
-  DECREMENT as ACTION_DEMO_DECREMENT
+  DEMO_ACTIONS,
+  DEMO_ACTIONS_INCREMENT,
+  DEMO_ACTIONS_DECREMENT
 } from '../actions/DemoActions'
 
 import Even from './Even.view'
@@ -24,22 +21,16 @@ class Main extends View {
   }
 
   view() {
-    const ACTION_DEMO = this.Action(ACTION_DEMO_KEY)
-
     const elements = this.html(
       'main#main.wrapper.tag',
-      this.html('button#decrement', '-' + this.getProp('step'), {
-        nodeRef: 'decrementButton'
-      }),
+      this.html('button#decrement', '-' + this.getProp('step')),
       this.html('span#curent', this.getProp('demoNumber'), {
         style: {
           fontSize: '50px'
         }
       }),
-      this.html('button#increment', '+ ' + this.getProp('step'), {
-        nodeRef: 'incrementButton'
-      }),
-      this.html('div#balloon', {
+      this.html('button#increment', '+ ' + this.getProp('step')),
+      this.html('div#balloon.balloon', {
         style: {
           position: 'absolute',
           bottom: this.getProp('demoNumber') + 'rem'
@@ -48,17 +39,16 @@ class Main extends View {
       this._subViews.get('even').render()
     )
 
-    $$(this.nodeRef('incrementButton'))
+    $$(this.nodeRef('increment'))
       .on('click', () => {
-        this.newAction(
-          ACTION_DEMO,
-          ACTION_DEMO_INCREMENT, {})
+        this.Action(DEMO_ACTIONS).trigger(
+          DEMO_ACTIONS_INCREMENT, {})
       }, false)
-    $$(this.nodeRef('decrementButton'))
+
+    $$(this.nodeRef('decrement'))
       .on('click', () => {
-        this.newAction(
-          ACTION_DEMO,
-          ACTION_DEMO_DECREMENT, {})
+        this.Action(DEMO_ACTIONS).trigger(
+          DEMO_ACTIONS_DECREMENT, {})
       }, false)
 
     return elements

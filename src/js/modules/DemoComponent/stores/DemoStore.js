@@ -3,6 +3,8 @@ import {
   storeBases
 } from 'hotballoon'
 
+export const DEMO_STORE = 'DEMO_STORE'
+
 const STORE = storeBases.Storage.create({
   demoNumber: 0,
   step: 1

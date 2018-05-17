@@ -9,38 +9,26 @@ import {
 } from 'hotballoon'
 
 import {
-  DemoStore
+  DemoStore,
+  DEMO_STORE
 } from '../stores/DemoStore'
 
 import {
-  AppActions,
-  APP_INITIALIZED as ACTION_APP_APP_INITIALIZED
-} from '../actions/AppActions'
-import {
   DemoActions,
-  INCREMENT as ACTION_DEMO_INCREMENT,
-  DECREMENT as ACTION_DEMO_DECREMENT,
-  CHANGE_STEP as ACTION_DEMO_CHANGE_STEP
+  DEMO_ACTIONS,
+  DEMO_ACTIONS_INCREMENT,
+  DEMO_ACTIONS_DECREMENT,
+  DEMO_ACTIONS_CHANGE_STEP
 } from '../actions/DemoActions'
 
 import {
-  DemoContainer
+  DemoContainer,
+  DEMO_VIEWCONTAINER
 } from '../views/DemoContainer'
 
-import {
-  DEMO_STORE,
-  TOKEN_APP_INITIALISED,
-  TOKEN_INCREMENT,
-  TOKEN_DECREMENT,
-  TOKEN_CHANGE_STEP,
-  ACTION_APP,
-  ACTION_DEMO,
-  DEMO_VIEWCONTAINER
-} from './_KEYS'
-
 export class DemoComponent extends Component {
-  constructor(hotBallonApplication, id, parentNode) {
-    super(hotBallonApplication, id)
+  constructor(hotBallonApplication, parentNode) {
+    super(hotBallonApplication)
 
     assert(!!isNode(parentNode),
       'DemoComponent:constructor: `parentNode` argument should be NodeType, %s given',
@@ -51,21 +39,20 @@ export class DemoComponent extends Component {
       value: parentNode
     })
   }
-  /**
-   *
-   * --------------------------------------------------------------
-   * Init
-   * --------------------------------------------------------------
-   */
+
   _initActions() {
-    this.addAction(ACTION_APP, new AppActions(this.Dispatcher(), this._ID))
-    this.addAction(ACTION_DEMO, new DemoActions(this.Dispatcher(), this._ID))
+    this.addAction(
+      DEMO_ACTIONS,
+      new DemoActions(this.Dispatcher(), this._ID)
+    )
   }
 
   _initStores() {
     const tokenMydemoStore = this.nextID()
-    const myDemoStore = new DemoStore(tokenMydemoStore)
-    this.addStore(tokenMydemoStore, myDemoStore)
+    this.addStore(
+      tokenMydemoStore,
+      new DemoStore(tokenMydemoStore)
+    )
 
     /**
      * Keep the token for select the store
@@ -75,39 +62,26 @@ export class DemoComponent extends Component {
 
   _initDispatcherListeners() {
     /**
-     *  register action APP_INITIALIZED
-     */
-    const myTokenAppInitialised = this.Dispatcher().addEventListener(
-      ACTION_APP_APP_INITIALIZED,
-      (payload) => {
-        this._appInitialized(payload)
-      })
-    /**
-     * Keep the token for retrive later
-     */
-    this.dispatcherListenerTokens.set(TOKEN_APP_INITIALISED, myTokenAppInitialised)
-
-    /**
      * register action ACTION_DEMO
      * Keep the token for retrive later
      */
     this.dispatcherListenerTokens.set(
-      TOKEN_INCREMENT,
-      this.Dispatcher().addEventListener(ACTION_DEMO_INCREMENT,
+      DEMO_ACTIONS_INCREMENT,
+      this.addActionListener(DEMO_ACTIONS_INCREMENT,
         (payload) => {
           this._increment(payload)
         }))
 
     this.dispatcherListenerTokens.set(
-      TOKEN_DECREMENT,
-      this.Dispatcher().addEventListener(ACTION_DEMO_DECREMENT,
+      DEMO_ACTIONS_DECREMENT,
+      this.addActionListener(DEMO_ACTIONS_DECREMENT,
         (payload) => {
           this._decrement(payload)
         }))
 
     this.dispatcherListenerTokens.set(
-      TOKEN_CHANGE_STEP,
-      this.Dispatcher().addEventListener(ACTION_DEMO_CHANGE_STEP,
+      DEMO_ACTIONS_CHANGE_STEP,
+      this.addActionListener(DEMO_ACTIONS_CHANGE_STEP,
         (payload) => {
           this._changeStep(payload)
         }))
@@ -119,9 +93,7 @@ export class DemoComponent extends Component {
    * Listeners
    * --------------------------------------------------------------
    */
-  _appInitialized(payload) {
-    console.log(payload.message)
-
+  _createRenderMountView() {
     /**
      * Add ViewContainer:DemoContainer into the component
      */

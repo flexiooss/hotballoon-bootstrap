@@ -6,23 +6,24 @@ import {
 } from './app/AppDispatcher'
 
 import {
-  DemoComponent,
-  ACTION_APP as ACTION_APP_KEY,
-  APP_INITIALIZED as ACTION_APP_APP_INITIALIZED
-} from './modules/DemoComponent'
+  MainComponent,
+  APP_ACTIONS,
+  APP_ACTIONS_APP_INITIALIZED
+} from './modules/MainComponent'
 
-const APP = new MaSuperApp(new AppDispatcher());
+const APP = new MaSuperApp('MaSuperApp', new AppDispatcher());
 
 (function(app) {
-  const applicationComponentToken = app.addComponent(DemoComponent, document.body)
+  const MAIN_COMPONENT_ID = app.addComponent(new MainComponent(app, document.body))
 
-  const ACTION_APP = app.Component(applicationComponentToken).Action(ACTION_APP_KEY)
-
-  ACTION_APP.newAction(
-    ACTION_APP_APP_INITIALIZED, {
-      message: 'HEY YOUR APPLICATION IS READY, ENJOY !!'
-    }
-  )
+  app
+    .Component(MAIN_COMPONENT_ID)
+    .Action(APP_ACTIONS)
+    .trigger(
+      APP_ACTIONS_APP_INITIALIZED, {
+        message: 'HEY YOUR APPLICATION IS READY, ENJOY !!'
+      }
+    )
 })(APP)
 
 export {

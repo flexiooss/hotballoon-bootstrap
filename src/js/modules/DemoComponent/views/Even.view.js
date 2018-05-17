@@ -34,19 +34,18 @@ class Even extends View {
 
     this.onStateChanged = () => {
       console.log('DemoComponent:View:Even will onStateChanged')
-      this.nodeRef('h5').innerHTML = this._formatTitle()
+      this.nodeRef('Even').innerHTML = this._formatTitle()
     }
   }
 
   view() {
-    return this.html('div#evenContainer.wrapper.bordered.tag', {
+    return this.html('div#evenContainer.wrapper.bordered.tag.evenContainer', {
       style: {
         textAlign: 'center'
       }
     },
     this.html('h5#Even', this._formatTitle(), {
-      title: 'theTitle',
-      nodeRef: 'h5'
+      title: 'theTitle'
     }))
   }
 
