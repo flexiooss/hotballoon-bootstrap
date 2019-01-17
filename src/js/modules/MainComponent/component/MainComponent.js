@@ -31,6 +31,7 @@ export class MainComponent extends Component {
    * @private
    */
   _setParentNode(parentNode) {
+
     assert(!!isNode(parentNode),
       'MainComponent:constructor: `parentNode` argument should be NodeType, %s given',
       typeof parentNode)
@@ -61,4 +62,5 @@ export class MainComponent extends Component {
         .build()
     )
   }
+
 }

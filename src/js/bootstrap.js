@@ -7,6 +7,7 @@ import {AppInitializedAction, AppActionPayload} from './modules/MainComponent/ac
 export const APP = new App('CIClientApplication', new AppDispatcher())
 const HTML_NODE = document.body
 
+
 (function (app) {
   const MAIN_COMPONENT_ID = app.addComponent(MainComponent.create(app, HTML_NODE))
   app.Component(MAIN_COMPONENT_ID)

@@ -1,0 +1,16 @@
+{
+  "presets": [
+    [
+      "env", {
+        "exclude": ["transform-es2015-classes"]
+      }
+    ]
+  ],
+  "env": {
+    "test": {
+      "presets": [
+        ["env"]
+      ]
+    }
+  }
+}
