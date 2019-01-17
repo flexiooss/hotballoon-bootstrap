@@ -1,5 +1,1 @@
-import {
-  Dispatcher
-} from 'hotballoon'
-
-export class AppDispatcher extends Dispatcher {}
+export { Dispatcher as AppDispatcher } from 'hotballoon'

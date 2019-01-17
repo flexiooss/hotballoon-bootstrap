@@ -1,5 +1,5 @@
-# hotballoon-application-environnement
-### Development environnement to create a hotballoon application
+# hotballoon-bootstrap
+### Development environment to create a hotballoon application
 
 ## Required
 - Nodejs v8+
@@ -18,10 +18,10 @@ $ yarn install
 $ yarn --check-files
 $ yarn run dev
 ```
-- Enjoy with [localhost:8080](https://localhost8080)
+- Enjoy with [localhost:8080](https://localhost:8080)
 
 ## Development Yarn commands
-- **Run development server in [localhost:8080](https://localhost8080)**
+- **Run development server in [localhost:8080](https://localhost:8080)**
 ```sh
 $ yarn run dev
 ```

@@ -1,24 +1,18 @@
-import {
-  MaSuperApp
-} from './app/MaSuperApp'
-import {
-  AppDispatcher
-} from './app/AppDispatcher'
+import {App} from './app/App'
+import {AppDispatcher} from './app/AppDispatcher'
 
-import {
-  DemoComponent,
-  ACTION_APP
-} from './modules/DemoComponent'
+import {MainComponent} from './modules/MainComponent'
+import {AppInitializedAction, AppActionPayload} from './modules/MainComponent/actions/AppInitializedAction'
 
-const APP = new MaSuperApp(new AppDispatcher());
-(function(app) {
-  const applicationComponentToken = app.addComponent(DemoComponent, document.body)
-  let action = app.Component(applicationComponentToken).Action(ACTION_APP)
-  app.createAction(action, action.type('APP_INITIALIZED'), {
-    message: 'HEY YOUR APPLICATION IS READY, ENJOY !!'
-  })
+export const APP = new App('CIClientApplication', new AppDispatcher())
+const HTML_NODE = document.body
+
+(function (app) {
+  const MAIN_COMPONENT_ID = app.addComponent(MainComponent.create(app, HTML_NODE))
+  app.Component(MAIN_COMPONENT_ID)
+    .dispatchAction(
+      AppInitializedAction.withPayload(
+        new AppActionPayload('ready for take-off flexionaute !!!')
+      )
+    )
 })(APP)
-
-export {
-  APP
-}
