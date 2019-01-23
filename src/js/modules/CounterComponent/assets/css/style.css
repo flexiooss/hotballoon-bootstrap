@@ -1,0 +1,23 @@
+* {
+    font-size: large;
+    font-weight: bold;
+}
+
+.increment {
+    background: black;
+    color: aliceblue;
+    border-radius: 5px;
+    border: none;
+    padding: 1em;
+    cursor: pointer;
+}
+
+div {
+    margin: 1em;
+}
+
+.counter {
+    margin: 1em;
+    padding: 1em;
+
+}

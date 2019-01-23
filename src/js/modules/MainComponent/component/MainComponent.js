@@ -2,6 +2,7 @@
 import {isNode, assert} from 'flexio-jshelpers'
 import {Component, DispatcherEventListenerFactory} from 'hotballoon'
 import {AppInitializedAction} from '../actions/AppInitializedAction'
+import {InitCounterComponent} from './InitCounterComponent'
 
 export class MainComponent extends Component {
   /**
@@ -57,7 +58,7 @@ export class MainComponent extends Component {
            * @param {AppActionPayload} payload
            */
           (payload) => {
-            console.log(payload.message)
+            InitCounterComponent.create(payload, this.APP(), this._parentNode)
           })
         .build()
     )
