@@ -1,22 +1,22 @@
 import {CounterComponent} from '../../CounterComponent'
+import {ComponentContext} from 'hotballoon'
 
 export class InitCounterComponent {
   constructor(payload, APP, parentNode) {
     console.log(payload.message)
-    const COUNTER_COMPONENT_ID = APP.addComponent(
-      CounterComponent.create(
-        APP, parentNode)
-    )
 
-    APP.Component(COUNTER_COMPONENT_ID).createRenderMountView()
+    CounterComponent.create(
+      APP.addComponentContext(new ComponentContext(APP)),
+      parentNode
+    ).createRenderMountView()
   }
 
   /**
    *
    * @param {Object} payload
-   * @param {HotballoonApplication} APP
+   * @param {HotBalloonApplication} APP
    * @param {Node} parentNode
-   * @return {InitCIPipelineComponent}
+   * @return {InitCounterComponent}
    * @constructor
    * @static
    */

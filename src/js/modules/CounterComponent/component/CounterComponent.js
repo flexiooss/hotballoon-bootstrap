@@ -1,30 +1,47 @@
 'use strict'
-import {ActionPayload, Component, ViewContainerParameters} from 'hotballoon'
-import {COUNT_STORE} from '../stores/CounterStore'
+import {TypeCheck, ViewContainerParameters} from 'hotballoon'
 import {initStores} from './initStores'
-import {initActionsListeners} from './initActionsListeners'
+import {initActionsListener} from './initActionsListener'
 import {isNode, assert} from 'flexio-jshelpers'
+import {CounterContainerStores, CounterContainer} from '../views/Counter.container'
 
-import {CounterIncrementAction} from '../actions/CounterIncrementAction'
-import {CounterContainerStores, COUNTER_VIEWCONTAINER, CounterContainer} from '../views/Counter.container'
-
-export class CounterComponent extends Component {
-  constructor(hotBalloonApplication, parentNode) {
-    super(hotBalloonApplication)
-
-    initStores(this)
-    initActionsListeners(this)
+export class CounterComponent {
+  /**
+   *
+   * @param {ComponentContext} componentContext
+   * @param {Node} parentNode
+   */
+  constructor(componentContext, parentNode) {
+    assert(
+      TypeCheck.isComponentContext(componentContext),
+      'BootstrapComponent:constructor: `parentNode` argument should be NodeType, %s given',
+      typeof parentNode)
+    /**
+     * @name CounterComponent#_componentContext
+     * @type {ComponentContext}
+     */
+    Object.defineProperty(this, '_componentContext', {
+      value: componentContext,
+      enumerable: false,
+      configurable: false
+    })
+    /**
+     *
+     * @type {Store}
+     * @private
+     */
+    this.__counterStore = initStores(this._componentContext)
+    initActionsListener(
+      this._componentContext,
+      this.__counterStore
+    )
 
     this._setParentNode(parentNode)
-
-    // this.dispatchAction(
-    //   CounterIncrementAction.withPayload(new ActionPayload())
-    // )
   }
 
   _setParentNode(parentNode) {
     assert(!!isNode(parentNode),
-      'MainComponent:constructor: `parentNode` argument should be NodeType, %s given',
+      'BootstrapComponent:constructor: `parentNode` argument should be NodeType, %s given',
       typeof parentNode)
 
     Object.defineProperties(this, {
@@ -41,41 +58,45 @@ export class CounterComponent extends Component {
 
   /**
    *
-   * @param {HotballoonApplication} hotballoonApplication
+   * @param {ComponentContext} componentContext
    * @param {Node} parentNode
    * @return {CounterComponent}
    * @constructor
    * @static
    */
-  static create(hotballoonApplication, parentNode) {
-    return new this(hotballoonApplication, parentNode)
+  static create(componentContext, parentNode) {
+    return new this(componentContext, parentNode)
   }
 
   createRenderMountView() {
     this._addCounterViewContainer().renderAndMount(this._parentNode)
   }
 
+  /**
+   *
+   * @return {ViewContainer}
+   * @private
+   */
   _addCounterViewContainer() {
-    const COUNTER_VIEWCONTAINER_ID = this.nextID()
+    const COUNTER_VIEWCONTAINER_ID = this._componentContext.nextID()
 
-    const COUNTER_VIEWCONTAINER_INST = this.addViewContainer(
+    const COUNTER_VIEWCONTAINER_INST = this._componentContext.addViewContainer(
       new CounterContainer(
         new ViewContainerParameters(
-          this,
+          this._componentContext,
           COUNTER_VIEWCONTAINER_ID,
           this._parentNode
         ),
         new CounterContainerStores(
-          this.StoreByRegister(COUNT_STORE)
+          this.__counterStore
         )
       )
     )
 
-    this.debug.log('COUNTER_VIEWCONTAINER_INST')
-    this.debug.object(COUNTER_VIEWCONTAINER_INST)
-    this.debug.print()
+    this._componentContext.debug.log('COUNTER_VIEWCONTAINER_INST')
+    this._componentContext.debug.object(COUNTER_VIEWCONTAINER_INST)
+    this._componentContext.debug.print()
 
-    this.viewContainersKey.set(COUNTER_VIEWCONTAINER, COUNTER_VIEWCONTAINER_ID)
     return COUNTER_VIEWCONTAINER_INST
   }
 }

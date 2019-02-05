@@ -15,17 +15,12 @@ export class CounterContainer extends ViewContainer {
    * @override
    */
   registerViews() {
-    // this.dispatchAction(
-    //   CounterIncrementAction.withPayload(
-    //     new ActionPayload()
-    //   )
-    // )
 
     this.addView(
       Main.create(
         new ViewParameters(MAIN_VIEW, this),
         new MainStores(
-          this.Store(COUNT_STORE)
+          this.store(COUNT_STORE)
         )
       )
     )
@@ -34,7 +29,7 @@ export class CounterContainer extends ViewContainer {
   }
 
   _handleEvents() {
-    this.View(MAIN_VIEW).on(
+    this.view(MAIN_VIEW).on(
       ViewEventListenerFactory
         .listen(INCREMENT_EVENT)
         .callback((payload) => {
@@ -43,7 +38,7 @@ export class CounterContainer extends ViewContainer {
               new ActionPayload()
             )
           )
-        }).build(this)
+        }).build()
     )
   }
 }
@@ -54,7 +49,7 @@ export class CounterContainer extends ViewContainer {
 export class CounterContainerStores extends ViewStoresParameters {
   /**
    *
-   * @param {CounterStore} counterStore
+   * @param {Store} counterStore
    */
   constructor(counterStore) {
     super()

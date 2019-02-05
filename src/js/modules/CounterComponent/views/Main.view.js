@@ -28,13 +28,13 @@ export default class Main extends View {
   view() {
     return this.html(
       'main#main.toto', HtmlParams.withChildNodes(
-        this.html(
+        [this.html(
           'div', HtmlParams.withChildNodes([
             this.html('span#Counter.counter', HtmlParams.withText(this._addCounter())),
             this.html('input#increment.increment',
               HtmlParams
                 .withAttributes(
-                  { value: 'Inc', type: 'button' })
+                  {value: 'Inc', type: 'button'})
                 .addEventListener(
                   NodeEventListenerFactory.listen('click')
                     .callback((e) => {
@@ -43,7 +43,7 @@ export default class Main extends View {
                     .build())
             )
           ])
-        )
+        )]
       )
     )
   }
@@ -68,10 +68,7 @@ export default class Main extends View {
 export class MainStores extends ViewStoresParameters {
   /**
    *
-   * @param {PipelineStore} pipelineStore
-   * @param {StagesStore} stagesStore
-   * @param {LogsStore} logsStore
-   * @param {SelectedPipelineStore} selectedPipelineStore
+   * @param {Store} counterStore
    */
   constructor(countStore) {
     super()

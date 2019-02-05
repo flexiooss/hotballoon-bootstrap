@@ -6,7 +6,7 @@ export const COUNT_STORE = 'COUNT_STORE'
  * @extends DataStoreInterface
  * @implements DataStoreInterface
  */
-export class CounterStore extends DataStoreInterface {
+export class CounterState extends DataStoreInterface {
   /**
    *
    * @return {{count: int}}
