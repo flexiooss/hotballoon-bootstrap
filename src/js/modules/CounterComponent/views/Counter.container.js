@@ -1,13 +1,11 @@
 'use strict'
 import {ViewStoresParameters, ViewContainer, ViewParameters, ViewEventListenerFactory, ActionPayload} from 'hotballoon'
-import { CounterIncrementAction } from '../actions/CounterIncrementAction'
-import { default as Main, MainStores, INCREMENT_EVENT } from './Main.view'
+import {CounterIncrementAction} from '../actions/CounterIncrementAction'
+import {default as Main, MainStores, INCREMENT_EVENT} from './Main.view'
 
 import '../assets/css/style.css'
 
 const COUNT_STORE = 'COUNT_STORE'
-export const COUNTER_VIEWCONTAINER = 'COUNTER_VIEWCONTAINER'
-
 const MAIN_VIEW = Symbol('MAIN_VIEW')
 
 export class CounterContainer extends ViewContainer {
@@ -15,7 +13,6 @@ export class CounterContainer extends ViewContainer {
    * @override
    */
   registerViews() {
-
     this.addView(
       Main.create(
         new ViewParameters(MAIN_VIEW, this),

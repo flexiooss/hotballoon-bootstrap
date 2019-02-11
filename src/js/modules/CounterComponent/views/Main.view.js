@@ -25,22 +25,25 @@ export default class Main extends View {
    *
    * @return {Node}
    */
-  view() {
+  template() {
     return this.html(
       'main#main.toto', HtmlParams.withChildNodes(
         [this.html(
           'div', HtmlParams.withChildNodes([
             this.html('span#Counter.counter', HtmlParams.withText(this._addCounter())),
-            this.html('input#increment.increment',
+            this.html(
+              'input#increment.increment',
               HtmlParams
                 .withAttributes(
-                  {value: 'Inc', type: 'button'})
+                  {value: 'Inc', type: 'button'}
+                )
                 .addEventListener(
                   NodeEventListenerFactory.listen('click')
                     .callback((e) => {
                       this.dispatch(INCREMENT_EVENT, null)
                     })
-                    .build())
+                    .build()
+                )
             )
           ])
         )]
