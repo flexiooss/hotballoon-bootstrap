@@ -1,24 +1,21 @@
 import {
   View,
   HtmlParams,
-  ViewParameters,
-  ViewStoresParameters,
   NodeEventListenerFactory
 } from 'hotballoon'
 
 export const INCREMENT_EVENT = 'INCREMENT_EVENT'
 
-const COUNT_STORE = 'COUNT_STORE'
-
 export default class Main extends View {
   /**
    *
    * @param {ViewParameters} viewParameters
-   * @param {MainStores} mainStores
+   * @param {CounterContainerStores} counterContainerStores
    */
-  constructor(viewParameters, mainStores) {
-    super(viewParameters, mainStores)
-    this.suscribeToStore(COUNT_STORE)
+  constructor(viewParameters, counterContainerStores) {
+    super(viewParameters)
+    this.counterStore = counterContainerStores.counterStore
+    this.subscribeToStore(this.counterStore)
   }
 
   /**
@@ -56,7 +53,7 @@ export default class Main extends View {
    * @private
    */
   _addCounter() {
-    const data = this.stateValue(COUNT_STORE)
+    const data = this.counterStore.data()
     console.log(this)
     console.log(data)
 
@@ -65,16 +62,5 @@ export default class Main extends View {
     } else {
       return 'counter not found'
     }
-  }
-}
-
-export class MainStores extends ViewStoresParameters {
-  /**
-   *
-   * @param {Store} counterStore
-   */
-  constructor(countStore) {
-    super()
-    this.setStore(COUNT_STORE, countStore)
   }
 }

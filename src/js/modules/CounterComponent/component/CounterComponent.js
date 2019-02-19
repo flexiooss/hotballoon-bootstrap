@@ -3,7 +3,8 @@ import {TypeCheck, ViewContainerParameters} from 'hotballoon'
 import {initStores} from './initStores'
 import {initActionsListener} from './initActionsListener'
 import {isNode, assert} from 'flexio-jshelpers'
-import {CounterContainerStores, CounterContainer} from '../views/Counter.container'
+import {CounterContainer} from '../views/Counter.container'
+import {CounterContainerStores} from '../views/CounterContainerStores'
 
 export class CounterComponent {
   /**
@@ -27,10 +28,11 @@ export class CounterComponent {
     })
     /**
      *
-     * @type {Store}
+     * @type {CounterStore}
      * @private
      */
     this.__counterStore = initStores(this._componentContext)
+
     initActionsListener(
       this._componentContext,
       this.__counterStore
