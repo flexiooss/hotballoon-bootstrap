@@ -10,17 +10,17 @@ export default class Main extends View {
   /**
    *
    * @param {ViewParameters} viewParameters
-   * @param {CounterContainerStores} counterContainerStores
+   * @param {CounterContainerStoresParams} counterContainerStores
    */
   constructor(viewParameters, counterContainerStores) {
     super(viewParameters)
-    this.counterStore = counterContainerStores.counterStore
-    this.subscribeToStore(this.counterStore)
+    this.__stores = counterContainerStores
+    this.subscribeToStore(this.__stores.counterStore)
   }
 
   /**
    *
-   * @return {Node}
+   * @return {Element}
    */
   template() {
     return this.html(
@@ -53,12 +53,10 @@ export default class Main extends View {
    * @private
    */
   _addCounter() {
-    const data = this.counterStore.data()
-    console.log(this)
-    console.log(data)
+    console.log(this.__stores.counterStore)
 
-    if (data.count) {
-      return data.count
+    if (this.__stores.counterStore.count) {
+      return this.__stores.counterStore.count
     } else {
       return 'counter not found'
     }

@@ -17,7 +17,7 @@ export class BootstrapComponent {
       typeof parentNode)
 
     /**
-     * @name CounterComponent#_componentContext
+     * @name BootstrapComponent#_componentContext
      * @type {ComponentContext}
      */
     Object.defineProperty(this, '_componentContext', {

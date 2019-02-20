@@ -4,8 +4,8 @@ import {initStores} from './initStores'
 import {initActionsListener} from './initActionsListener'
 import {isNode, assert} from 'flexio-jshelpers'
 import {CounterContainer} from '../views/Counter.container'
-import {CounterContainerStores} from '../views/CounterContainerStores'
-
+import {CounterContainerStoresParams} from '../views/CounterContainerStoresParams'
+import {CounterStorePublicHandler} from '../stores/CounterStorePublicHandler'
 export class CounterComponent {
   /**
    *
@@ -32,6 +32,12 @@ export class CounterComponent {
      * @private
      */
     this.__counterStore = initStores(this._componentContext)
+    /**
+     *
+     * @type {CounterStorePublicHandler}
+     * @private
+     */
+    this.__counterStorePublicHandler = new CounterStorePublicHandler(this.__counterStore)
 
     initActionsListener(
       this._componentContext,
@@ -89,8 +95,8 @@ export class CounterComponent {
           COUNTER_VIEWCONTAINER_ID,
           this._parentNode
         ),
-        new CounterContainerStores(
-          this.__counterStore
+        new CounterContainerStoresParams(
+          this.__counterStorePublicHandler
         )
       )
     )

@@ -4,7 +4,7 @@ import {CounterIncrementAction} from '../actions/CounterIncrementAction'
 import {default as Main, INCREMENT_EVENT} from './Main.view'
 
 import '../assets/css/style.css'
-import {CounterContainerStores} from './CounterContainerStores'
+import {CounterContainerStoresParams} from './CounterContainerStoresParams'
 
 const MAIN_VIEW = Symbol('MAIN_VIEW')
 
@@ -12,21 +12,21 @@ export class CounterContainer extends ViewContainer {
   /**
    *
    * @param {ViewContainerParameters} viewContainerParameters
-   * @param {CounterContainerStores} counterContainerStores
+   * @param {CounterContainerStoresParams} counterContainerStores
    */
   constructor(viewContainerParameters, counterContainerStores) {
     super(viewContainerParameters)
-    this.counterStore = counterContainerStores.counterStore
+    this.__stores = counterContainerStores
 
     this.__registerViews()
   }
 
   __registerViews() {
     this.addView(
-      Main.create(
+      new Main(
         new ViewParameters(MAIN_VIEW, this),
-        new CounterContainerStores(
-          this.counterStore
+        new CounterContainerStoresParams(
+          this.__stores.counterStore
         )
       )
     )
