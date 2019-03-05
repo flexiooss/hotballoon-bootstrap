@@ -10,6 +10,10 @@ import {assert} from 'flexio-jshelpers'
  * @return {Action.<CounterIncrementAction>}
  */
 export const initActionsListener = (componentContext, counterStore) => {
+  /**
+   *
+   * @type {!Action<CounterIncrementAction>}
+   */
   const counterIncrementAction = new Action(
     new ActionParams(
       'CounterIncrementAction',

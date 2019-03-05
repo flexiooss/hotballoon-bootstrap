@@ -34,6 +34,11 @@ export class BootstrapComponent {
    * @return {BootstrapComponent}
    */
   initAppInitializedAction() {
+    /**
+     *
+     * @type {!Action<AppInitializedAction>}
+     * @private
+     */
     this._appInitializedAction = new Action(
       new ActionParams(
         'AppInitializedAction',
@@ -53,7 +58,7 @@ export class BootstrapComponent {
 
   /**
    *
-   * @return {Action.<AppInitializedAction>}
+   * @return {!Action<AppInitializedAction>}
    */
   get appInitializedAction() {
     return this._appInitializedAction
