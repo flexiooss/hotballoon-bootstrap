@@ -35,7 +35,7 @@ export default class Main extends View {
                     {value: 'Inc', type: 'button'}
                   )
                   .addEventListener(
-                    NodeEventListenerFactory.listen('click')
+                    NodeEventListenerFactory.listen('mouseup')
                       .callback((e) => {
                         this.dispatch(INCREMENT_EVENT, null)
                       })

@@ -1,8 +1,9 @@
-import {Store} from 'hotballoon'
-
-/**
- * @implements {StoreInterface}
- */
-export class CounterStore extends Store {
-
+export class CounterStore {
+  /**
+   *
+   * @return {{count: int}}
+   */
+  constructor(count = 0) {
+    this.count = count
+  }
 }
