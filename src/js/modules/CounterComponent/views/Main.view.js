@@ -1,13 +1,10 @@
 import {
   View,
   HtmlParams,
-  NodeEventListenerFactory, ViewParameters
+  NodeEventListenerFactory
 } from 'hotballoon'
-import {default as Counter} from './Counter.view'
-import {RECONCILIATION_RULES} from 'flexio-nodes-reconciliation'
 
 export const INCREMENT_EVENT = 'INCREMENT_EVENT'
-const COUNTER = 'COUNTER'
 export default class Main extends View {
   /**
    *
@@ -18,11 +15,6 @@ export default class Main extends View {
     super(viewParameters)
     this.__stores = counterContainerStores
     this.subscribeToStore(this.__stores.counterStore)
-    this.addView(
-      new Counter(
-        new ViewParameters(COUNTER, this),
-        this.__stores)
-    )
   }
 
   /**
@@ -51,11 +43,8 @@ export default class Main extends View {
                   )
               )
             ])
-          ),
-          this.html('section#test',
-            HtmlParams.withViews([this.view(COUNTER)])
-              // .addReconciliationRules([RECONCILIATION_RULES.BYPATH_CHILDREN])
           )
+
         ]
       )
     )
