@@ -5,10 +5,12 @@ export class InitCounterComponent {
   constructor(payload, APP, parentNode) {
     console.log(payload.message)
 
-    CounterComponent.create(
-      APP.addComponentContext(new ComponentContext(APP)),
-      parentNode
-    ).createRenderMountView()
+    CounterComponent
+      .create(
+        APP.addComponentContext(new ComponentContext(APP)),
+        parentNode
+      )
+      .createRenderMountView()
   }
 
   /**

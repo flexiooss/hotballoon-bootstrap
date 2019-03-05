@@ -5,14 +5,15 @@ import {initActionsListener} from './initActionsListener'
 import {isNode, assert} from 'flexio-jshelpers'
 import {CounterContainer} from '../views/Counter.container'
 import {CounterContainerStoresParams} from '../views/CounterContainerStoresParams'
+import {CounterContainerActionsParams} from '../views/CounterContainerActionsParams'
 import {CounterStorePublicHandler} from '../stores/CounterStorePublicHandler'
+
 export class CounterComponent {
   /**
    *
    * @param {ComponentContext} componentContext
-   * @param {Node} parentNode
    */
-  constructor(componentContext, parentNode) {
+  constructor(componentContext) {
     assert(
       TypeCheck.isComponentContext(componentContext),
       'BootstrapComponent:constructor: `parentNode` argument should be NodeType, %s given',
@@ -26,6 +27,33 @@ export class CounterComponent {
       enumerable: false,
       configurable: false
     })
+
+
+    initActionsListener(
+      this._componentContext,
+      this.__counterStore
+    )
+
+  }
+
+  /**
+   *
+   * @param {ComponentContext} componentContext
+   * @param {Element} parentNode
+   * @return {CounterComponent}
+   */
+  static create(componentContext, parentNode) {
+    return new CounterComponent(componentContext)
+      .setParentDOMElement(parentNode)
+      .initCounterStore()
+      .initActionsListener()
+  }
+
+  /**
+   *
+   * @return {CounterComponent}
+   */
+  initCounterStore() {
     /**
      *
      * @type {CounterStore}
@@ -38,16 +66,15 @@ export class CounterComponent {
      * @private
      */
     this.__counterStorePublicHandler = new CounterStorePublicHandler(this.__counterStore)
-
-    initActionsListener(
-      this._componentContext,
-      this.__counterStore
-    )
-
-    this._setParentNode(parentNode)
+    return this
   }
 
-  _setParentNode(parentNode) {
+  /**
+   *
+   * @param {Element} parentNode
+   * @return {CounterComponent}
+   */
+  setParentDOMElement(parentNode) {
     assert(!!isNode(parentNode),
       'BootstrapComponent:constructor: `parentNode` argument should be NodeType, %s given',
       typeof parentNode)
@@ -56,27 +83,33 @@ export class CounterComponent {
       _parentNode: {
         enumerable: false,
         /**
-         * @property {Node} _parentNode
+         * @property {Element} _parentNode
          * @name CounterComponent#_parentNode
          */
         value: parentNode
       }
     })
+    return this
   }
 
   /**
    *
-   * @param {ComponentContext} componentContext
-   * @param {Node} parentNode
    * @return {CounterComponent}
-   * @constructor
-   * @static
    */
-  static create(componentContext, parentNode) {
-    return new this(componentContext, parentNode)
+  initActionsListener() {
+    this.__counterIncrementAction = initActionsListener(
+      this._componentContext,
+      this.__counterStore
+    )
+    return this
   }
 
+
   createRenderMountView() {
+    assert(
+      isNode(this._parentNode),
+      'CounterComponent:createRenderMountView: `_parentNode` property should be a NodeElement')
+
     this._addCounterViewContainer().renderAndMount(this._parentNode)
   }
 
@@ -88,18 +121,20 @@ export class CounterComponent {
   _addCounterViewContainer() {
     const COUNTER_VIEWCONTAINER_ID = this._componentContext.nextID()
 
-    const COUNTER_VIEWCONTAINER_INST = this._componentContext.addViewContainer(
-      new CounterContainer(
-        new ViewContainerParameters(
-          this._componentContext,
-          COUNTER_VIEWCONTAINER_ID,
-          this._parentNode
-        ),
-        new CounterContainerStoresParams(
-          this.__counterStorePublicHandler
+    const COUNTER_VIEWCONTAINER_INST = this._componentContext
+      .addViewContainer(
+        new CounterContainer(
+          new ViewContainerParameters(
+            this._componentContext,
+            COUNTER_VIEWCONTAINER_ID,
+            this._parentNode
+          ),
+          new CounterContainerStoresParams(
+            this.__counterStorePublicHandler
+          ),
+          new CounterContainerActionsParams(this.__counterIncrementAction)
         )
       )
-    )
 
     this._componentContext.debug.log('COUNTER_VIEWCONTAINER_INST')
     this._componentContext.debug.object(COUNTER_VIEWCONTAINER_INST)

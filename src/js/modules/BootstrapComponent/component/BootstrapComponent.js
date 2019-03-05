@@ -1,6 +1,6 @@
 'use strict'
 import {isNode, assert} from 'flexio-jshelpers'
-import {DispatcherEventListenerFactory, TypeCheck} from 'hotballoon'
+import {Action, ActionParams, TypeCheck} from 'hotballoon'
 import {AppInitializedAction} from '../actions/AppInitializedAction'
 import {InitCounterComponent} from './InitCounterComponent'
 
@@ -27,7 +27,36 @@ export class BootstrapComponent {
     })
 
     this._setParentNode(parentNode)
-    this.initBootstrap()
+  }
+
+  /**
+   *
+   * @return {BootstrapComponent}
+   */
+  initAppInitializedAction() {
+    this._appInitializedAction = new Action(
+      new ActionParams(
+        'AppInitializedAction',
+        AppInitializedAction,
+        (payload) => {
+          console.log(payload)
+          assert(payload instanceof AppInitializedAction,
+            'BootstrapComponent:AppInitializedAction:validate `payload` should be an instance of AppInitializedAction'
+          )
+          return true
+        },
+        this.componentContext.dispatcher()
+      )
+    )
+    return this
+  }
+
+  /**
+   *
+   * @return {Action.<AppInitializedAction>}
+   */
+  get appInitializedAction() {
+    return this._appInitializedAction
   }
 
   /**
@@ -67,24 +96,34 @@ export class BootstrapComponent {
 
   /**
    *
-   * @return {BootstrapComponent}
+   * @return {Action.<AppInitializedAction>}
    */
-  initBootstrap() {
-    this.componentContext.listenAction(
-      /**
-       * @param {AppActionPayload} payload
-       */
-      DispatcherEventListenerFactory.listen(new AppInitializedAction())
-        .callback(
-          /**
-           * @param {AppActionPayload} payload
-           */
-          (payload) => {
-            console.log('ici')
-            InitCounterComponent.create(payload, this.componentContext.APP(), this._parentNode)
-          })
-        .build()
+  initActionListener() {
+    this._appInitializedAction = new Action(
+      new ActionParams(
+        'AppInitializedAction',
+        AppInitializedAction,
+        (payload) => {
+          console.log(payload)
+          assert(payload instanceof AppInitializedAction,
+            'BootstrapComponent:AppInitializedAction:validate `payload` should be an instance of AppInitializedAction'
+          )
+          return true
+        },
+        this.componentContext.dispatcher()
+      )
     )
-    return this
+
+    this
+      .appInitializedAction
+      .listenWithCallback(
+        /**
+         * @param {AppInitializedAction} payload
+         */
+        (payload) => {
+          InitCounterComponent.create(payload, this.componentContext.APP(), this._parentNode)
+        })
+
+    return this._appInitializedAction
   }
 }

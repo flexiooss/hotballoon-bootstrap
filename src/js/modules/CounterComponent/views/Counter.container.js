@@ -1,5 +1,5 @@
 'use strict'
-import {ActionPayload, ViewContainer, ViewEventListenerFactory, ViewParameters} from 'hotballoon'
+import {ViewContainer, ViewEventListenerFactory, ViewParameters} from 'hotballoon'
 import {CounterIncrementAction} from '../actions/CounterIncrementAction'
 import {default as Main, INCREMENT_EVENT} from './Main.view'
 
@@ -13,10 +13,12 @@ export class CounterContainer extends ViewContainer {
    *
    * @param {ViewContainerParameters} viewContainerParameters
    * @param {CounterContainerStoresParams} counterContainerStores
+   * @param {CounterContainerActionsParams} counterContainerActions
    */
-  constructor(viewContainerParameters, counterContainerStores) {
+  constructor(viewContainerParameters, counterContainerStores, counterContainerActions) {
     super(viewContainerParameters)
     this.__stores = counterContainerStores
+    this.__actions = counterContainerActions
 
     this.__registerViews()
   }
@@ -35,16 +37,15 @@ export class CounterContainer extends ViewContainer {
   }
 
   __handleEvents() {
-    this.view(MAIN_VIEW).on(
-      ViewEventListenerFactory
-        .listen(INCREMENT_EVENT)
-        .callback((payload) => {
-          this.dispatchAction(
-            CounterIncrementAction.withPayload(
-              new ActionPayload()
-            )
-          )
-        }).build()
-    )
+    this.view(MAIN_VIEW)
+      .on(
+        ViewEventListenerFactory
+          .listen(INCREMENT_EVENT)
+          .callback((payload) => {
+            this.__actions
+              .counterIncrementAction
+              .dispatch(new CounterIncrementAction())
+          }).build()
+      )
   }
 }

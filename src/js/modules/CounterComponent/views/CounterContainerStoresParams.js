@@ -1,16 +1,14 @@
-import {ViewStoresParameters} from 'hotballoon'
+import {TypeCheck} from 'hotballoon'
 
 /**
- * @extends ViewStoresParameters
  */
-export class CounterContainerStoresParams extends ViewStoresParameters {
+export class CounterContainerStoresParams {
   /**
    *
    * @param {CounterStorePublicHandler} counterStore
    */
   constructor(counterStore) {
-    super()
-    this.__counterStore = this.validate(counterStore)
+    this.__counterStore = TypeCheck.assertStoreBase(counterStore)
   }
 
   /**

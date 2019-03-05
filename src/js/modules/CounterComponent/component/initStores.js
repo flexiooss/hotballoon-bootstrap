@@ -9,9 +9,12 @@ import {State, InMemoryStorage} from 'hotballoon'
  */
 export const initStores = (componentContext) => {
   const ID = componentContext.nextID()
-  const counterStore = new CounterStore(ID, new InMemoryStorage(
-    new State(ID, new CounterState(10)),
-    new CounterState())
+
+  const counterStore = new CounterStore(
+    ID,
+    new InMemoryStorage(
+      new State(ID, new CounterState(10)),
+      new CounterState())
   )
 
   componentContext.addStore(counterStore)
