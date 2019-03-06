@@ -11,7 +11,7 @@ export class CounterContainerStoresParams {
    */
   constructor(counterStore) {
     assert(
-      counterStore.isStoreOf(CounterStore),
+      counterStore.isTypeOf(CounterStore),
       'CounterContainerStoresParams: `counterStore ` should be a Store of CounterStore')
 
     this.__counterStore = TypeCheck.assertStoreBase(counterStore)

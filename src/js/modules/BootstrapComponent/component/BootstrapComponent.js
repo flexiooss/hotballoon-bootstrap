@@ -106,10 +106,8 @@ export class BootstrapComponent {
   initActionListener() {
     this._appInitializedAction = new Action(
       new ActionParams(
-        'AppInitializedAction',
         AppInitializedAction,
         (payload) => {
-          console.log(payload)
           assert(payload instanceof AppInitializedAction,
             'BootstrapComponent:AppInitializedAction:validate `payload` should be an instance of AppInitializedAction'
           )

@@ -108,7 +108,7 @@ export class CounterComponent {
   createRenderMountView() {
     assert(
       isNode(this._parentNode),
-      'CounterComponent:createRenderMountView: `_parentNode` property should be a NodeElement')
+      'CounterComponent:createRenderMountView: `_parentNode` property should be a ElementDescription')
 
     this._addCounterViewContainer().renderAndMount(this._parentNode)
   }

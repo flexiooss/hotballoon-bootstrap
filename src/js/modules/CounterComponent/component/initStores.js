@@ -1,5 +1,5 @@
 import {CounterStore} from '../stores/CounterStore'
-import {State, Store, InMemoryStorage, StoreParams} from 'hotballoon'
+import {StoreBuilder, InMemoryStoreParams} from 'hotballoon'
 
 /**
  *
@@ -7,29 +7,17 @@ import {State, Store, InMemoryStorage, StoreParams} from 'hotballoon'
  * @return {CounterStore}
  */
 export const initStores = (componentContext) => {
-  const ID = componentContext.nextID()
   /**
    *
    * @type {Store<CounterStore>}
    */
-  const counterStore = new Store(
-    new StoreParams(
-      ID,
+  const counterStore = StoreBuilder.InMemory(
+    new InMemoryStoreParams(
       CounterStore,
       (data) => {
         return data instanceof CounterStore
       },
-      /**
-       * @type {InMemoryStorage<CounterStore>}
-       */
-      new InMemoryStorage(
-        CounterStore,
-        /**
-         * @type {State<CounterStore>}
-         */
-        new State(ID, CounterStore, new CounterStore(10))
-      )
-    )
+      new CounterStore(10))
   )
 
   componentContext.addStore(counterStore)

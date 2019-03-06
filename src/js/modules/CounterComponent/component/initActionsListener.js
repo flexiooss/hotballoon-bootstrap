@@ -16,7 +16,6 @@ export const initActionsListener = (componentContext, counterStore) => {
    */
   const counterIncrementAction = new Action(
     new ActionParams(
-      'CounterIncrementAction',
       CounterIncrementAction,
       (payload) => {
         assert(

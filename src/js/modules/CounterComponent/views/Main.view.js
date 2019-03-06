@@ -1,7 +1,7 @@
 import {
   View,
-  HtmlParams,
-  NodeEventListenerFactory
+  NodeEventListenerFactory,
+  e
 } from 'hotballoon'
 
 export const INCREMENT_EVENT = 'INCREMENT_EVENT'
@@ -23,44 +23,56 @@ export default class Main extends View {
    */
   template() {
     return this.html(
-      'main#main.toto', HtmlParams.withChildNodes(
-        [
-          this.html(
-            'div', HtmlParams.withChildNodes([
-              this.html('span#Counter.counter', HtmlParams.withText(this._addCounter())),
-              this.html(
-                'input#increment.increment',
-                HtmlParams
-                  .withAttributes(
-                    {value: 'Inc', type: 'button'}
-                  )
-                  .addEventListener(
-                    NodeEventListenerFactory.listen('mouseup')
-                      .callback((e) => {
-                        this.dispatch(INCREMENT_EVENT, null)
-                      })
-                      .build()
-                  )
-              )
-            ])
-          )
-
-        ]
+      e('main#main.toto').childNodes(
+        this.html(
+          e('div').childNodes(
+            this.__e_CounterText(),
+            this.__e_button()
+          ))
       )
     )
   }
 
   /**
    *
+   * @return {Element}
+   */
+  __e_CounterText() {
+    return this.html(
+      e('span#Counter.counter').text(this._addCounter())
+    )
+  }
+
+  /**
+   *
+   * @return {(number|string)}
    * @private
    */
   _addCounter() {
-    console.log(this.__stores.counterStore)
-
     if (this.__stores.counterStore.count) {
       return this.__stores.counterStore.count
     } else {
       return 'counter not found'
     }
+  }
+
+  /**
+   *
+   * @return {Element}
+   */
+  __e_button() {
+    return this.html(
+      e('input#increment.increment')
+        .attributes(
+          {value: 'Inc', type: 'button'}
+        )
+        .listenEvent(
+          NodeEventListenerFactory.listen('mouseup')
+            .callback((e) => {
+              this.dispatch(INCREMENT_EVENT, null)
+            })
+            .build()
+        )
+    )
   }
 }
