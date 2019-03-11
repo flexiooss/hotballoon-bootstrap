@@ -1,6 +1,5 @@
 import {App} from './app/App'
 import {AppDispatcher} from './app/AppDispatcher'
-import {ComponentContext} from 'hotballoon'
 import {BootstrapComponent} from './modules/BootstrapComponent'
 import {AppInitializedAction} from './modules/BootstrapComponent/actions/AppInitializedAction'
 
@@ -10,7 +9,7 @@ const HTML_NODE = document.body
 ;(function (app) {
   (BootstrapComponent
     .create(
-      app.addComponentContext(new ComponentContext(app)),
+      app.addComponentContext(),
       HTML_NODE
     ))
     .initActionListener()

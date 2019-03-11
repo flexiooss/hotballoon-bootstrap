@@ -1,5 +1,5 @@
 'use strict'
-import {ViewContainer, ViewEventListenerFactory, ViewParameters} from 'hotballoon'
+import {ViewContainer, ViewEventListenerBuilder, ViewParameters} from 'hotballoon'
 import {CounterIncrementAction} from '../actions/CounterIncrementAction'
 import {default as Main, INCREMENT_EVENT} from './Main.view'
 
@@ -39,7 +39,7 @@ export class CounterContainer extends ViewContainer {
   __handleEvents() {
     this.view(MAIN_VIEW)
       .on(
-        ViewEventListenerFactory
+        ViewEventListenerBuilder
           .listen(INCREMENT_EVENT)
           .callback((payload) => {
             this.__actions

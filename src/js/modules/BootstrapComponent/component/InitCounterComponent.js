@@ -1,5 +1,4 @@
 import {CounterComponent} from '../../CounterComponent'
-import {ComponentContext} from 'hotballoon'
 
 export class InitCounterComponent {
   constructor(payload, APP, parentNode) {
@@ -7,7 +6,7 @@ export class InitCounterComponent {
 
     CounterComponent
       .create(
-        APP.addComponentContext(new ComponentContext(APP)),
+        APP.addComponentContext(),
         parentNode
       )
       .createRenderMountView()

@@ -1,7 +1,8 @@
 import {
   View,
-  NodeEventListenerFactory,
-  e
+  ElementEventListenerBuilder,
+  e,
+  RECONCILIATION_RULES
 } from 'hotballoon'
 
 export const INCREMENT_EVENT = 'INCREMENT_EVENT'
@@ -67,12 +68,12 @@ export default class Main extends View {
           {value: 'Inc', type: 'button'}
         )
         .listenEvent(
-          NodeEventListenerFactory.listen('mouseup')
+          ElementEventListenerBuilder.listen('mouseup')
             .callback((e) => {
               this.dispatch(INCREMENT_EVENT, null)
             })
             .build()
-        )
+        ).reconciliationRules(RECONCILIATION_RULES.BYPATH)
     )
   }
 }

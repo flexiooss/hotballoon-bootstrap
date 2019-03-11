@@ -1,4 +1,4 @@
-import {Action, ActionParams} from 'hotballoon'
+import {ActionBuilder, ActionParams} from 'hotballoon'
 import {CounterIncrementAction} from '../actions/CounterIncrementAction'
 import {CounterStore} from '../stores/CounterStore'
 import {assert} from 'flexio-jshelpers'
@@ -14,7 +14,7 @@ export const initActionsListener = (componentContext, counterStore) => {
    *
    * @type {!Action<CounterIncrementAction>}
    */
-  const counterIncrementAction = new Action(
+  const counterIncrementAction = ActionBuilder.build(
     new ActionParams(
       CounterIncrementAction,
       (payload) => {

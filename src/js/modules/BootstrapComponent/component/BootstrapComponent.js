@@ -1,6 +1,6 @@
 'use strict'
 import {isNode, assert} from 'flexio-jshelpers'
-import {Action, ActionParams, TypeCheck} from 'hotballoon'
+import {ActionBuilder, ActionParams, TypeCheck} from 'hotballoon'
 import {AppInitializedAction} from '../actions/AppInitializedAction'
 import {InitCounterComponent} from './InitCounterComponent'
 
@@ -39,9 +39,8 @@ export class BootstrapComponent {
      * @type {!Action<AppInitializedAction>}
      * @private
      */
-    this._appInitializedAction = new Action(
+    this._appInitializedAction = ActionBuilder.build(
       new ActionParams(
-        'AppInitializedAction',
         AppInitializedAction,
         (payload) => {
           console.log(payload)
@@ -104,7 +103,7 @@ export class BootstrapComponent {
    * @return {Action.<AppInitializedAction>}
    */
   initActionListener() {
-    this._appInitializedAction = new Action(
+    this._appInitializedAction = ActionBuilder.build(
       new ActionParams(
         AppInitializedAction,
         (payload) => {
