@@ -1,18 +1,23 @@
 import {ActionBuilder, ActionParams} from 'hotballoon'
-import {CounterIncrementAction} from '../actions/CounterIncrementAction'
-import {CounterStore} from '../stores/CounterStore'
-import {assert} from 'flexio-jshelpers'
+import {FLEXIO_IMPORT_OBJECT, assert} from 'flexio-jshelpers'
+import '../generated/io/package'
+
+/**
+ *
+ * @type {CounterIncrementAction}
+ */
+const CounterIncrementAction = window[FLEXIO_IMPORT_OBJECT].io.flexio.CounterComponent.CounterIncrementAction
 
 /**
  *
  * @param {ComponentContext} componentContext
- * @param {!Store<CounterStore>} counterStore
- * @return {Action.<CounterIncrementAction>}
+ * @param {Store<CounterStore>} counterStore
+ * @return {Action<CounterIncrementAction>}
  */
 export const initActionsListener = (componentContext, counterStore) => {
   /**
    *
-   * @type {!Action<CounterIncrementAction>}
+   * @type {Action<CounterIncrementAction>}
    */
   const counterIncrementAction = ActionBuilder.build(
     new ActionParams(
@@ -31,7 +36,7 @@ export const initActionsListener = (componentContext, counterStore) => {
   counterIncrementAction
     .listenWithCallback((payload) => {
       counterStore.set(
-        new CounterStore(counterStore.state().data.count + 1)
+        counterStore.state().data.withCount(counterStore.state().data.count() + 1)
       )
     })
 

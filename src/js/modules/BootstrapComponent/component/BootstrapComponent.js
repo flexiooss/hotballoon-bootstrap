@@ -1,20 +1,29 @@
 'use strict'
 import {isNode, assert} from 'flexio-jshelpers'
 import {ActionBuilder, ActionParams, TypeCheck} from 'hotballoon'
-import {AppInitializedAction} from '../actions/AppInitializedAction'
 import {InitCounterComponent} from './InitCounterComponent'
+
+import '../generated/io/package'
+import {FLEXIO_IMPORT_OBJECT} from 'flexio-jshelpers'
+
+/**
+ *
+ * @type {AppInitializedAction}
+ */
+const AppInitializedAction = window[FLEXIO_IMPORT_OBJECT].io.flexio.BootstrapComponent.AppInitializedAction
+
 
 export class BootstrapComponent {
   /**
    *
    * @param {ComponentContext} componentContext
-   * @param {Node} parentNode
+   * @param {Element} parentNode
    */
   constructor(componentContext, parentNode) {
     assert(
       TypeCheck.isComponentContext(componentContext),
-      'BootstrapComponent:constructor: `parentNode` argument should be NodeType, %s given',
-      typeof parentNode)
+      'BootstrapComponent:constructor: `componentContext` argument should be an instanceof ComponentContext, %s given',
+      typeof componentContext)
 
     /**
      * @name BootstrapComponent#_componentContext
@@ -36,14 +45,13 @@ export class BootstrapComponent {
   initAppInitializedAction() {
     /**
      *
-     * @type {!Action<AppInitializedAction>}
+     * @type {Action<AppInitializedAction>}
      * @private
      */
     this._appInitializedAction = ActionBuilder.build(
       new ActionParams(
         AppInitializedAction,
         (payload) => {
-          console.log(payload)
           assert(payload instanceof AppInitializedAction,
             'BootstrapComponent:AppInitializedAction:validate `payload` should be an instance of AppInitializedAction'
           )
@@ -57,7 +65,7 @@ export class BootstrapComponent {
 
   /**
    *
-   * @return {!Action<AppInitializedAction>}
+   * @return {Action<AppInitializedAction>}
    */
   get appInitializedAction() {
     return this._appInitializedAction
@@ -66,7 +74,7 @@ export class BootstrapComponent {
   /**
    *
    * @param {ComponentContext} componentContext
-   * @param {Node} parentNode
+   * @param {Element} parentNode
    * @return {BootstrapComponent}
    * @static
    */
@@ -84,7 +92,7 @@ export class BootstrapComponent {
 
   /**
    *
-   * @param {Node} parentNode
+   * @param {Element} parentNode
    * @private
    */
   _setParentNode(parentNode) {
@@ -100,22 +108,9 @@ export class BootstrapComponent {
 
   /**
    *
-   * @return {Action.<AppInitializedAction>}
+   * @return {Action<AppInitializedAction>}
    */
   initActionListener() {
-    this._appInitializedAction = ActionBuilder.build(
-      new ActionParams(
-        AppInitializedAction,
-        (payload) => {
-          assert(payload instanceof AppInitializedAction,
-            'BootstrapComponent:AppInitializedAction:validate `payload` should be an instance of AppInitializedAction'
-          )
-          return true
-        },
-        this.componentContext.dispatcher()
-      )
-    )
-
     this
       .appInitializedAction
       .listenWithCallback(

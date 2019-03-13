@@ -1,12 +1,11 @@
 'use strict'
-import {TypeCheck, ViewContainerParameters} from 'hotballoon'
+import {PublicStoreHandler, TypeCheck, ViewContainerParameters} from 'hotballoon'
 import {initStores} from './initStores'
 import {initActionsListener} from './initActionsListener'
 import {isNode, assert} from 'flexio-jshelpers'
 import {CounterContainer} from '../views/Counter.container'
 import {CounterContainerStoresParams} from '../views/CounterContainerStoresParams'
 import {CounterContainerActionsParams} from '../views/CounterContainerActionsParams'
-import {CounterStorePublicHandler} from '../stores/CounterStorePublicHandler'
 
 export class CounterComponent {
   /**
@@ -28,12 +27,10 @@ export class CounterComponent {
       configurable: false
     })
 
-
     initActionsListener(
       this._componentContext,
       this.__counterStore
     )
-
   }
 
   /**
@@ -62,10 +59,10 @@ export class CounterComponent {
     this.__counterStore = initStores(this._componentContext)
     /**
      *
-     * @type {CounterStorePublicHandler}
+     * @type {PublicStoreHandler}
      * @private
      */
-    this.__counterStorePublicHandler = new CounterStorePublicHandler(this.__counterStore)
+    this.__counterStorePublicHandler = new PublicStoreHandler(this.__counterStore)
     return this
   }
 
@@ -103,7 +100,6 @@ export class CounterComponent {
     )
     return this
   }
-
 
   createRenderMountView() {
     assert(

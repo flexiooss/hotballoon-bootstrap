@@ -1,0 +1,2 @@
+CounterStore:
+  count: int

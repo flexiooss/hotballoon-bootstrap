@@ -1,8 +1,14 @@
 import {CounterComponent} from '../../CounterComponent'
 
 export class InitCounterComponent {
+  /**
+   *
+   * @param {AppInitializedAction} payload
+   * @param {HotBalloonApplication} APP
+   * @param {Element} parentNode
+   */
   constructor(payload, APP, parentNode) {
-    console.log(payload.message)
+    console.log(payload.message())
 
     CounterComponent
       .create(
@@ -14,9 +20,9 @@ export class InitCounterComponent {
 
   /**
    *
-   * @param {Object} payload
+   * @param {AppInitializedAction} payload
    * @param {HotBalloonApplication} APP
-   * @param {Node} parentNode
+   * @param {Element} parentNode
    * @return {InitCounterComponent}
    * @constructor
    * @static

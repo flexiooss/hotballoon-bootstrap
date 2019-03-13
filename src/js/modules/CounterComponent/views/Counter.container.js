@@ -1,10 +1,17 @@
 'use strict'
 import {ViewContainer, ViewEventListenerBuilder, ViewParameters} from 'hotballoon'
-import {CounterIncrementAction} from '../actions/CounterIncrementAction'
 import {default as Main, INCREMENT_EVENT} from './Main.view'
 
 import '../assets/css/style.css'
 import {CounterContainerStoresParams} from './CounterContainerStoresParams'
+import '../generated/io/package'
+import {FLEXIO_IMPORT_OBJECT} from 'flexio-jshelpers'
+
+/**
+ *
+ * @type {CounterIncrementAction}
+ */
+const CounterIncrementAction = window[FLEXIO_IMPORT_OBJECT].io.flexio.CounterComponent.CounterIncrementAction
 
 const MAIN_VIEW = Symbol('MAIN_VIEW')
 

@@ -1,13 +1,20 @@
 import {TypeCheck} from 'hotballoon'
 import {assert} from 'flexio-jshelpers'
-import {CounterStore} from '../stores/CounterStore'
+import '../generated/io/package'
+import {FLEXIO_IMPORT_OBJECT} from 'flexio-jshelpers'
+
+/**
+ *
+ * @type {CounterStore}
+ */
+const CounterStore = window[FLEXIO_IMPORT_OBJECT].io.flexio.CounterComponent.CounterStore
 
 /**
  */
 export class CounterContainerStoresParams {
   /**
    *
-   * @param {CounterStorePublicHandler} counterStore
+   * @param {PublicStoreHandler<CounterStore>} counterStore
    */
   constructor(counterStore) {
     assert(
@@ -19,7 +26,7 @@ export class CounterContainerStoresParams {
 
   /**
    *
-   * @return {CounterStorePublicHandler}
+   * @return {PublicStoreHandler<CounterStore>}
    */
   get counterStore() {
     return this.__counterStore

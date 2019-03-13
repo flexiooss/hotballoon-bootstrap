@@ -14,6 +14,11 @@ export default class Main extends View {
    */
   constructor(viewParameters, counterContainerStores) {
     super(viewParameters)
+    /**
+     *
+     * @type {CounterContainerStoresParams}
+     * @private
+     */
     this.__stores = counterContainerStores
     this.subscribeToStore(this.__stores.counterStore)
   }
@@ -50,8 +55,8 @@ export default class Main extends View {
    * @private
    */
   _addCounter() {
-    if (this.__stores.counterStore.count) {
-      return this.__stores.counterStore.count
+    if (this.__stores.counterStore.data().count()) {
+      return this.__stores.counterStore.data().count()
     } else {
       return 'counter not found'
     }
