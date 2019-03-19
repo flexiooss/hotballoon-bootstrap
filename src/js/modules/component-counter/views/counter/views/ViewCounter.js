@@ -1,5 +1,6 @@
 import {View, e, ElementEventListenerBuilder} from 'hotballoon'
 import {RECONCILIATION_RULES} from 'flexio-nodes-reconciliation'
+import style from '../../../assets/css/style.css'
 
 export const INCREMENT_EVENT = 'INCREMENT_EVENT'
 export default class Main extends View {
@@ -25,17 +26,17 @@ export default class Main extends View {
    */
   template() {
     return this.html(
-      e('main#main.toto').childNodes(
+      e('main#main').childNodes(
         this.html(
           e('div').childNodes(
             this.html(
-              e('span#Counter.counter').text(this._addCounter())
+              e('span#Counter.' + style.counter).text(this._addCounter())
             ),
 
             this.html(
-              e('input#increment.increment')
+              e('input#increment.' + style.increment)
                 .attributes(
-                  { value: 'Inc', type: 'button' }
+                  {value: 'Inc', type: 'button'}
                 )
                 .listenEvent(
                   ElementEventListenerBuilder.listen('mouseup')

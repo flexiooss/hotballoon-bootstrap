@@ -2,7 +2,6 @@
 import {ViewContainer, ViewParameters, ViewEventListenerBuilder} from 'hotballoon'
 import {default as Main, INCREMENT_EVENT} from './views/ViewCounter'
 
-import '../../assets/css/style.css'
 import '../../generated/io/package'
 import {FLEXIO_IMPORT_OBJECT} from 'flexio-jshelpers'
 import {ContainerStoreCounter} from '../ContainerStoreCounter'
