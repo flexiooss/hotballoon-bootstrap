@@ -1,4 +1,4 @@
-import {StoreBuilder, InMemoryStoreParams, TypeParameter} from 'hotballoon'
+import {StoreBuilder, InMemoryStoreParams, StoreTypeParam} from 'hotballoon'
 import '../../generated/io/package'
 import {FLEXIO_IMPORT_OBJECT, isNull} from 'flexio-jshelpers'
 
@@ -13,7 +13,7 @@ const StoreCounterBuilder = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_cou
 export const initStoreCounter = (componentContext) => {
   return componentContext.addStore(StoreBuilder.InMemory(
     new InMemoryStoreParams(
-      new TypeParameter(
+      new StoreTypeParam(
         StoreCounter,
         /**
          *

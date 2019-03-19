@@ -1,10 +1,10 @@
-import {ActionBuilder, ActionParams} from 'hotballoon'
+import {ActionBuilder, ActionParams, ActionTypeParam} from 'hotballoon'
 import {FLEXIO_IMPORT_OBJECT} from 'flexio-jshelpers'
 import '../../generated/io/package'
 
 /**
  *
- * @type {ActionIncrementCounter}
+ * @params {ActionIncrementCounter}
  */
 const ActionIncrementCounter = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.action.ActionIncrementCounter
 
@@ -16,15 +16,9 @@ const ActionIncrementCounter = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_
 export const initActionIncrementCounter = (dispatcher) => {
   return ActionBuilder.build(
     new ActionParams(
-      ActionIncrementCounter,
-      /**
-       *
-       * @param {ActionIncrementCounter} payload
-       * @return {boolean}
-       */
-      (payload) => {
-        return true
-      },
+      new ActionTypeParam(
+        ActionIncrementCounter
+      ),
       dispatcher
     )
   )

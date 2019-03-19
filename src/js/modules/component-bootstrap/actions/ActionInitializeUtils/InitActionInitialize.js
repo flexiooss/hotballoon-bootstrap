@@ -1,11 +1,7 @@
-import {ActionBuilder, ActionParams} from 'hotballoon'
-import {FLEXIO_IMPORT_OBJECT, assert} from 'flexio-jshelpers'
+import {ActionBuilder, ActionParams, ActionTypeParam} from 'hotballoon'
+import {FLEXIO_IMPORT_OBJECT, isNull} from 'flexio-jshelpers'
 import '../../generated/io/package'
 
-/**
- *
- * @type {ActionInitialize}
- */
 const ActionInitialize = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_bootsrap.action.ActionInitialize
 
 /**
@@ -16,15 +12,28 @@ const ActionInitialize = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_bootsr
 export const initActionInitialize = (dispatcher) => {
   return ActionBuilder.build(
     new ActionParams(
-      ActionInitialize,
-      (payload) => {
-        assert(
-          payload instanceof ActionInitialize,
-          'ComponentBootstrap:initActionInitialize: `payload` argument should be an instance of ActionInitialize, %s given',
-          typeof payload
-        )
-        return true
-      },
+      new ActionTypeParam(
+        ActionInitialize,
+        /**
+         *
+         * @param {ActionInitialize} data
+         * @return {ActionInitialize}
+         */
+        (data) => {
+          if (isNull(data.message())) {
+            return data.withMessage('Default message')
+          }
+          return data
+        },
+        /**
+         *
+         * @param {ActionInitialize} payload
+         * @return {boolean}
+         */
+        (payload) => {
+          return !isNull(payload.message())
+        }
+      ),
       dispatcher
     )
   )

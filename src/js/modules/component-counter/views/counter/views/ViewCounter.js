@@ -12,7 +12,7 @@ export default class Main extends View {
     super(viewParameters)
     /**
      *
-     * @type {ContainerStoreCounter}
+     * @params {ContainerStoreCounter}
      * @private
      */
     this.__stores = counterContainerStores
