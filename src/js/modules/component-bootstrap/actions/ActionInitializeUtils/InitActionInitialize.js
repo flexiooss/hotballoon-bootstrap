@@ -6,7 +6,7 @@ import '../../generated/io/package'
  *
  * @type {ActionInitialize}
  */
-const ActionInitialize = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_bootstrap.ActionInitialize
+const ActionInitialize = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_bootsrap.action.ActionInitialize
 
 /**
  *

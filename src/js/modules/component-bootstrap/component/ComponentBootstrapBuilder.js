@@ -1,4 +1,5 @@
-import {ComponentBootstrap} from '..'
+import {ComponentBootstrap} from './ComponentBootstrap'
+import {ComponentBootstrapPublic} from './ComponentBootstrapPublic'
 import {TypeCheck} from 'hotballoon'
 import {assert, isNode} from 'flexio-jshelpers'
 
@@ -7,8 +8,9 @@ export class ComponentBootstrapBuilder {
    *
    * @param {HotBalloonApplication} APP
    * @param {Element} parentNode
+   * @return {ComponentBootstrapPublic}
    */
-  constructor(APP, parentNode) {
+  static build(APP, parentNode) {
     assert(TypeCheck.isHotballoonApplication(APP),
       'ComponentBootstrapBuilder:constructor: `APP` argument should be an instanceof HotballoonApplication, %s given',
       typeof APP)
@@ -17,17 +19,11 @@ export class ComponentBootstrapBuilder {
       'ComponentBootstrapBuilder:constructor: `parentNode` argument should be NodeType, %s given',
       typeof parentNode)
 
-    this.__componentBootstrap = ComponentBootstrap.create(
-      APP.addComponentContext(),
-      parentNode
-    ).setEventLoop()
+    return new ComponentBootstrapPublic(
+      new ComponentBootstrap(
+        APP.addComponentContext(),
+        parentNode
+      )
+    )
   }
-
-
-
-  dispatchActionInitialize(message) {
-    this.__componentBootstrap.dispatchActionInitialize(message)
-  }
-
-
 }

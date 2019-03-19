@@ -1,4 +1,4 @@
-import {assert, assertType, isNode} from 'flexio-jshelpers'
+import {assert, assertType, FLEXIO_IMPORT_OBJECT, isNode} from 'flexio-jshelpers'
 import {TypeCheck} from 'hotballoon'
 
 export class ListenActionIncrementCounterParam {
@@ -41,18 +41,19 @@ export class ListenActionIncrementCounterParam {
  * @param {ListenActionIncrementCounterParam} param
  */
 export const listenActionIncrementCounter = (param) => {
-  assert(TypeCheck.isAction(param.action),
-    'ComponentCounter:listenActionIncrementCounter: ActionIncrementCounter should be initialized before using it'
-  )
-
-  assert(TypeCheck.isStore(param.store),
-    'ComponentCounter:listenActionIncrementCounter: StoreCounter should be initialized before using it'
+  assertType(param instanceof ListenActionIncrementCounterParam,
+    'ComponentCounter:listenActionIncrementCounter: `param` should be ListenActionIncrementCounterParam'
   )
 
   param.action
-    .listenWithCallback((payload) => {
-      param.store.set(
-        param.store.state().data.withCount(param.store.state().data.count() + 1)
-      )
-    })
+    .listenWithCallback(
+      /**
+       *
+       * @param {ActionIncrementCounter} payload
+       */
+      (payload) => {
+        param.store.set(
+          param.store.state().data
+            .withCount(param.store.state().data.count() + 1))
+      })
 }

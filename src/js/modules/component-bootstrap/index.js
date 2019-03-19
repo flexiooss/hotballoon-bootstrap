@@ -1,1 +1,1 @@
-export {ComponentBootstrap} from './component/ComponentBootstrap'
+export {ComponentBootstrapBuilder} from './component/ComponentBootstrapBuilder'

@@ -24,6 +24,7 @@ export const initStoreCounter = (componentContext) => {
           if (isNull(data.count())) {
             return data.withCount(0)
           }
+          return data
         },
         /**
          *

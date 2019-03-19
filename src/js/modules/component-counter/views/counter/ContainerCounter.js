@@ -7,11 +7,7 @@ import '../../generated/io/package'
 import {FLEXIO_IMPORT_OBJECT} from 'flexio-jshelpers'
 import {ContainerStoreCounter} from '../ContainerStoreCounter'
 
-/**
- *
- * @type {ActionIncrementCounter}
- */
-const ActionIncrementCounter = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.ActionIncrementCounter
+const ActionIncrementCounterBuilder = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.action.ActionIncrementCounterBuilder
 
 const MAIN_VIEW = Symbol('MAIN_VIEW')
 
@@ -50,7 +46,7 @@ export class ContainerCounter extends ViewContainer {
           .listen(INCREMENT_EVENT)
           .callback((payload) => {
             this.__actions
-              .counterIncrementAction.dispatch(new ActionIncrementCounter())
+              .counterIncrementAction.dispatch(new ActionIncrementCounterBuilder().build())
           }).build()
       )
   }

@@ -1,7 +1,7 @@
 'use strict'
 import {TypeCheck} from 'hotballoon'
 
-import {isNode, assert, FLEXIO_IMPORT_OBJECT} from 'flexio-jshelpers'
+import {isNode, assert, FLEXIO_IMPORT_OBJECT, assertType} from 'flexio-jshelpers'
 import '../generated/io/package'
 import {initActionInitialize} from '../actions/ActionInitializeUtils/InitActionInitialize'
 import {
@@ -9,11 +9,7 @@ import {
   ListenActionInitializeParam
 } from '../actions/ActionInitializeUtils/ListenActionInitialize'
 
-/**
- *
- * @type {ActionInitialize}
- */
-const ActionInitialize = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_bootstrap.ActionInitialize
+const ActionInitializeBuilder = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_bootsrap.action.ActionInitializeBuilder
 
 export class ComponentBootstrap {
   /**
@@ -55,21 +51,10 @@ export class ComponentBootstrap {
   }
 
   dispatchActionInitialize(message) {
-    assert(TypeCheck.isAction(this.__actionInitialize),
+    assertType(TypeCheck.isAction(this.__actionInitialize),
       'ComponentBootstrap:dispatchActionInitialize: ActionInitialize should be initialized before using it'
     )
-    this.__actionInitialize.dispatch(new ActionInitialize(message))
-  }
-
-  /**
-   *
-   * @param {ComponentContext} componentContext
-   * @param {Element} parentNode
-   * @return {ComponentBootstrap}
-   * @static
-   */
-  static create(componentContext, parentNode) {
-    return new this(componentContext, parentNode)
+    this.__actionInitialize.dispatch(new ActionInitializeBuilder().message(message).build())
   }
 
   /**

@@ -1,21 +1,20 @@
 import {assertType} from 'flexio-jshelpers'
 import {ComponentCounter} from './ComponentCounter'
 
-const __componentCounter = Symbol('__componentCounter')
+const __component = Symbol('__componentCounter')
 
 export class ComponentCounterPublic {
   /**
    *
-   * @param {ComponentCounter} componentCounter
+   * @param {ComponentCounter} component
    */
-  constructor(componentCounter) {
-    assertType(componentCounter instanceof ComponentCounter, 'ComponentCounterPublic:constructor: `componentCounter` should be a ComponentCounter')
+  constructor(component) {
+    assertType(component instanceof ComponentCounter, 'ComponentCounterPublic:constructor: `component` should be a ComponentCounter')
     /**
      * @private
-     * @property {ComponentCounter} ComponentCounterPublic.__componentCounter
-     * @type {ComponentCounter}
+     * @property {ComponentCounter} ComponentCounterPublic.__component
      */
-    this[__componentCounter] = componentCounter
+    this[__component] = component
   }
 
   /**
@@ -23,7 +22,7 @@ export class ComponentCounterPublic {
    * @return {ComponentCounterPublic}
    */
   initAndMount() {
-    this[__componentCounter]
+    this[__component]
       .setEventLoop()
       .mountView()
     return this
