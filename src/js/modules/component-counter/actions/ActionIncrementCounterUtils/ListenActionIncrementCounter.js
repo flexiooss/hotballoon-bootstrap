@@ -1,5 +1,6 @@
 import {assert, assertType, FLEXIO_IMPORT_OBJECT, isNode} from 'flexio-jshelpers'
 import {TypeCheck} from 'hotballoon'
+import {StoreCounterHandler} from '../../stores/storeCounterUtils/StoreCounterHandler'
 
 export class ListenActionIncrementCounterParam {
   /**
@@ -44,6 +45,7 @@ export const listenActionIncrementCounter = (param) => {
   assertType(param instanceof ListenActionIncrementCounterParam,
     'ComponentCounter:listenActionIncrementCounter: `param` should be ListenActionIncrementCounterParam'
   )
+  const store = new StoreCounterHandler(param.store)
 
   param.action
     .listenWithCallback(
@@ -52,8 +54,6 @@ export const listenActionIncrementCounter = (param) => {
        * @param {ActionIncrementCounter} payload
        */
       (payload) => {
-        param.store.set(
-          param.store.state().data
-            .withCount(param.store.state().data.count() + 1))
+        store.increment()
       })
 }

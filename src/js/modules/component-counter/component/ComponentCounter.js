@@ -1,12 +1,15 @@
 'use strict'
 import {PublicStoreHandler, TypeCheck} from 'hotballoon'
-import {initStoreCounter} from '../stores/storeCounterBuilder/initStoreCounter'
-import {isNode, assert} from 'flexio-jshelpers'
+import {initStoreCounter} from '../stores/storeCounterUtils/initStoreCounter'
+import {isNode, assert,assertType} from 'flexio-jshelpers'
 import {addCounterViewContainer} from '../views/counter/InitViewContainerCounter'
-import {listenActionIncrementCounter,ListenActionIncrementCounterParam} from '../actions/ActionIncrementCounterUtils/ListenActionIncrementCounter'
+import {
+  listenActionIncrementCounter,
+  ListenActionIncrementCounterParam
+} from '../actions/ActionIncrementCounterUtils/ListenActionIncrementCounter'
 import {initActionIncrementCounter} from '../actions/ActionIncrementCounterUtils/InitActionIncrementCounter'
 
-export class ComponentCounter  {
+export class ComponentCounter {
   /**
    *
    * @param {ComponentContext} componentContext
@@ -18,15 +21,13 @@ export class ComponentCounter  {
       'ComponentBootstrap:constructor: `componentContext` argument should be an instanceof ComponentContext, %s given',
       typeof componentContext)
 
-    assert(!!isNode(parentNode),
+    assertType(!!isNode(parentNode),
       'ComponentBootstrap:constructor: `parentNode` argument should be NodeType, %s given',
       typeof parentNode)
 
     this.__componentContext = componentContext
     this.__parentNode = parentNode
   }
-
-
 
   /**
    *
@@ -55,7 +56,7 @@ export class ComponentCounter  {
   }
 
   mountView() {
-    assert(isNode(this.__parentNode),
+    assertType(isNode(this.__parentNode),
       'ComponentCounter:mountView: `parentNode` should be a NodeType, %s given',
       typeof this.__parentNode
     )
