@@ -2,7 +2,10 @@
 import {PublicStoreHandler, TypeCheck} from 'hotballoon'
 import {initStoreCounter} from '../stores/storeCounterUtils/initStoreCounter'
 import {isNode, assert,assertType} from 'flexio-jshelpers'
-import {addCounterViewContainer} from '../views/counter/InitViewContainerCounter'
+import {
+  InitViewContainerCounterParams,
+  initViewContainerCounter
+} from '../views/counter/InitViewContainerCounter'
 import {
   listenActionIncrementCounter,
   ListenActionIncrementCounterParam
@@ -60,6 +63,13 @@ export class ComponentCounter {
       'ComponentCounter:mountView: `parentNode` should be a NodeType, %s given',
       typeof this.__parentNode
     )
-    addCounterViewContainer(this).renderAndMount(this.__parentNode)
+    initViewContainerCounter(
+      this.__componentContext,
+      this.__parentNode,
+      new InitViewContainerCounterParams(
+        this.__actionIncrementCounter,
+        this.__counterStorePublicHandler
+      )
+    ).renderAndMount(this.__parentNode)
   }
 }

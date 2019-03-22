@@ -6,7 +6,7 @@ import '../../generated/io/package'
  *
  * @params {ActionIncrementCounter}
  */
-const ActionIncrementCounter = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.action.ActionIncrementCounter
+const ActionIncrementCounter = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.actions.ActionIncrementCounter
 
 /**
  *

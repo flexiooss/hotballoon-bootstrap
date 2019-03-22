@@ -2,8 +2,8 @@ import {StoreBuilder, InMemoryStoreParams, StoreTypeParam} from 'hotballoon'
 import '../../generated/io/package'
 import {FLEXIO_IMPORT_OBJECT, isNull} from 'flexio-jshelpers'
 
-const StoreCounter = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.store.StoreCounter
-const StoreCounterBuilder = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.store.StoreCounterBuilder
+const StoreCounter = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.stores.StoreCounter
+const StoreCounterBuilder = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.stores.StoreCounterBuilder
 
 /**
  *

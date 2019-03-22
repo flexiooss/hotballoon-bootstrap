@@ -1,4 +1,4 @@
-import {assert, assertType, FLEXIO_IMPORT_OBJECT, isNode} from 'flexio-jshelpers'
+import {assertType} from 'flexio-jshelpers'
 import {TypeCheck} from 'hotballoon'
 import {StoreCounterHandler} from '../../stores/storeCounterUtils/StoreCounterHandler'
 

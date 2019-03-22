@@ -9,7 +9,7 @@ import {
   ListenActionInitializeParam
 } from '../actions/ActionInitializeUtils/ListenActionInitialize'
 
-const ActionInitializeBuilder = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_bootsrap.action.ActionInitializeBuilder
+const ActionInitializeBuilder = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_bootstrap.actions.ActionInitializeBuilder
 
 export class ComponentBootstrap {
   /**

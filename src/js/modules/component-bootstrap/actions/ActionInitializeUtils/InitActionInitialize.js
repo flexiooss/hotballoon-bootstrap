@@ -2,7 +2,7 @@ import {ActionBuilder, ActionParams, ActionTypeParam} from 'hotballoon'
 import {FLEXIO_IMPORT_OBJECT, isNull} from 'flexio-jshelpers'
 import '../../generated/io/package'
 
-const ActionInitialize = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_bootsrap.action.ActionInitialize
+const ActionInitialize = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_bootstrap.actions.ActionInitialize
 
 /**
  *

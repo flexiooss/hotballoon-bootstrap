@@ -46,7 +46,8 @@ export default class Main extends View {
                     .build()
                 ).reconciliationRules(RECONCILIATION_RULES.BYPATH)
             )
-          ))
+          )
+        )
       )
     )
   }

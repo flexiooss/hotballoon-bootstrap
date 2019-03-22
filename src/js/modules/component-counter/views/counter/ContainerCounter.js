@@ -6,7 +6,7 @@ import '../../generated/io/package'
 import {FLEXIO_IMPORT_OBJECT} from 'flexio-jshelpers'
 import {ContainerStoreCounter} from '../ContainerStoreCounter'
 
-const ActionIncrementCounterBuilder = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.action.ActionIncrementCounterBuilder
+const ActionIncrementCounterBuilder = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.actions.ActionIncrementCounterBuilder
 
 const MAIN_VIEW = Symbol('MAIN_VIEW')
 
