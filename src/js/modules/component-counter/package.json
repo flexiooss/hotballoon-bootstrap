@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "main": "index.js",
   "author": "Thomas Chatelain (https://github.com/TomAchT)",
-  "license": "no",
-  "private": true
+  "hotballoon-shed": {
+    "builder": "webpack4",
+    "test": "code-altimeter-js",
+    "generate-sources": {
+      "value-objects": {
+        "extension": ".spec.yaml"
+      }
+    }
+  }
 }

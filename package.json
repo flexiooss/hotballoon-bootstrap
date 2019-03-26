@@ -4,12 +4,14 @@
   "main": "index.js",
   "repository": "git@github.com:Flexio-corp/hotballoon-bootstrap.git",
   "author": "Thomas Chatelain (https://github.com/TomAchT)",
-  "private": true,
   "scripts": {
     "hotballoon-shed": "node ./node_modules/hotballoon-shed",
+    "clean-install": "yarn install --no-lockfile --force",
+    "postinstall": "echo 'bibi'",
     "build": "yarn hotballoon-shed --operation=production",
     "dev": "yarn hotballoon-shed --operation=development -v",
-    "test": "yarn hotballoon-shed --test"
+    "test": "yarn hotballoon-shed --test",
+    "generator:run": "npm explore hotballoon-shed -- npm run-script value-object-generator:run root=$(pwd)"
   },
   "devDependencies": {
     "code-altimeter-js": "https://github.com/flexiooss/code-altimeter-js.git",
@@ -32,5 +34,13 @@
     "flexio-jsrouter": "https://github.com/flexiooss/flexio-jsrouter.git",
     "flexio-nodes-reconciliation": "https://github.com/flexiooss/flexio-nodes-reconciliation.git",
     "hotballoon": "https://github.com/flexiooss/hotballoon.git"
+  },
+  "hotballoon-shed": {
+    "builder": "webpack4",
+    "test": "code-altimeter-js",
+    "modules": {
+      "component-bootstrap": "src/js/modules/component-bootsrap",
+      "component-counter": "src/js/modules/component-counter"
+    }
   }
 }
