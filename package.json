@@ -4,15 +4,6 @@
   "main": "index.js",
   "repository": "git@github.com:Flexio-corp/hotballoon-bootstrap.git",
   "author": "Thomas Chatelain (https://github.com/TomAchT)",
-  "scripts": {
-    "hotballoon-shed": "node ./node_modules/hotballoon-shed",
-    "clean-install": "yarn install --no-lockfile --force",
-    "postinstall": "echo 'bibi'",
-    "build": "yarn hotballoon-shed --operation=production",
-    "dev": "yarn hotballoon-shed --operation=development -v",
-    "test": "yarn hotballoon-shed --test",
-    "generator:run": "npm explore hotballoon-shed -- npm run-script value-object-generator:run root=$(pwd)"
-  },
   "devDependencies": {
     "code-altimeter-js": "https://github.com/flexiooss/code-altimeter-js.git",
     "eslint": "^5.7.0",
@@ -20,27 +11,33 @@
     "eslint-friendly-formatter": "^4.0.1",
     "eslint-plugin-html": "^4.0.6",
     "eslint-plugin-import": "^2.8.0",
-    "eslint-plugin-jest": "^21.18.0",
     "eslint-plugin-node": "^7.0.1",
     "eslint-plugin-promise": "^4.0.1",
     "eslint-plugin-standard": "^4.0.0",
-    "hotballoon-shed": "https://github.com/flexiooss/hotballoon-shed.git",
     "hotballoon-test-dummies": "https://github.com/flexiooss/hotballoon-test-dummies.git",
     "stylelint": "^9.6.0",
     "stylelint-config-standard": "^18.2.0"
   },
   "dependencies": {
     "flexio-jshelpers": "https://github.com/flexiooss/flexio-jshelpers.git",
-    "flexio-jsrouter": "https://github.com/flexiooss/flexio-jsrouter.git",
     "flexio-nodes-reconciliation": "https://github.com/flexiooss/flexio-nodes-reconciliation.git",
     "hotballoon": "https://github.com/flexiooss/hotballoon.git"
   },
   "hotballoon-shed": {
-    "builder": "webpack4",
-    "test": "code-altimeter-js",
+    "build": {
+      "builder": "webpack4",
+      "entries": [
+        "src/main/js/bootstrap.js"
+      ],
+      "html_template": "src/main/js/index.html"
+    },
+    "test": {
+      "tester": "code-altimeter-js",
+      "path": "src/test"
+    },
     "modules": {
-      "component-bootstrap": "src/js/modules/component-bootsrap",
-      "component-counter": "src/js/modules/component-counter"
+      "component-bootstrap": "src/main/js/modules/component-bootstrap",
+      "component-counter": "src/main/js/modules/component-counter"
     }
   }
 }

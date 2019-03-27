@@ -49,6 +49,7 @@ class StoreCounterBuilder {
     }
     /**
     * @param { number } count
+    * @returns {StoreCounterBuilder}
     */
     count( count ) {
         if( !isNull( count )){

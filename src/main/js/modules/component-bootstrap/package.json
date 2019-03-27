@@ -1,11 +1,14 @@
 {
-  "name": "ci-pipeline-component",
+  "name": "component-bootstrap",
   "version": "1.0.0",
   "main": "index.js",
   "author": "Thomas Chatelain (https://github.com/TomAchT)",
   "hotballoon-shed": {
     "builder": "webpack4",
-    "test": "code-altimeter-js",
+    "test": {
+      "tester": "code-altimeter-js",
+      "path": "__tests__"
+    },
     "generate-sources": {
       "value-objects": {
         "extension": ".spec.yaml"

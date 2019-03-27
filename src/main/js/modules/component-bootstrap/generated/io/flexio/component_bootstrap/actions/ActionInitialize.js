@@ -49,6 +49,7 @@ class ActionInitializeBuilder {
     }
     /**
     * @param { string } message
+    * @returns {ActionInitializeBuilder}
     */
     message( message ) {
         if( !isNull( message )){
