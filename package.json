@@ -29,7 +29,8 @@
       "entries": [
         "src/main/js/bootstrap.js"
       ],
-      "html_template": "src/main/js/index.html"
+      "html_template": "src/main/js/index.html",
+      "output": "./dist"
     },
     "test": {
       "tester": "code-altimeter-js",

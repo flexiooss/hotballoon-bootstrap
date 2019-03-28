@@ -1,7 +1,7 @@
 'use strict'
 import {PublicStoreHandler, TypeCheck} from 'hotballoon'
 import {initStoreCounter} from '../stores/storeCounterUtils/initStoreCounter'
-import {isNode, assert,assertType} from 'flexio-jshelpers'
+import {isNode, assert, assertType} from 'flexio-jshelpers'
 import {
   InitViewContainerCounterParams,
   initViewContainerCounter
