@@ -21,9 +21,8 @@ export class ComponentCounterPublic {
    *
    * @return {ComponentCounterPublic}
    */
-  initAndMount() {
+  mountView() {
     this[__component]
-      .setEventLoop()
       .mountView()
     return this
   }

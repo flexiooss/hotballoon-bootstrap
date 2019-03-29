@@ -22,6 +22,7 @@ export class ComponentCounterBuilder {
 
     console.log(message)
     return new ComponentCounterPublic(
-      new ComponentCounter(APP.addComponentContext(), parentNode))
+      new ComponentCounter(APP.addComponentContext(), parentNode).setEventLoop()
+    )
   }
 }
