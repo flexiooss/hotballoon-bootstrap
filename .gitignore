@@ -7,3 +7,4 @@ node_modules/
 .idea/
 *.iml
 generated/
+package-lock.json
