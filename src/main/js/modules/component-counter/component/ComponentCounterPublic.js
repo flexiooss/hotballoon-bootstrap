@@ -3,6 +3,9 @@ import {ComponentCounter} from './ComponentCounter'
 
 const __component = Symbol('__componentCounter')
 
+/**
+ * @implements {Component}
+ */
 export class ComponentCounterPublic {
   /**
    *

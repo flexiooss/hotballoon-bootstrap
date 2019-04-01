@@ -1,5 +1,5 @@
 import {TypeCheck} from 'hotballoon'
-import {isNode,assertType} from 'flexio-jshelpers'
+import {isNode, assertType} from 'flexio-jshelpers'
 import {ActionIncrementCounterUtils} from '../actions/ActionIncrementCounterUtils/ActionIncrementCounterUtils'
 import {StoreCounterUtils} from '../stores/storeCounterUtils/StoreCounterUtils'
 import {ViewContainerCounterUtils} from '../views/counter/ViewContainerCounterUtils'
@@ -64,7 +64,7 @@ export class ComponentCounter {
       'ComponentCounter:mountView: `parentNode` should be a NodeType, %s given',
       typeof this.__parentNode
     )
-    new ViewContainerCounterUtils(
+    const viewContainer = new ViewContainerCounterUtils(
       this.__componentContext,
       this.__parentNode,
       this.__actionIncrement.action(),
