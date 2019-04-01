@@ -1,16 +1,18 @@
-import {View, e, ElementEventListenerBuilder} from 'hotballoon'
+import {View, e, ElementEventListenerBuilder, ViewPublicEventHandler, EventListenerOrderedBuilder} from 'hotballoon'
 import {RECONCILIATION_RULES} from 'flexio-nodes-reconciliation'
 import style from '../../../assets/css/style.css'
+import {assertType, isFunction} from 'flexio-jshelpers'
 
-export const INCREMENT_EVENT = 'INCREMENT_EVENT'
-export default class Main extends View {
+const INCREMENT_EVENT = 'INCREMENT_EVENT'
+
+export class ViewCounter extends View {
   /**
    *
-   * @param {ViewParameters} viewParameters
+   * @param {ViewContainerBase} container
    * @param {ContainerStoreCounter} counterContainerStores
    */
-  constructor(viewParameters, counterContainerStores) {
-    super(viewParameters)
+  constructor(container, counterContainerStores) {
+    super(container)
     /**
      *
      * @params {ContainerStoreCounter}
@@ -18,6 +20,16 @@ export default class Main extends View {
      */
     this.__stores = counterContainerStores
     this.subscribeToStore(this.__stores.counterStore)
+  }
+
+  /**
+   *
+   * @return {ViewCounterEvent}
+   */
+  on() {
+    return new ViewCounterEvent((a) => {
+      return this._on(a)
+    })
   }
 
   /**
@@ -64,4 +76,30 @@ export default class Main extends View {
       return 'counter not found'
     }
   }
+}
+
+class ViewCounterEvent extends ViewPublicEventHandler {
+  /**
+   *
+   * @param {ViewCounterEvent~incrementClb} clb
+   * @return {String}
+   */
+  increment(clb) {
+    assertType(
+      isFunction(clb),
+      'ViewContainerPublicEventHandler:beforeRemove: `clb` should be a function'
+    )
+    return this._subscriber(
+      EventListenerOrderedBuilder
+        .listen(INCREMENT_EVENT)
+        .callback(() => {
+          clb()
+        })
+        .build()
+    )
+  }
+
+  /**
+   * @callback ViewCounterEvent~incrementClb
+   */
 }

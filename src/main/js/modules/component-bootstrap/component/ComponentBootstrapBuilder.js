@@ -23,7 +23,7 @@ export class ComponentBootstrapBuilder {
       new ComponentBootstrap(
         APP.addComponentContext(),
         parentNode
-      )
+      ).setEventLoop()
     )
   }
 }

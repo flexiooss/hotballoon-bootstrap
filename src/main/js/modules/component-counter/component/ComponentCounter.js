@@ -1,16 +1,8 @@
-'use strict'
-import {PublicStoreHandler, TypeCheck} from 'hotballoon'
-import {initStoreCounter} from '../stores/storeCounterUtils/initStoreCounter'
-import {isNode, assert, assertType} from 'flexio-jshelpers'
-import {
-  InitViewContainerCounterParams,
-  initViewContainerCounter
-} from '../views/counter/InitViewContainerCounter'
-import {
-  listenActionIncrementCounter,
-  ListenActionIncrementCounterParam
-} from '../actions/ActionIncrementCounterUtils/ListenActionIncrementCounter'
-import {initActionIncrementCounter} from '../actions/ActionIncrementCounterUtils/InitActionIncrementCounter'
+import {TypeCheck} from 'hotballoon'
+import {isNode, assertType} from 'flexio-jshelpers'
+import {ActionIncrementCounterUtils} from '../actions/ActionIncrementCounterUtils/ActionIncrementCounterUtils'
+import {StoreCounterUtils} from '../stores/storeCounterUtils/StoreCounterUtils'
+import {ViewContainerCounterUtils} from '../views/counter/ViewContainerCounterUtils'
 
 export class ComponentCounter {
   /**
@@ -19,26 +11,29 @@ export class ComponentCounter {
    * @param {Node} parentNode
    */
   constructor(componentContext, parentNode) {
-    assert(
+    assertType(
       TypeCheck.isComponentContext(componentContext),
-      'ComponentBootstrap:constructor: `componentContext` argument should be an instanceof ComponentContext, %s given',
-      typeof componentContext)
-
+      'ComponentBootstrap:constructor: `componentContext` argument should be an instanceof ComponentContext'
+    )
     assertType(!!isNode(parentNode),
-      'ComponentBootstrap:constructor: `parentNode` argument should be NodeType, %s given',
-      typeof parentNode)
+      'ComponentBootstrap:constructor: `parentNode` argument should be NodeType'
+    )
 
     this.__componentContext = componentContext
     this.__parentNode = parentNode
+
+    this.__storeCounter = null
+    this.__actionIncrement = null
   }
 
   /**
    *
    * @return {ComponentCounter}
    */
-  initCounterStore() {
-    this.__storeCounter = initStoreCounter(this.__componentContext)
-    this.__counterStorePublicHandler = new PublicStoreHandler(this.__storeCounter)
+  __initCounterStore() {
+    this.__storeCounter = new StoreCounterUtils(
+      this.__componentContext
+    ).build()
     return this
   }
 
@@ -46,15 +41,21 @@ export class ComponentCounter {
    *
    * @return {ComponentCounter}
    */
-  initActionIncrementCounter() {
-    this.__actionIncrementCounter = initActionIncrementCounter(this.__componentContext.dispatcher())
-    listenActionIncrementCounter(new ListenActionIncrementCounterParam(this.__actionIncrementCounter, this.__storeCounter))
+  __initActionIncrementCounter() {
+    this.__actionIncrement = new ActionIncrementCounterUtils(
+      this.__componentContext.dispatcher(),
+      this.__storeCounter.store()
+    ).init().listen()
     return this
   }
 
+  /**
+   *
+   * @returns {ComponentCounter}
+   */
   setEventLoop() {
-    this.initCounterStore()
-    this.initActionIncrementCounter()
+    this.__initCounterStore()
+    this.__initActionIncrementCounter()
     return this
   }
 
@@ -63,13 +64,11 @@ export class ComponentCounter {
       'ComponentCounter:mountView: `parentNode` should be a NodeType, %s given',
       typeof this.__parentNode
     )
-    initViewContainerCounter(
+    const viewContainer = new ViewContainerCounterUtils(
       this.__componentContext,
       this.__parentNode,
-      new InitViewContainerCounterParams(
-        this.__actionIncrementCounter,
-        this.__counterStorePublicHandler
-      )
-    ).renderAndMount(this.__parentNode)
+      this.__actionIncrement.action(),
+      this.__storeCounter.storePublic()
+    ).init().renderAndMount(this.__parentNode)
   }
 }

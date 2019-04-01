@@ -10,5 +10,5 @@ const HTML_NODE = document.body
 ;(function (app) {
   ComponentBootstrapBuilder
     .build(app, HTML_NODE)
-    .initDispatchActionInitialize('Rutabaga !!!')
+    .dispatchActionInitialize('Rutabaga !!!')
 })(APP)

@@ -13,7 +13,7 @@ export class ComponentBootstrapPublic {
     this[__component] = component
   }
 
-  initDispatchActionInitialize(message) {
-    this[__component].setEventLoop().dispatchActionInitialize(message)
+  dispatchActionInitialize(message) {
+    this[__component].dispatchActionInitialize(message)
   }
 }

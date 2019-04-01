@@ -3,6 +3,9 @@ import {ComponentCounter} from './ComponentCounter'
 
 const __component = Symbol('__componentCounter')
 
+/**
+ * @implements {Component}
+ */
 export class ComponentCounterPublic {
   /**
    *
@@ -21,9 +24,8 @@ export class ComponentCounterPublic {
    *
    * @return {ComponentCounterPublic}
    */
-  initAndMount() {
+  mountView() {
     this[__component]
-      .setEventLoop()
       .mountView()
     return this
   }
