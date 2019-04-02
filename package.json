@@ -32,6 +32,21 @@
       "html_template": "src/main/js/index.html",
       "output": "./dist"
     },
+    "dev": {
+      "server": {
+        "host": "ui.flexio.io",
+        "proxy": {
+          "/api": {
+            "target": "https://api.flexio.io",
+            "pathRewrite": {
+              "^/api": ""
+            },
+            "secure": true,
+            "changeOrigin": true
+          }
+        }
+      }
+    },
     "test": {
       "tester": "code-altimeter-js",
       "path": "src/test"
