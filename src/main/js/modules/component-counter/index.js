@@ -1,1 +1,3 @@
-export { ComponentCounterBuilder } from './component/ComponentCounterBuilder'
+import './generated/io/package'
+
+export {ComponentCounterBuilder} from './component/ComponentCounterBuilder'

@@ -1,7 +1,6 @@
 import {assertType, FLEXIO_IMPORT_OBJECT, isNull} from 'flexio-jshelpers'
 import {ActionBuilder, ActionParams, ActionTypeParam, TypeCheck} from 'hotballoon'
 import {StoreCounterHandler} from '../../stores/storeCounterUtils/StoreCounterHandler'
-import '../../generated/io/package'
 
 const ActionIncrementCounter = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.actions.ActionIncrementCounter
 
