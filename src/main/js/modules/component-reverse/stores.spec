@@ -1,0 +1,2 @@
+StoreReverseItem:
+  label: string
