@@ -3,6 +3,7 @@ import { TypeCheck } from 'hotballoon'
 import { ActionUpdateLabelBuilder } from '../actions/ActionUpdateLabelBuilder'
 import '../generated/io/package'
 import { StoreReverse } from '../stores/StoreReverse'
+import { ViewContainerReverse } from '../view/ViewContainerReverse'
 
 export class ComponentReverse {
   /**
@@ -24,6 +25,9 @@ export class ComponentReverse {
     let storeReverse = new StoreReverse(this.__componentContext)
     this.__store = storeReverse.getStore()
     this.__action = new ActionUpdateLabelBuilder(componentContext.dispatcher()).init()
+
+    this.__viewContainer = new ViewContainerReverse(componentContext, parentNode, storeReverse.getStorePublic(), this.__action)
+    this.__viewContainer.renderAndMount(this.__parentNode)
 
     this.__listenAction()
   }
