@@ -1,6 +1,7 @@
 import { assertType, isNode } from 'flexio-jshelpers'
 import { TypeCheck } from 'hotballoon'
 import '../generated/io/package'
+import { StoreReverse } from '../stores/StoreReverse'
 
 export class ComponentReverse {
   /**
@@ -19,5 +20,7 @@ export class ComponentReverse {
 
     this.__componentContext = componentContext
     this.__parentNode = parentNode
+    let storeReverse = new StoreReverse(this.__componentContext)
+    this.__store = storeReverse.getStore()
   }
 }
