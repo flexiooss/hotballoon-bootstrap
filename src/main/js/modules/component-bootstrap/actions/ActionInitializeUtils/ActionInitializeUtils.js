@@ -1,6 +1,7 @@
-import { isNode, assertType, FLEXIO_IMPORT_OBJECT, isNull } from 'flexio-jshelpers'
+import { assertType, FLEXIO_IMPORT_OBJECT, isNode, isNull } from 'flexio-jshelpers'
 import { ComponentCounterBuilder } from '../../../component-counter'
 import { ActionBuilder, ActionParams, ActionTypeParam, TypeCheck } from 'hotballoon'
+import { ComponentReverse } from '../../../component-reverse'
 
 const ActionInitialize = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_bootstrap.actions.ActionInitialize
 
@@ -72,6 +73,7 @@ export class ActionInitializeUtils {
         ComponentCounterBuilder
           .buildSimpleWithMessage(payload.message(), this.__application, this.__parentElement)
           .mountView()
+        new ComponentReverse(this.__application.addComponentContext(), this.__parentElement)
       }
     )
     return this
