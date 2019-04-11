@@ -1,0 +1,2 @@
+ActionUpdatePayload:
+  label: string
