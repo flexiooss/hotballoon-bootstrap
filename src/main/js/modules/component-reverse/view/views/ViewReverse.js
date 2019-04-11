@@ -17,9 +17,9 @@ export class ViewReverse extends View {
   __div() {
     return this.html(
       e('div').childNodes(
-        this.__spanLabel(),
         this.__inputText(),
-        this.__inputButton()
+        this.__inputButton(),
+        this.__spanLabel()
       )
     )
   }
@@ -27,7 +27,7 @@ export class ViewReverse extends View {
   __spanLabel() {
     let label = this.__store.data().label()
     return this.html(
-      e('span').text(label)
+      e('p').text('Inversé : ' + label)
     )
   }
 
