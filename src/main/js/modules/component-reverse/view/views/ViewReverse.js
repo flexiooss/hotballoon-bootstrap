@@ -1,4 +1,6 @@
-import { e, View } from 'hotballoon'
+import { e, ElementEventListenerBuilder, View } from 'hotballoon'
+
+export const UPDATE_EVENT = 'UPDATE_EVENT'
 
 export class ViewReverse extends View {
   constructor(viewContainer, storeReversePublic) {
@@ -15,9 +17,9 @@ export class ViewReverse extends View {
   __div() {
     return this.html(
       e('div').childNodes(
+        this.__spanLabel(),
         this.__inputText(),
-        this.__inputButton(),
-        this.__spanLabel()
+        this.__inputButton()
       )
     )
   }
@@ -25,7 +27,7 @@ export class ViewReverse extends View {
   __spanLabel() {
     let label = this.__store.data().label()
     return this.html(
-      e('p').text('Inversé : ' + label)
+      e('span').text(label)
     )
   }
 
@@ -43,7 +45,19 @@ export class ViewReverse extends View {
       e('input')
         .attributes(
           { value: 'maj', type: 'button' }
-        )
+        ).listenEvent(
+        ElementEventListenerBuilder.listen('click')
+          .callback((event) => {
+            this.__updateLabelEvent(event)
+          })
+          .build()
+      )
     )
+  }
+
+  __updateLabelEvent(event) {
+    const p = this.nodeRef('PLOK').value
+    console.dir(p)
+    this.dispatch(UPDATE_EVENT, p)
   }
 }
