@@ -53,7 +53,8 @@
     },
     "modules": {
       "component-bootstrap": "src/main/js/modules/component-bootstrap",
-      "component-counter": "src/main/js/modules/component-counter"
+      "component-counter": "src/main/js/modules/component-counter",
+      "component-reverse": "src/main/js/modules/component-reverse"
     }
   }
 }
