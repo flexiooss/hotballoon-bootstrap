@@ -24,5 +24,19 @@ export class ComponentReverse {
     let storeReverse = new StoreReverse(this.__componentContext)
     this.__store = storeReverse.getStore()
     this.__action = new ActionUpdateLabelBuilder(componentContext.dispatcher()).init()
+
+    this.__listenAction()
+  }
+
+  __listenAction() {
+    this.__action.listenWithCallback(
+      (payload) => {
+        let label = payload.label().split('').reverse().join('')
+
+        this.__store.set(
+          this.__store.state().data.withLabel(label)
+        )
+      }
+    )
   }
 }
