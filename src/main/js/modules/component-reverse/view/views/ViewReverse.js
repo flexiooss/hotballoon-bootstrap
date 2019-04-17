@@ -1,4 +1,4 @@
-import { e, ElementEventListenerBuilder, View } from 'hotballoon'
+import { e, ElementEventListenerBuilder, EventListenerOrderedBuilder, View, ViewPublicEventHandler } from 'hotballoon'
 
 export const UPDATE_EVENT = 'UPDATE_EVENT'
 
@@ -8,6 +8,12 @@ export class ViewReverse extends View {
 
     this.__store = storeReversePublic
     this.subscribeToStore(this.__store)
+  }
+
+  on() {
+    return new ViewReverseEvent((a) => {
+      return this._on(a)
+    })
   }
 
   template() {
@@ -59,5 +65,18 @@ export class ViewReverse extends View {
     const p = this.nodeRef('PLOK').value
     console.dir(p)
     this.dispatch(UPDATE_EVENT, p)
+  }
+}
+
+class ViewReverseEvent extends ViewPublicEventHandler {
+  reverseEvent(clb) {
+    return this._subscriber(
+      EventListenerOrderedBuilder
+        .listen(UPDATE_EVENT)
+        .callback((payload) => {
+          clb(payload)
+        })
+        .build()
+    )
   }
 }

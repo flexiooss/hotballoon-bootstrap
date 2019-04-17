@@ -1,5 +1,5 @@
-import { EventListenerOrderedBuilder, ViewContainer, ViewContainerParameters } from 'hotballoon'
-import { UPDATE_EVENT, ViewReverse } from './views/ViewReverse'
+import { ViewContainer, ViewContainerParameters } from 'hotballoon'
+import { ViewReverse } from './views/ViewReverse'
 import { FLEXIO_IMPORT_OBJECT } from 'flexio-jshelpers'
 
 const ActionUpdatePayloadBuilder = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_reverse.actions.ActionUpdatePayloadBuilder
@@ -21,15 +21,12 @@ export class ViewContainerReverse extends ViewContainer {
   }
 
   __handleEventFromView() {
-    this.view._on(
-      EventListenerOrderedBuilder
-        .listen(UPDATE_EVENT)
-        .callback((payload) => {
-          let actionBuilder = new ActionUpdatePayloadBuilder()
-          let action = actionBuilder.label(payload).build()
-          this.__action.dispatch(action)
-        })
-        .build()
-    )
+    this.view
+      .on()
+      .reverseEvent((payload) => {
+        let actionBuilder = new ActionUpdatePayloadBuilder()
+        let action = actionBuilder.label(payload).build()
+        this.__action.dispatch(action)
+      })
   }
 }
