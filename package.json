@@ -47,10 +47,6 @@
         }
       }
     },
-    "test": {
-      "tester": "code-altimeter-js",
-      "path": "src/test"
-    },
     "modules": {
       "component-bootstrap": "src/main/js/modules/component-bootstrap",
       "component-counter": "src/main/js/modules/component-counter",
