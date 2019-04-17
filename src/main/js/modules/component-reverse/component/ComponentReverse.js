@@ -24,12 +24,16 @@ export class ComponentReverse {
     this.__parentNode = parentNode
     let storeReverse = new StoreReverse(this.__componentContext)
     this.__store = storeReverse.getStore()
+    this.__storePublic = storeReverse.getStorePublic()
+
     this.__action = new ActionUpdateLabelBuilder(componentContext.dispatcher()).init()
 
-    this.__viewContainer = new ViewContainerReverse(componentContext, parentNode, storeReverse.getStorePublic(), this.__action)
-    this.__viewContainer.renderAndMount(this.__parentNode)
-
     this.__listenAction()
+  }
+
+  initViews() {
+    this.__viewContainer = new ViewContainerReverse(this.__componentContext, this.__parentNode, this.__storePublic, this.__action)
+    this.__viewContainer.renderAndMount(this.__parentNode)
   }
 
   __listenAction() {
@@ -42,5 +46,13 @@ export class ComponentReverse {
         )
       }
     )
+  }
+
+  getAction() {
+    return this.__action
+  }
+
+  getPublicStore() {
+    return this.__storePublic
   }
 }

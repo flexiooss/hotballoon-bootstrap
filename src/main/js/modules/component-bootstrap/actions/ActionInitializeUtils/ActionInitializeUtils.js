@@ -73,7 +73,7 @@ export class ActionInitializeUtils {
         ComponentCounterBuilder
           .buildSimpleWithMessage(payload.message(), this.__application, this.__parentElement)
           .mountView()
-        new ComponentReverse(this.__application.addComponentContext(), this.__parentElement)
+        new ComponentReverse(this.__application.addComponentContext(), this.__parentElement).initViews()
       }
     )
     return this
