@@ -1,7 +1,7 @@
 import {ComponentBootstrap} from './ComponentBootstrap'
 import {ComponentBootstrapPublic} from './ComponentBootstrapPublic'
-import {TypeCheck} from 'hotballoon'
-import {assert, isNode} from 'flexio-jshelpers'
+import {TypeCheck} from '@flexio-oss/hotballoon'
+import {isNode, assertType} from '@flexio-oss/assert'
 
 export class ComponentBootstrapBuilder {
   /**
@@ -11,11 +11,11 @@ export class ComponentBootstrapBuilder {
    * @return {ComponentBootstrapPublic}
    */
   static build(APP, parentNode) {
-    assert(TypeCheck.isHotballoonApplication(APP),
+    assertType(TypeCheck.isHotballoonApplication(APP),
       'ComponentBootstrapBuilder:constructor: `APP` argument should be an instanceof HotballoonApplication, %s given',
       typeof APP)
 
-    assert(!!isNode(parentNode),
+    assertType(!!isNode(parentNode),
       'ComponentBootstrapBuilder:constructor: `parentNode` argument should be NodeType, %s given',
       typeof parentNode)
 

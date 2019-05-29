@@ -1,8 +1,7 @@
-import { isNode, assertType, FLEXIO_IMPORT_OBJECT, isNull } from 'flexio-jshelpers'
-import { ComponentCounterBuilder } from '../../../component-counter'
-import { ActionBuilder, ActionParams, ActionTypeParam, TypeCheck } from 'hotballoon'
-
-const ActionInitialize = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_bootstrap.actions.ActionInitialize
+import {isNode, assertType, isNull} from '@flexio-oss/assert'
+import {globalFlexioImport} from '@flexio-oss/global-import-registry'
+import {ComponentCounterBuilder} from '../../../component-counter'
+import {ActionBuilder, ActionParams, ActionTypeParam, TypeCheck} from '@flexio-oss/hotballoon'
 
 export class ActionInitializeUtils {
   /**
@@ -31,7 +30,7 @@ export class ActionInitializeUtils {
     this.__action = ActionBuilder.build(
       new ActionParams(
         new ActionTypeParam(
-          ActionInitialize,
+          globalFlexioImport.io.flexio.component_bootstrap.actions.ActionInitialize,
           /**
            *
            * @param {ActionInitialize} data

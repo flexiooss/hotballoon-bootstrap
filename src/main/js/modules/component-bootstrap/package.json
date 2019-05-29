@@ -15,9 +15,8 @@
       }
     }
   },
-  "peerDependencies": {
-    "flexio-jshelpers": "https://github.com/flexiooss/flexio-jshelpers.git",
-    "flexio-nodes-reconciliation": "https://github.com/flexiooss/flexio-nodes-reconciliation.git",
-    "hotballoon": "https://github.com/flexiooss/hotballoon.git"
+  "dependencies": {
+    "@flexio-oss/hotballoon": "0.1.0-dev",
+    "@flexio-oss/global-import-registry": "0.0.0"
   }
 }
