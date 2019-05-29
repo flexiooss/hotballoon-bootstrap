@@ -1,8 +1,8 @@
-import {TypeCheck} from 'hotballoon'
-import {isNode, assertType} from 'flexio-jshelpers'
-import {ActionIncrementCounterUtils} from '../actions/ActionIncrementCounterUtils/ActionIncrementCounterUtils'
-import {StoreCounterUtils} from '../stores/storeCounterUtils/StoreCounterUtils'
-import {ViewContainerCounterUtils} from '../views/counter/ViewContainerCounterUtils'
+import { TypeCheck } from '@flexio-oss/hotballoon'
+import { isNode, assertType } from '@flexio-oss/assert'
+import { ActionIncrementCounterUtils } from '../actions/ActionIncrementCounterUtils/ActionIncrementCounterUtils'
+import { StoreCounterUtils } from '../stores/storeCounterUtils/StoreCounterUtils'
+import { ViewContainerCounterUtils } from '../views/counter/ViewContainerCounterUtils'
 
 export class ComponentCounter {
   /**

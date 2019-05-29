@@ -14,9 +14,5 @@
         "extension": ".spec"
       }
     }
-  },
-  "dependencies": {
-    "@flexio-oss/hotballoon": "0.1.0-dev",
-    "@flexio-oss/global-import-registry": "0.0.0"
   }
 }

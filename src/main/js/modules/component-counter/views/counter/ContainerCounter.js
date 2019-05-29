@@ -1,12 +1,8 @@
-'use strict'
-import {ViewContainer, ViewParameters, ViewEventListenerBuilder} from 'hotballoon'
+import {ViewContainer} from '@flexio-oss/hotballoon'
 import {ViewCounter} from './views/ViewCounter'
 
-import '../../generated/io/package'
-import {FLEXIO_IMPORT_OBJECT} from 'flexio-jshelpers'
+import {globalFlexioImport} from '@flexio-oss/global-import-registry'
 import {ContainerStoreCounter} from '../ContainerStoreCounter'
-
-const ActionIncrementCounterBuilder = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.actions.ActionIncrementCounterBuilder
 
 export class ContainerCounter extends ViewContainer {
   /**
@@ -47,7 +43,7 @@ export class ContainerCounter extends ViewContainer {
       .on()
       .increment((payload) => {
         this.__actions
-          .counterIncrementAction.dispatch(new ActionIncrementCounterBuilder().build())
+          .counterIncrementAction.dispatch(new globalFlexioImport.io.flexio.component_counter.actions.ActionIncrementCounterBuilder().build())
       })
   }
 }

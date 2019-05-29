@@ -1,8 +1,6 @@
-import {TypeCheck} from 'hotballoon'
-import {assertType, FLEXIO_IMPORT_OBJECT} from 'flexio-jshelpers'
-import '../generated/io/package'
-
-const StoreCounter = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.stores.StoreCounter
+import { TypeCheck } from '@flexio-oss/hotballoon'
+import { assertType } from '@flexio-oss/assert'
+import { globalFlexioImport } from '@flexio-oss/global-import-registry'
 
 /**
  */
@@ -13,7 +11,7 @@ export class ContainerStoreCounter {
    */
   constructor(storeCounter) {
     assertType(
-      storeCounter.isTypeOf(StoreCounter),
+      storeCounter.isTypeOf(globalFlexioImport.io.flexio.component_counter.stores.StoreCounter),
       'ContainerStoreCounter:constructor: `counterStore` should be a Store of CounterStore, %s given',
       typeof storeCounter
     )

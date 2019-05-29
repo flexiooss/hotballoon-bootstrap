@@ -1,9 +1,6 @@
-import {StoreBuilder, InMemoryStoreParams, StoreTypeParam, TypeCheck, PublicStoreHandler} from 'hotballoon'
-import {assertType, FLEXIO_IMPORT_OBJECT, isNull} from 'flexio-jshelpers'
-import '../../generated/io/package'
-
-const StoreCounter = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.stores.StoreCounter
-const StoreCounterBuilder = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_counter.stores.StoreCounterBuilder
+import { StoreBuilder, InMemoryStoreParams, StoreTypeParam, TypeCheck, PublicStoreHandler } from '@flexio-oss/hotballoon'
+import { assertType, isNull } from '@flexio-oss/assert'
+import { globalFlexioImport } from '@flexio-oss/global-import-registry'
 
 export class StoreCounterUtils {
   constructor(componentContext) {
@@ -19,7 +16,7 @@ export class StoreCounterUtils {
     this.__store = this.__componentContext.addStore(StoreBuilder.InMemory(
       new InMemoryStoreParams(
         new StoreTypeParam(
-          StoreCounter,
+          globalFlexioImport.io.flexio.component_counter.stores.StoreCounter,
           /**
            *
            * @param {StoreCounter} data
@@ -46,7 +43,7 @@ export class StoreCounterUtils {
            */
           (obj) => StoreCounterUtils.fromObject(obj).build()
         ),
-        new StoreCounterBuilder().count(0).build()
+        new globalFlexioImport.io.flexio.component_counter.stores.StoreCounterBuilder().count(0).build()
       ))
     )
     this.__storePublic = new PublicStoreHandler(this.__store)
