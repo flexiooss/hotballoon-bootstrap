@@ -1,7 +1,13 @@
-import {View, e, ElementEventListenerBuilder, ViewPublicEventHandler, EventListenerOrderedBuilder} from 'hotballoon'
-import {RECONCILIATION_RULES} from 'flexio-nodes-reconciliation'
+import {
+  View,
+  e,
+  ElementEventListenerBuilder,
+  ViewPublicEventHandler,
+  EventListenerOrderedBuilder,
+  RECONCILIATION_RULES
+} from '@flexio-oss/hotballoon'
 import style from '../../../assets/css/style.css'
-import {assertType, isFunction} from 'flexio-jshelpers'
+import { assertType, isFunction } from '@flexio-oss/assert'
 
 const INCREMENT_EVENT = 'INCREMENT_EVENT'
 
@@ -48,7 +54,7 @@ export class ViewCounter extends View {
             this.html(
               e('input#increment.' + style.increment)
                 .attributes(
-                  {value: 'Inc', type: 'button'}
+                  { value: 'Inc', type: 'button' }
                 )
                 .listenEvent(
                   ElementEventListenerBuilder.listen('mouseup')

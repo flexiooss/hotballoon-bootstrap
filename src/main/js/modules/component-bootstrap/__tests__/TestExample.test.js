@@ -3,7 +3,7 @@ import {TestCase} from 'code-altimeter-js'
 
 const assert = require('assert')
 
-class TestExample extends TestCase {
+class TestExampleTest extends TestCase {
   testFirstThink() {
     assert.ok(true, 'Test should pass if you don\'t touch this method')
   }
@@ -32,4 +32,4 @@ class TestExample extends TestCase {
   }
 }
 
-runTest(TestExample)
+runTest(TestExampleTest)

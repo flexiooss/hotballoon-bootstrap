@@ -1,11 +1,7 @@
-'use strict'
-import {TypeCheck} from 'hotballoon'
-
-import {isNode, assert, FLEXIO_IMPORT_OBJECT, assertType} from 'flexio-jshelpers'
-import '../generated/io/package'
+import {TypeCheck} from '@flexio-oss/hotballoon'
+import {isNode, assertType} from '@flexio-oss/assert'
+import {globalFlexioImport} from '@flexio-oss/global-import-registry'
 import {ActionInitializeUtils} from '../actions/ActionInitializeUtils/ActionInitializeUtils'
-
-const ActionInitializeBuilder = window[FLEXIO_IMPORT_OBJECT].io.flexio.component_bootstrap.actions.ActionInitializeBuilder
 
 export class ComponentBootstrap {
   /**
@@ -51,7 +47,7 @@ export class ComponentBootstrap {
       'ComponentBootstrap:dispatchActionInitialize: ActionInitialize should be initialized before using it'
     )
     this.__actionInitialize.action().dispatch(
-      new ActionInitializeBuilder().message(message).build()
+      new globalFlexioImport.io.flexio.component_bootstrap.actions.ActionInitializeBuilder().message(message).build()
     )
   }
 

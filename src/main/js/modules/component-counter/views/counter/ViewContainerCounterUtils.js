@@ -1,8 +1,8 @@
-import {ContainerCounter} from './ContainerCounter'
-import {TypeCheck, ViewContainerParameters} from 'hotballoon'
-import {ContainerStoreCounter} from '../ContainerStoreCounter'
-import {ContainerActionCounter} from '../ContainerActionCounter'
-import {assertType, isNode} from 'flexio-jshelpers'
+import { ContainerCounter } from './ContainerCounter'
+import { TypeCheck, ViewContainerParameters } from '@flexio-oss/hotballoon'
+import { ContainerStoreCounter } from '../ContainerStoreCounter'
+import { ContainerActionCounter } from '../ContainerActionCounter'
+import { assertType, isNode } from '@flexio-oss/assert'
 
 export class ViewContainerCounterUtils {
   constructor(componentContext, parentNode, action, store) {

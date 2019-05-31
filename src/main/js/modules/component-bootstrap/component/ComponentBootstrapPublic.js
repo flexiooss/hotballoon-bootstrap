@@ -1,5 +1,5 @@
-import {assertType} from 'flexio-jshelpers'
-import {ComponentBootstrap} from './ComponentBootstrap'
+import { assertType } from '@flexio-oss/assert'
+import { ComponentBootstrap } from './ComponentBootstrap'
 
 const __component = Symbol('__componentBootstrapPublic')
 
