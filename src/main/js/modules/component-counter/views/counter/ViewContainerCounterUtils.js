@@ -1,8 +1,8 @@
-import { ContainerCounter } from './ContainerCounter'
-import { TypeCheck, ViewContainerParameters } from '@flexio-oss/hotballoon'
-import { ContainerStoreCounter } from '../ContainerStoreCounter'
-import { ContainerActionCounter } from '../ContainerActionCounter'
-import { assertType, isNode } from '@flexio-oss/assert'
+import {ContainerCounter} from './ContainerCounter'
+import {TypeCheck, ViewContainerParameters} from '@flexio-oss/hotballoon'
+import {ContainerStoreCounter} from '../ContainerStoreCounter'
+import {ContainerActionCounter} from '../ContainerActionCounter'
+import {assertType, isNode} from '@flexio-oss/assert'
 
 export class ViewContainerCounterUtils {
   constructor(componentContext, parentNode, action, store) {
@@ -43,9 +43,13 @@ export class ViewContainerCounterUtils {
       )
     )
 
-    this.__componentContext.debug.log('VIEWCONTAINER_INST')
-    this.__componentContext.debug.object(VIEWCONTAINER_INST)
-    this.__componentContext.debug.print()
+    this.__componentContext.logger().log(
+      this.__componentContext.logger()
+        .builder()
+        .debug()
+        .pushLog('VIEWCONTAINER_INST')
+        .pushLog(VIEWCONTAINER_INST)
+    )
 
     return VIEWCONTAINER_INST
   }
