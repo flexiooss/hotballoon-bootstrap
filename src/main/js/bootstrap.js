@@ -1,6 +1,6 @@
 import {App} from './app/App'
 import {AppDispatcher} from './app/AppDispatcher'
-import {ConsoleLogger} from '@flexio-oss/js-logger'
+import {ConsoleLogger, FakeLogger} from '@flexio-oss/js-logger'
 
 import {ComponentBootstrapBuilder} from './modules/component-bootstrap'
 
