@@ -1,5 +1,5 @@
 'use strict'
-import {ViewContainer, ViewParameters, ViewEventListenerBuilder} from 'hotballoon'
+import {ViewContainer, ViewParameters, ViewEventListenerBuilder} from '@flexio-oss/hotballoon'
 import {ViewCounter} from './views/ViewCounter'
 
 import {globalFlexioImport} from '@flexio-oss/global-import-registry'
