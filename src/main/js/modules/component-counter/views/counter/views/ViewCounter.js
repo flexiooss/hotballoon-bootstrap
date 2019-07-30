@@ -57,12 +57,14 @@ export class ViewCounter extends View {
                   { value: 'Inc', type: 'button' }
                 )
                 .listenEvent(
-                  ElementEventListenerBuilder.listen('mouseup')
+                  ElementEventListenerBuilder
+                    .listen('click')
                     .callback((e) => {
                       this.dispatch(INCREMENT_EVENT, null)
                     })
                     .build()
-                ).reconciliationRules(RECONCILIATION_RULES.BYPATH)
+                )
+                .reconciliationRules(RECONCILIATION_RULES.BYPASS_LISTENERS)
             )
           )
         )
