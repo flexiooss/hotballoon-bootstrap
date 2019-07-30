@@ -43,7 +43,7 @@ export class ComponentBootstrap {
   }
 
   dispatchActionInitialize(message) {
-    assertType(TypeCheck.isAction(this.__actionInitialize.action()),
+    assertType(TypeCheck.isActionDispatcher(this.__actionInitialize.action()),
       'ComponentBootstrap:dispatchActionInitialize: ActionInitialize should be initialized before using it'
     )
     this.__actionInitialize.action().dispatch(

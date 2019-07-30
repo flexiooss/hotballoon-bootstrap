@@ -12,7 +12,7 @@ export class ViewContainerCounterUtils {
     assertType(isNode(parentNode),
       'ViewContainerCounterUtils:constructor: `parentNode` should be a Node'
     )
-    assertType(TypeCheck.isAction(action),
+    assertType(TypeCheck.isActionDispatcher(action),
       'ViewContainerCounterUtils:constructor: `action` should be a Action'
     )
     assertType(TypeCheck.isPublicStoreHandler(store),

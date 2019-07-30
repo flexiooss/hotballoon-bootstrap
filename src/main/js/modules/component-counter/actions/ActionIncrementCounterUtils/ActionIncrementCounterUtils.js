@@ -1,7 +1,7 @@
 import { assertType, isNull } from '@flexio-oss/assert'
 import { globalFlexioImport } from '@flexio-oss/global-import-registry'
 
-import { ActionBuilder, ActionParams, ActionTypeParam, TypeCheck } from '@flexio-oss/hotballoon'
+import { ActionDispatcherBuilder, ActionDispatcherConfig, ActionTypeConfig, TypeCheck } from '@flexio-oss/hotballoon'
 import { StoreCounterHandler } from '../../stores/storeCounterUtils/StoreCounterHandler'
 
 export class ActionIncrementCounterUtils {
@@ -24,9 +24,9 @@ export class ActionIncrementCounterUtils {
   }
 
   init() {
-    this.__action = ActionBuilder.build(
-      new ActionParams(
-        new ActionTypeParam(
+    this.__action = ActionDispatcherBuilder.build(
+      new ActionDispatcherConfig(
+        new ActionTypeConfig(
           globalFlexioImport.io.flexio.component_counter.actions.ActionIncrementCounter
         ),
         this.__dispatcher
