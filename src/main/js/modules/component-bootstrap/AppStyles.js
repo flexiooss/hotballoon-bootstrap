@@ -109,7 +109,8 @@ export class AppStyles {
       new globalFlexioImport.io.flexio.stylist.types.StyleSheetMediaArrayBuilder()
         .pushValue(styleSheetMediaAll)
         .pushValue(styleSheetMediaPrint)
-        .build()
+        .build(),
+      false
     )
   }
 

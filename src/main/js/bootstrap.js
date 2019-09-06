@@ -1,4 +1,3 @@
-// import '@flexio-oss/stylist'
 import {App} from './app/App'
 import {AppDispatcher} from './app/AppDispatcher'
 import {ConsoleLogger, FakeLogger} from '@flexio-oss/js-logger'
@@ -19,6 +18,10 @@ const HTML_NODE = document.body
 
 ;(function(app) {
   ComponentBootstrapBuilder
-    .build(app, appStylesConfig, HTML_NODE)
+    .build(
+      app,
+      appStylesConfig,
+      HTML_NODE
+    )
     .dispatchActionInitialize('Rutabaga !!!')
 })(APP)
