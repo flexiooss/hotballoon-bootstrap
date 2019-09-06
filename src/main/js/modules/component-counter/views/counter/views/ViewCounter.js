@@ -8,6 +8,7 @@ import {
 } from '@flexio-oss/hotballoon'
 import style from '../../../assets/css/style.css'
 import { assertType, isFunction } from '@flexio-oss/assert'
+import {colors} from "@flexio-corp/theme-app-flexio"
 
 const INCREMENT_EVENT = 'INCREMENT_EVENT'
 
@@ -48,7 +49,7 @@ export class ViewCounter extends View {
         this.html(
           e('div').childNodes(
             this.html(
-              e('span#Counter.' + style.counter).text(this._addCounter())
+              e('span#Counter.' + style.counter).text(this._addCounter()).className(colors.backgroundColorPrimary)
             ),
 
             this.html(
