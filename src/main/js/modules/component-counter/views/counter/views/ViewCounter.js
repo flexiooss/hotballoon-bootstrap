@@ -6,9 +6,7 @@ import {
   EventListenerOrderedBuilder,
   RECONCILIATION_RULES
 } from '@flexio-oss/hotballoon'
-import style from '../../../assets/css/style.css'
-import { assertType, isFunction } from '@flexio-oss/assert'
-import {colors} from "@flexio-corp/theme-app-flexio"
+import {assertType, isFunction} from '@flexio-oss/assert'
 
 const INCREMENT_EVENT = 'INCREMENT_EVENT'
 
@@ -16,10 +14,12 @@ export class ViewCounter extends View {
   /**
    *
    * @param {ViewContainerBase} container
+   * @param {AppStylesConfig} appStylesConfig
    * @param {ContainerStoreCounter} counterContainerStores
    */
-  constructor(container, counterContainerStores) {
+  constructor(container, appStylesConfig, counterContainerStores) {
     super(container)
+    this.__appStylesConfig = appStylesConfig
     /**
      *
      * @params {ContainerStoreCounter}
@@ -49,13 +49,13 @@ export class ViewCounter extends View {
         this.html(
           e('div').childNodes(
             this.html(
-              e('span#Counter.' + style.counter).text(this._addCounter()).className(colors.backgroundColorPrimary)
+              e('span#Counter' + this.__appStylesConfig.color.colorInfo).text(this._addCounter())
             ),
 
             this.html(
-              e('input#increment.' + style.increment)
+              e('input#increment' + this.__appStylesConfig.border.borderLight)
                 .attributes(
-                  { value: 'Inc', type: 'button' }
+                  {value: 'Inc', type: 'button'}
                 )
                 .listenEvent(
                   ElementEventListenerBuilder

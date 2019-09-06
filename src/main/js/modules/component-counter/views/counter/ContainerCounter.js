@@ -8,11 +8,13 @@ export class ContainerCounter extends ViewContainer {
   /**
    *
    * @param {ViewContainerParameters} viewContainerParameters
+   * @param {AppStylesConfig} appStylesConfig
    * @param {ContainerStoreCounter} counterContainerStores
    * @param {ContainerActionCounter} counterContainerActions
    */
-  constructor(viewContainerParameters, counterContainerStores, counterContainerActions) {
+  constructor(viewContainerParameters, appStylesConfig, counterContainerStores, counterContainerActions) {
     super(viewContainerParameters)
+    this.__appStylesConfig = appStylesConfig
     this.__stores = counterContainerStores
     this.__actions = counterContainerActions
     /**
@@ -29,6 +31,7 @@ export class ContainerCounter extends ViewContainer {
     this.__viewCounter = this.addView(
       new ViewCounter(
         this,
+        this.__appStylesConfig,
         new ContainerStoreCounter(
           this.__stores.counterStore
         )

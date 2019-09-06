@@ -8,9 +8,10 @@ export class ActionInitializeUtils {
    *
    * @param {Dispatcher} dispatcher
    * @param {HotBalloonApplication} application
+   * @param {AppStylesConfig} appStylesConfig
    * @param {Element} parentElement
    */
-  constructor(dispatcher, application, parentElement) {
+  constructor(dispatcher, application, appStylesConfig,parentElement) {
     assertType(TypeCheck.isDispatcher(dispatcher),
       'ActionInitializeUtils:constructor: `dispatcher` should be a Dispatcher'
     )
@@ -22,6 +23,7 @@ export class ActionInitializeUtils {
     )
     this.__dispatcher = dispatcher
     this.__action = null
+    this.__appStylesConfig = appStylesConfig
     this.__application = application
     this.__parentElement = parentElement
   }
@@ -69,7 +71,11 @@ export class ActionInitializeUtils {
        */
       (payload) => {
         ComponentCounterBuilder
-          .buildSimpleWithMessage(payload.message(), this.__application, this.__parentElement)
+          .buildSimpleWithMessage(
+            payload.message(),
+            this.__application,
+            this.__appStylesConfig,
+            this.__parentElement)
           .mountView()
       }
     )

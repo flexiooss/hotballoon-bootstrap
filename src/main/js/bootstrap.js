@@ -1,21 +1,24 @@
+// import '@flexio-oss/stylist'
 import {App} from './app/App'
 import {AppDispatcher} from './app/AppDispatcher'
 import {ConsoleLogger, FakeLogger} from '@flexio-oss/js-logger'
 
 import {ComponentBootstrapBuilder} from './modules/component-bootstrap'
+import {AppStyles} from './modules/component-bootstrap/AppStyles'
 
-export const APPAPP = 'APPAPP'
+const logger = new ConsoleLogger().debug()
+
+const appStylesConfig = AppStyles.build(logger)
+
 export const APP = new App(
   'CounterApplication',
   new AppDispatcher(),
-  new ConsoleLogger().debug()
+  logger
 )
 const HTML_NODE = document.body
-if (typeof window['__HB_APP_CONF__'] !== 'undefined') {
-  console.log(window['__HB_APP_CONF__'])
-}
+
 ;(function(app) {
   ComponentBootstrapBuilder
-    .build(app, HTML_NODE)
+    .build(app, appStylesConfig, HTML_NODE)
     .dispatchActionInitialize('Rutabaga !!!')
 })(APP)

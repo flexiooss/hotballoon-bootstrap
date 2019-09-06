@@ -5,7 +5,15 @@ import {ContainerActionCounter} from '../ContainerActionCounter'
 import {assertType, isNode} from '@flexio-oss/assert'
 
 export class ViewContainerCounterUtils {
-  constructor(componentContext, parentNode, action, store) {
+  /**
+   *
+   * @param {ComponentContext} componentContext
+   * @param {AppStylesConfig} appStylesConfig
+   * @param {Element} parentNode
+   * @param {ActionDispatcher<ActionIncrementCounter>} action
+   * @param {PublicStoreHandler<StoreCounter>} store
+   */
+  constructor(componentContext, appStylesConfig, parentNode, action, store) {
     assertType(TypeCheck.isComponentContext(componentContext),
       'ViewContainerCounterUtils:constructor: `componentContext` should be a ComponentContext'
     )
@@ -19,6 +27,7 @@ export class ViewContainerCounterUtils {
       'ViewContainerCounterUtils:constructor: `store` should be a Store'
     )
     this.__componentContext = componentContext
+    this.__appStylesConfig = appStylesConfig
     this.__parentNode = parentNode
     this.__action = action
     this.__store = store
@@ -38,6 +47,7 @@ export class ViewContainerCounterUtils {
           VIEWCONTAINER_ID,
           this.__parentNode
         ),
+        this.__appStylesConfig,
         new ContainerStoreCounter(this.__store),
         new ContainerActionCounter(this.__action)
       )
