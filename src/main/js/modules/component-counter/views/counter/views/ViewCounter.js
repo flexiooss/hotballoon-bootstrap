@@ -3,7 +3,7 @@ import {
   e,
   ElementEventListenerBuilder,
   ViewPublicEventHandler,
-  EventListenerOrderedBuilder,
+  OrderedEventListenerConfigBuilder,
   RECONCILIATION_RULES
 } from '@flexio-oss/hotballoon'
 import {assertType, isFunction} from '@flexio-oss/assert'
@@ -94,18 +94,7 @@ class ViewCounterEvent extends ViewPublicEventHandler {
    * @return {String}
    */
   increment(clb) {
-    assertType(
-      isFunction(clb),
-      'ViewContainerPublicEventHandler:beforeRemove: `clb` should be a function'
-    )
-    return this._subscriber(
-      EventListenerOrderedBuilder
-        .listen(INCREMENT_EVENT)
-        .callback(() => {
-          clb()
-        })
-        .build()
-    )
+    return this._subscribeTo(INCREMENT_EVENT, clb)
   }
 
   /**

@@ -1,7 +1,7 @@
 import {isNode, assertType, isNull} from '@flexio-oss/assert'
 import {globalFlexioImport} from '@flexio-oss/global-import-registry'
 import {ComponentCounterBuilder} from '../../../component-counter'
-import {ActionDispatcherBuilder, ActionDispatcherConfig, ActionTypeConfig, TypeCheck} from '@flexio-oss/hotballoon'
+import {ActionDispatcherBuilder, TypeCheck} from '@flexio-oss/hotballoon'
 
 export class ActionInitializeUtils {
   /**
@@ -11,7 +11,7 @@ export class ActionInitializeUtils {
    * @param {AppStylesConfig} appStylesConfig
    * @param {Element} parentElement
    */
-  constructor(dispatcher, application, appStylesConfig,parentElement) {
+  constructor(dispatcher, application, appStylesConfig, parentElement) {
     assertType(TypeCheck.isDispatcher(dispatcher),
       'ActionInitializeUtils:constructor: `dispatcher` should be a Dispatcher'
     )
@@ -29,33 +29,12 @@ export class ActionInitializeUtils {
   }
 
   init() {
-    this.__action = ActionDispatcherBuilder.build(
-      new ActionDispatcherConfig(
-        new ActionTypeConfig(
-          globalFlexioImport.io.flexio.component_bootstrap.actions.ActionInitialize,
-          /**
-           *
-           * @param {ActionInitialize} data
-           * @return {ActionInitialize}
-           */
-          (data) => {
-            if (isNull(data.message())) {
-              return data.withMessage('Default message')
-            }
-            return data
-          },
-          /**
-           *
-           * @param {ActionInitialize} payload
-           * @return {boolean}
-           */
-          (payload) => {
-            return !isNull(payload.message())
-          }
-        ),
-        this.__dispatcher
-      )
-    )
+    this.__action = new ActionDispatcherBuilder()
+      .type(globalFlexioImport.io.flexio.component_bootstrap.actions.ActionInitialize)
+      .payloadBuilder(globalFlexioImport.io.flexio.component_bootstrap.actions.ActionInitializeBuilder)
+      .dispatcher(this.__dispatcher)
+      .build()
+
     console.log(this.__action)
     return this
   }
