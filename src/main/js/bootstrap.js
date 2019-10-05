@@ -11,7 +11,7 @@ const appStylesConfig = AppStyles.build(logger)
 
 export const APP = new App(
   'CounterApplication',
-  new AppDispatcher(),
+  new AppDispatcher(logger),
   logger
 )
 const HTML_NODE = document.body

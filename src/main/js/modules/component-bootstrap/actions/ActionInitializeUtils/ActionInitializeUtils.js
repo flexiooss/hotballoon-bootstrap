@@ -31,7 +31,6 @@ export class ActionInitializeUtils {
   init() {
     this.__action = new ActionDispatcherBuilder()
       .type(globalFlexioImport.io.flexio.component_bootstrap.actions.ActionInitialize)
-      .payloadBuilder(globalFlexioImport.io.flexio.component_bootstrap.actions.ActionInitializeBuilder)
       .dispatcher(this.__dispatcher)
       .build()
 

@@ -26,7 +26,6 @@ export class ActionIncrementCounterUtils {
   init() {
     this.__action = new ActionDispatcherBuilder()
       .type(globalFlexioImport.io.flexio.component_counter.actions.ActionIncrementCounter)
-      .payloadBuilder(globalFlexioImport.io.flexio.component_counter.actions.ActionIncrementCounterBuilder)
       .dispatcher(this.__dispatcher)
       .build()
 

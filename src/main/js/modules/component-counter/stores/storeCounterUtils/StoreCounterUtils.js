@@ -16,7 +16,6 @@ export class StoreCounterUtils {
     this.__store = this.__componentContext.addStore(
       new InMemoryStoreBuilder()
         .type(globalFlexioImport.io.flexio.component_counter.stores.StoreCounter)
-        .typeBuilder(globalFlexioImport.io.flexio.component_counter.stores.StoreCounterBuilder)
         .initialData(
           new globalFlexioImport.io.flexio.component_counter.stores
             .StoreCounterBuilder()

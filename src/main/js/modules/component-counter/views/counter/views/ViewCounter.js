@@ -1,7 +1,7 @@
 import {
   View,
   e,
-  ElementEventListenerBuilder,
+  ElementEventListenerConfigBuilder,
   ViewPublicEventHandler,
   OrderedEventListenerConfigBuilder,
   RECONCILIATION_RULES
@@ -58,7 +58,7 @@ export class ViewCounter extends View {
                   {value: 'Inc', type: 'button'}
                 )
                 .listenEvent(
-                  ElementEventListenerBuilder
+                  ElementEventListenerConfigBuilder
                     .listen('click')
                     .callback((e) => {
                       this.dispatch(INCREMENT_EVENT, null)
