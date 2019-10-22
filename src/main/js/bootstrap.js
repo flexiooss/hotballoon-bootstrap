@@ -1,5 +1,4 @@
-import {App} from './app/App'
-import {AppDispatcher} from './app/AppDispatcher'
+import {ApplicationBuilder, Dispatcher} from '@flexio-oss/hotballoon'
 import {ConsoleLogger, FakeLogger} from '@flexio-oss/js-logger'
 
 import {ComponentBootstrapBuilder} from './modules/component-bootstrap'
@@ -9,11 +8,13 @@ const logger = new ConsoleLogger().debug()
 
 const appStylesConfig = AppStyles.build(logger)
 
-export const APP = new App(
-  'CounterApplication',
-  new AppDispatcher(logger),
-  logger
-)
+export const APP = new ApplicationBuilder()
+  .id('CounterApplication')
+  .logger(logger)
+  .dispatcher(new Dispatcher(logger))
+  .document(document)
+  .build()
+
 const HTML_NODE = document.body
 
 ;(function(app) {
