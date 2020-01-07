@@ -38,10 +38,23 @@ export class ActionInitializeUtils {
     return this
   }
 
-  listen() {
+  action() {
+    return this.__action
+  }
+
+  /**
+   *
+   * @param {ComponentContext} componentContext
+   * @return {ActionInitializeUtils}
+   */
+  listen(componentContext) {
     assertType(!isNull(this.__action),
       'ActionInitializeUtils:listen: action should be initialize before using it'
     )
+    
+    console.log(componentContext)
+    
+    
     this.__action.listenWithCallback(
       /**
        *
@@ -55,12 +68,9 @@ export class ActionInitializeUtils {
             this.__appStylesConfig,
             this.__parentElement)
           .mountView()
-      }
+      },
+      componentContext
     )
     return this
-  }
-
-  action() {
-    return this.__action
   }
 }

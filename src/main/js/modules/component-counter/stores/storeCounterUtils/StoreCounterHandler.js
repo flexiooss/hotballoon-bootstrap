@@ -14,7 +14,7 @@ export class StoreCounterHandler {
 
   increment() {
     this.__store.set(
-      this.__store.state().data
-        .withCount(this.__store.state().data.count() + 1))
+      this.__store.state().data()
+        .withCount(this.__store.state().data().count() + 1))
   }
 }

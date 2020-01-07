@@ -49,11 +49,11 @@ export class ViewCounter extends View {
         this.html(
           e('div').childNodes(
             this.html(
-              e('span#Counter' + this.__appStylesConfig.color.colorInfo).text(this._addCounter())
+              e('span#Counter.' + this.__appStylesConfig.color.colorInfo()).text(this._addCounter())
             ),
 
             this.html(
-              e('input#increment' + this.__appStylesConfig.border.borderLight)
+              e('input#increment.' + this.__appStylesConfig.border.borderLight())
                 .attributes(
                   {value: 'Inc', type: 'button'}
                 )

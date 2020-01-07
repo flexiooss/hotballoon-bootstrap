@@ -4,99 +4,111 @@ import {AppStylesConfig} from './AppStylesConfig'
 
 const styleSheetMediaAll = new globalFlexioImport.io.flexio.stylist.types.StyleSheetMediaBuilder()
   .name('all')
-  .medias(
-    new globalFlexioImport.io.flexio.extended_flex_types.StringArrayBuilder()
-      .pushValue('all')
-      .build()
-  )
+  .medias(new globalFlexioImport.io.flexio.flex_types.arrays.StringArray('all'))
   .build()
 
 const styleSheetMediaPrint = new globalFlexioImport.io.flexio.stylist.types.StyleSheetMediaBuilder()
   .name('print')
-  .medias(
-    new globalFlexioImport.io.flexio.extended_flex_types.StringArrayBuilder()
-      .pushValue('print')
-      .build()
-  )
+  .medias(new globalFlexioImport.io.flexio.flex_types.arrays.StringArray('print'))
   .build()
 
-class Color extends globalFlexioImport.io.flexio.stylist.types.Style {
 
-  get colorAlert() {
-    return this._css('.color-main')
-      .rule(
-        styleSheetMediaAll,
-        {
-          'color': 'red',
-          'background-color': 'black',
-        }
-      ).rule(
+class Color extends globalFlexioImport.io.flexio.stylist.types.Style {
+  constructor() {
+    super()
+
+    this._addStyleRules(
+      this._cssBuilder([this.colorAlert()])
+        .styleSheetMediaRules(
+          styleSheetMediaAll,
+          {
+            'color': 'red',
+            'background-color': 'black',
+          }
+        ).styleSheetMediaRules(
         styleSheetMediaPrint,
         {
           'color': 'red'
         }
-      )
-      .build()
-  }
-
-  get colorInfo() {
-    return this._css('.color-info')
-      .rule(
-        styleSheetMediaAll,
-        {
-          'color': 'blue',
-          'background-color': '#c1efdb',
-        }
-      )
-      .rule(
+        )
+        .build()
+      ,
+      this._cssBuilder([this.colorInfo()])
+        .styleSheetMediaRules(
+          styleSheetMediaAll,
+          {
+            'color': 'blue',
+            'background-color': 'red',
+          }
+        ).styleSheetMediaRules(
         styleSheetMediaPrint,
         {
           'color': 'blue'
         }
-      )
-      .build()
+        )
+        .build()
+    )
+  }
+
+  colorAlert() {
+    return this._selector('.color-main')
+  }
+
+  colorInfo() {
+    return this._selector('.color-info')
   }
 }
 
-class Border extends globalFlexioImport.io.flexio.stylist.types.Style {
 
-  get borderLight() {
-    return this._css('.color')
-      .rule(
-        styleSheetMediaAll,
-        {
-          'color': 'red',
-          'background-color': 'pink',
-        }
-      ).rule(
+class Border extends globalFlexioImport.io.flexio.stylist.types.Style {
+  constructor() {
+    super()
+
+    this._addStyleRules(
+      this._cssBuilder([this.borderLight()])
+        .styleSheetMediaRules(
+          styleSheetMediaAll,
+          {
+            'color': 'red',
+            'background-color': 'pink',
+          }
+        ).styleSheetMediaRules(
         styleSheetMediaPrint,
         {
           'color': 'red',
           'background-color': 'black',
         }
-      )
-      .build()
+        )
+        .build()
+      ,
+      this._cssBuilder([this.color2()])
+        .styleSheetMediaRules(
+          styleSheetMediaAll,
+          {
+            'color': 'blue',
+            'background-color': '#ef3d8d',
+          }
+        )
+        .styleSheetMediaRules(
+          styleSheetMediaPrint,
+          {
+            'color': 'red',
+            'background-color': 'pink',
+          }
+        )
+        .build()
+    )
   }
 
-  get color2() {
-    return this._css('.color-2')
-      .rule(
-        styleSheetMediaAll,
-        {
-          'color': 'blue',
-          'background-color': '#ef3d8d',
-        }
-      )
-      .rule(
-        styleSheetMediaPrint,
-        {
-          'color': 'red',
-          'background-color': 'pink',
-        }
-      )
-      .build()
+  borderLight() {
+    return this._selector('.color')
+  }
+
+  color2() {
+    return this._selector('.color-2')
   }
 }
+
 
 export class AppStyles {
   /**
@@ -116,6 +128,15 @@ export class AppStyles {
 
   /**
    *
+   * @param {Style} style
+   * @return {Style}
+   */
+  register(style) {
+    return this.__styleHandler.register(style)
+  }
+
+  /**
+   *
    * @param {LoggerInterface} logger
    * @return {AppStylesConfig}
    */
@@ -123,11 +144,7 @@ export class AppStyles {
     const appStyles = new AppStyles(logger)
 
     return new AppStylesConfig(
-      appStyles.__styleHandler.register(
-        new Color()
-      ),
-      appStyles.__styleHandler.register(
-        new Border())
-    )
+      appStyles.register(new Color()),
+      appStyles.register(new Border()))
   }
 }

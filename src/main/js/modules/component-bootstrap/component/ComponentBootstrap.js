@@ -3,6 +3,7 @@ import {isNode, assertType} from '@flexio-oss/assert'
 import {globalFlexioImport} from '@flexio-oss/global-import-registry'
 import {ActionInitializeUtils} from '../actions/ActionInitializeUtils/ActionInitializeUtils'
 
+
 export class ComponentBootstrap {
   /**
    *
@@ -21,8 +22,23 @@ export class ComponentBootstrap {
       typeof parentNode
     )
 
+    /**
+     *
+     * @type {ComponentContext}
+     * @private
+     */
     this.__componentContext = componentContext
+    /**
+     *
+     * @type {AppStylesConfig}
+     * @private
+     */
     this.__appStylesConfig = appStylesConfig
+    /**
+     *
+     * @type {Element}
+     * @private
+     */
     this.__parentNode = parentNode
   }
 
@@ -36,7 +52,9 @@ export class ComponentBootstrap {
       this.__componentContext.APP(),
       this.__appStylesConfig,
       this.__parentNode
-    ).init().listen()
+    )
+      .init()
+      .listen(this.__componentContext)
     return this
   }
 

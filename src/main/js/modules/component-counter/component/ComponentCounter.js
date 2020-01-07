@@ -4,12 +4,13 @@ import {ActionIncrementCounterUtils} from '../actions/ActionIncrementCounterUtil
 import {StoreCounterUtils} from '../stores/storeCounterUtils/StoreCounterUtils'
 import {ViewContainerCounterUtils} from '../views/counter/ViewContainerCounterUtils'
 
+
 export class ComponentCounter {
   /**
    *
    * @param {ComponentContext} componentContext
    * @param {AppStylesConfig} appStylesConfig
-   * @param {Node} parentNode
+   * @param {Element} parentNode
    */
   constructor(componentContext, appStylesConfig, parentNode) {
     assertType(
@@ -20,11 +21,36 @@ export class ComponentCounter {
       'ComponentBootstrap:constructor: `parentNode` argument should be NodeType'
     )
 
+    /**
+     *
+     * @type {ComponentContext}
+     * @private
+     */
     this.__componentContext = componentContext
+    /**
+     *
+     * @type {AppStylesConfig}
+     * @private
+     */
     this.__appStylesConfig = appStylesConfig
+    /**
+     *
+     * @type {Element}
+     * @private
+     */
     this.__parentNode = parentNode
 
+    /**
+     *
+     * @type {?StoreCounterUtils}
+     * @private
+     */
     this.__storeCounter = null
+    /**
+     *
+     * @type {?ActionIncrementCounterUtils}
+     * @private
+     */
     this.__actionIncrement = null
   }
 
@@ -47,7 +73,10 @@ export class ComponentCounter {
     this.__actionIncrement = new ActionIncrementCounterUtils(
       this.__componentContext.dispatcher(),
       this.__storeCounter.store()
-    ).init().listen()
+    )
+      .init()
+      .listen(this.__componentContext)
+
     return this
   }
 
@@ -74,6 +103,6 @@ export class ComponentCounter {
       this.__storeCounter.storePublic()
     )
       .init()
-      .renderAndMount(this.__parentNode)
+      .renderAndMount()
   }
 }

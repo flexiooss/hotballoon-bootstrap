@@ -32,7 +32,12 @@ export class ActionIncrementCounterUtils {
     return this
   }
 
-  listen() {
+  /**
+   *
+   * @param {ComponentContext} componentContext
+   * @return {ActionIncrementCounterUtils}
+   */
+  listen(componentContext) {
     assertType(!isNull(this.__action),
       'ActionIncrementCounterUtils:listen: action should be initialize before using it'
     )
@@ -45,7 +50,8 @@ export class ActionIncrementCounterUtils {
        */
       (payload) => {
         storeHandler.increment()
-      }
+      },
+      componentContext
     )
     return this
   }
