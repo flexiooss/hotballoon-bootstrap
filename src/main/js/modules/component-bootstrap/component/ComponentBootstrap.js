@@ -8,10 +8,10 @@ export class ComponentBootstrap {
   /**
    *
    * @param {ComponentContext} componentContext
-   * @param {AppStylesConfig} appStylesConfig
+   * @param {ThemeStyle} themeStyle
    * @param {Element} parentNode
    */
-  constructor(componentContext, appStylesConfig, parentNode) {
+  constructor(componentContext, themeStyle, parentNode) {
     assertType(TypeCheck.isComponentContext(componentContext),
       'ComponentBootstrap:constructor: `componentContext` argument should be a ComponentContext, %s given',
       typeof componentContext
@@ -30,10 +30,10 @@ export class ComponentBootstrap {
     this.__componentContext = componentContext
     /**
      *
-     * @type {AppStylesConfig}
+     * @type {ThemeStyle}
      * @private
      */
-    this.__appStylesConfig = appStylesConfig
+    this.__themeStyle = themeStyle
     /**
      *
      * @type {Element}
@@ -50,7 +50,7 @@ export class ComponentBootstrap {
     this.__actionInitialize = new ActionInitializeUtils(
       this.__componentContext.dispatcher(),
       this.__componentContext.APP(),
-      this.__appStylesConfig,
+      this.__themeStyle,
       this.__parentNode
     )
       .init()

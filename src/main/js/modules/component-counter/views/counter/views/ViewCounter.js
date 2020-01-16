@@ -7,19 +7,22 @@ import {
   RECONCILIATION_RULES
 } from '@flexio-oss/hotballoon'
 import {assertType, isFunction} from '@flexio-oss/assert'
+import {FlexioIconsTheme} from '../../../../../../../../../../../__iconist/flexio-icons-theme'
+
 
 const INCREMENT_EVENT = 'INCREMENT_EVENT'
+
 
 export class ViewCounter extends View {
   /**
    *
    * @param {ViewContainerBase} container
-   * @param {AppStylesConfig} appStylesConfig
+   * @param {ThemeStyle} themeStyle
    * @param {ContainerStoreCounter} counterContainerStores
    */
-  constructor(container, appStylesConfig, counterContainerStores) {
+  constructor(container, themeStyle, counterContainerStores) {
     super(container)
-    this.__appStylesConfig = appStylesConfig
+    this.__themeStyle = themeStyle
     /**
      *
      * @params {ContainerStoreCounter}
@@ -27,6 +30,8 @@ export class ViewCounter extends View {
      */
     this.__stores = counterContainerStores
     this.subscribeToStore(this.__stores.counterStore)
+
+    this.__icons = new FlexioIconsTheme(this.__themeStyle.color())
   }
 
   /**
@@ -44,19 +49,27 @@ export class ViewCounter extends View {
    * @return {Element}
    */
   template() {
+
+    const iconContainer = this.html(e('span#myCross')
+      .reconciliationRules(RECONCILIATION_RULES.BYPASS_CHILDREN))
+
     return this.html(
       e('main#main').childNodes(
+        ((this.__stores.counterStore.data().count() % 2 === 0)
+          ? this.__icons.applyTo(iconContainer, 'close').cross().big().dark()
+          : this.__icons.applyTo(iconContainer, 'close').cross().small().danger()),
         this.html(
           e('div').childNodes(
             this.html(
-              e('span#Counter.' + this.__appStylesConfig.color.colorInfo()).text(this._addCounter())
+              e('span#Counter.' + this.__themeStyle.color().focus()).text(this._addCounter())
             ),
 
             this.html(
-              e('input#increment.' + this.__appStylesConfig.border.borderLight())
+              e('input#increment.' + this.__themeStyle.button().button())
                 .attributes(
                   {value: 'Inc', type: 'button'}
                 )
+                .className(this.__themeStyle.button().white())
                 .listenEvent(
                   ElementEventListenerConfigBuilder
                     .listen('click')
@@ -86,6 +99,7 @@ export class ViewCounter extends View {
     }
   }
 }
+
 
 class ViewCounterEvent extends ViewPublicEventHandler {
   /**

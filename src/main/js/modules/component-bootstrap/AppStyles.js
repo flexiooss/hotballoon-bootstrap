@@ -1,6 +1,6 @@
 import {Stylist} from '@flexio-oss/stylist'
 import {globalFlexioImport} from '@flexio-oss/global-import-registry'
-import {AppStylesConfig} from './AppStylesConfig'
+import {themeAppFlexio} from "@flexio-corp/theme-app-flexio"
 
 const styleSheetMediaAll = new globalFlexioImport.io.flexio.stylist.types.StyleSheetMediaBuilder()
   .name('all')
@@ -11,103 +11,6 @@ const styleSheetMediaPrint = new globalFlexioImport.io.flexio.stylist.types.Styl
   .name('print')
   .medias(new globalFlexioImport.io.flexio.flex_types.arrays.StringArray('print'))
   .build()
-
-
-class Color extends globalFlexioImport.io.flexio.stylist.types.Style {
-  constructor() {
-    super()
-
-    this._addStyleRules(
-      this._cssBuilder([this.colorAlert()])
-        .styleSheetMediaRules(
-          styleSheetMediaAll,
-          {
-            'color': 'red',
-            'background-color': 'black',
-          }
-        ).styleSheetMediaRules(
-        styleSheetMediaPrint,
-        {
-          'color': 'red'
-        }
-        )
-        .build()
-      ,
-      this._cssBuilder([this.colorInfo()])
-        .styleSheetMediaRules(
-          styleSheetMediaAll,
-          {
-            'color': 'blue',
-            'background-color': 'red',
-          }
-        ).styleSheetMediaRules(
-        styleSheetMediaPrint,
-        {
-          'color': 'blue'
-        }
-        )
-        .build()
-    )
-  }
-
-  colorAlert() {
-    return this._selector('.color-main')
-  }
-
-  colorInfo() {
-    return this._selector('.color-info')
-  }
-}
-
-
-class Border extends globalFlexioImport.io.flexio.stylist.types.Style {
-  constructor() {
-    super()
-
-    this._addStyleRules(
-      this._cssBuilder([this.borderLight()])
-        .styleSheetMediaRules(
-          styleSheetMediaAll,
-          {
-            'color': 'red',
-            'background-color': 'pink',
-          }
-        ).styleSheetMediaRules(
-        styleSheetMediaPrint,
-        {
-          'color': 'red',
-          'background-color': 'black',
-        }
-        )
-        .build()
-      ,
-      this._cssBuilder([this.color2()])
-        .styleSheetMediaRules(
-          styleSheetMediaAll,
-          {
-            'color': 'blue',
-            'background-color': '#ef3d8d',
-          }
-        )
-        .styleSheetMediaRules(
-          styleSheetMediaPrint,
-          {
-            'color': 'red',
-            'background-color': 'pink',
-          }
-        )
-        .build()
-    )
-  }
-
-  borderLight() {
-    return this._selector('.color')
-  }
-
-  color2() {
-    return this._selector('.color-2')
-  }
-}
 
 
 export class AppStyles {
@@ -128,23 +31,20 @@ export class AppStyles {
 
   /**
    *
-   * @param {Style} style
-   * @return {Style}
+   * @return {Stylist}
    */
-  register(style) {
-    return this.__styleHandler.register(style)
+  stylist() {
+    return this.__styleHandler
   }
 
   /**
    *
    * @param {LoggerInterface} logger
-   * @return {AppStylesConfig}
+   * @return {ThemeStyle}
    */
   static build(logger) {
     const appStyles = new AppStyles(logger)
+    return themeAppFlexio.register(appStyles.stylist())
 
-    return new AppStylesConfig(
-      appStyles.register(new Color()),
-      appStyles.register(new Border()))
   }
 }

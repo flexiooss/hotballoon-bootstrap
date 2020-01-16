@@ -8,11 +8,11 @@ export class ComponentCounterBuilder {
    *
    * @param {string} message
    * @param {HotBalloonApplication} APP
-   * @param {AppStylesConfig} appStylesConfig
+   * @param {ThemeStyle} themeStyle
    * @param {Element} parentNode
    * @return {ComponentCounterPublic}
    */
-  static buildSimpleWithMessage(message, APP, appStylesConfig, parentNode) {
+  static buildSimpleWithMessage(message, APP, themeStyle, parentNode) {
     assertType(TypeCheck.isHotballoonApplication(APP),
       'ComponentCounterBuilder:constructor: `APP` argument should be an instanceof HotballoonApplication, %s given',
       typeof APP)
@@ -25,7 +25,7 @@ export class ComponentCounterBuilder {
     return new ComponentCounterPublic(
       new ComponentCounter(
         APP.addComponentContext(),
-        appStylesConfig,
+        themeStyle,
         parentNode
       )
         .setEventLoop()

@@ -9,10 +9,10 @@ export class ComponentCounter {
   /**
    *
    * @param {ComponentContext} componentContext
-   * @param {AppStylesConfig} appStylesConfig
+   * @param {ThemeStyle} themeStyle
    * @param {Element} parentNode
    */
-  constructor(componentContext, appStylesConfig, parentNode) {
+  constructor(componentContext, themeStyle, parentNode) {
     assertType(
       TypeCheck.isComponentContext(componentContext),
       'ComponentBootstrap:constructor: `componentContext` argument should be an instanceof ComponentContext'
@@ -29,10 +29,10 @@ export class ComponentCounter {
     this.__componentContext = componentContext
     /**
      *
-     * @type {AppStylesConfig}
+     * @type {ThemeStyle}
      * @private
      */
-    this.__appStylesConfig = appStylesConfig
+    this.__themeStyle = themeStyle
     /**
      *
      * @type {Element}
@@ -97,7 +97,7 @@ export class ComponentCounter {
     )
     const viewContainer = new ViewContainerCounterUtils(
       this.__componentContext,
-      this.__appStylesConfig,
+      this.__themeStyle,
       this.__parentNode,
       this.__actionIncrement.action(),
       this.__storeCounter.storePublic()

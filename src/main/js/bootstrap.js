@@ -6,7 +6,7 @@ import {AppStyles} from './modules/component-bootstrap/AppStyles'
 
 const logger = new ConsoleLogger().debug()
 
-const appStylesConfig = AppStyles.build(logger)
+const themeStyle = AppStyles.build(logger)
 
 export const APP = new ApplicationBuilder()
   .id('CounterApplication')
@@ -21,7 +21,7 @@ const HTML_NODE = document.body
   ComponentBootstrapBuilder
     .build(
       app,
-      appStylesConfig,
+      themeStyle,
       HTML_NODE
     )
     .dispatchActionInitialize('Rutabaga !!!')

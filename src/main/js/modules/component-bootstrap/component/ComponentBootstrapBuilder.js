@@ -8,19 +8,16 @@ export class ComponentBootstrapBuilder {
   /**
    *
    * @param {HotBalloonApplication} APP
-   * @param {AppStylesConfig} appStylesConfig
+   * @param {ThemeStyle} themeStyle
    * @param {Element} parentNode
    * @return {ComponentBootstrapPublic}
    */
-  static build(APP, appStylesConfig, parentNode) {
+  static build(APP, themeStyle, parentNode) {
     assertType(TypeCheck.isHotballoonApplication(APP),
       'ComponentBootstrapBuilder:constructor: `APP` argument should be an instanceof HotballoonApplication, %s given',
       typeof APP)
 
-    assertType(
-      appStylesConfig instanceof AppStylesConfig,
-      'ComponentBootstrapBuilder:constructor: `appStylesConfig` argument should be an instanceof AppStylesConfig'
-    )
+
 
     assertType(!!isNode(parentNode),
       'ComponentBootstrapBuilder:constructor: `parentNode` argument should be NodeType, %s given',
@@ -29,7 +26,7 @@ export class ComponentBootstrapBuilder {
     return new ComponentBootstrapPublic(
       new ComponentBootstrap(
         APP.addComponentContext(),
-        appStylesConfig,
+        themeStyle,
         parentNode
       ).setEventLoop()
     )

@@ -8,12 +8,12 @@ export class ViewContainerCounterUtils {
   /**
    *
    * @param {ComponentContext} componentContext
-   * @param {AppStylesConfig} appStylesConfig
+   * @param {ThemeStyle} themeStyle
    * @param {Element} parentNode
    * @param {ActionDispatcher<ActionIncrementCounter>} action
    * @param {PublicStoreHandler<StoreCounter>} store
    */
-  constructor(componentContext, appStylesConfig, parentNode, action, store) {
+  constructor(componentContext, themeStyle, parentNode, action, store) {
     assertType(TypeCheck.isComponentContext(componentContext),
       'ViewContainerCounterUtils:constructor: `componentContext` should be a ComponentContext'
     )
@@ -27,7 +27,7 @@ export class ViewContainerCounterUtils {
       'ViewContainerCounterUtils:constructor: `store` should be a Store'
     )
     this.__componentContext = componentContext
-    this.__appStylesConfig = appStylesConfig
+    this.__themeStyle = themeStyle
     this.__parentNode = parentNode
     this.__action = action
     this.__store = store
@@ -47,7 +47,7 @@ export class ViewContainerCounterUtils {
           VIEWCONTAINER_ID,
           this.__parentNode
         ),
-        this.__appStylesConfig,
+        this.__themeStyle,
         new ContainerStoreCounter(this.__store),
         new ContainerActionCounter(this.__action)
       )
