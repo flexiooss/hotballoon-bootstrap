@@ -9,7 +9,7 @@ class TestExampleTest extends TestCase {
   }
 
   testSecondThink() {
-    assert.doesNotThrow(() => {
+    assert.throws(() => {
       throw Error('Learn more : https://github.com/flexiooss/code-altimeter-js')
     },
     'Ah ah !!!')
