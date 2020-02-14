@@ -4,8 +4,6 @@
 ## Required
 - Nodejs v8+
 [installation](https://docs.npmjs.com/getting-started/installing-node)
-- Yarn v1.5+
-[installation](https://yarnpkg.com/en/docs/install)
 
 
 ## Installation
@@ -14,18 +12,23 @@
 
 ```sh
 $ cd path/to/the/repository
-$ yarn install
-$ yarn --check-files
-$ yarn run dev
+$ hbshed cig
 ```
-- Enjoy with [localhost:8080](https://localhost:8080)
+- Enjoy with [ui.flexio.io](https://ui.flexio.io:8080)
 
-## Development Yarn commands
+## Run demo
 - **Run development server in [localhost:8080](https://localhost:8080)**
 ```sh
-$ yarn run dev
+$ hbshed dev
 ```
 - **Run the build for merge and concat files into /dist folder**
 ```sh
-$ yarn run build
+$ hbshed build
+```
+
+## Application builder
+
+```javascript
+
+
 ```

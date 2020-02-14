@@ -1,5 +1,5 @@
 {
-  "name": "hotballoon-bootstrap",
+  "name": "@flexio-oss/hotballoon-bootstrap",
   "version": "1.0.0-dev",
   "main": "index.js",
   "repository": "git@github.com:Flexio-corp/hotballoon-bootstrap.git",
@@ -9,33 +9,28 @@
   },
   "dependencies": {
     "@flexio-corp/hotballoon-app-parent": "0.1.0-dev",
-    "@flexio-corp/theme-app-flexio": "0.1.0-dev"
+    "@flexio-corp/theme-app-flexio": "0.1.0-dev",
+    "@flexio-oss/simple-dom-notifier": "1.0.0-dev",
+    "@flexio-corp/hbservice-environment": "1.0.0-dev",
+    "keycloak-js": "8.0.0",
+    "@flexio-oss/js-keycloack-http-requester": "1.0.0-dev",
+    "@flexio-corp/application-environment-ui": "1.0.0-dev"
   },
   "hotballoon-shed": {
     "build": {
       "builder": "webpack4",
       "entries": [
-        "src/main/js/bootstrap.js"
+        "src/demo/js/bootstrap.js"
       ],
-      "html_template": "src/main/js/index.html",
+      "html_template": "src/demo/js/index.html",
       "output": "./dist"
     },
     "dev": {
       "entries": [
-        "src/main/js/bootstrap.js"
+        "src/demo/js/bootstrap.js"
       ],
       "server": {
-        "host": "ui.flexio.io",
-        "proxy": {
-          "/api": {
-            "target": "https://api.flexio.io",
-            "pathRewrite": {
-              "^/api": ""
-            },
-            "secure": true,
-            "changeOrigin": true
-          }
-        }
+        "host": "ui.flexio.io"
       }
     },
     "test": {
@@ -43,8 +38,8 @@
       "path": "src/test"
     },
     "modules": {
-      "component-bootstrap": "src/main/js/modules/component-bootstrap",
-      "component-counter": "src/main/js/modules/component-counter"
+      "component-bootstrap": "src/demo/js/modules/component-bootstrap",
+      "component-counter": "src/demo/js/modules/component-counter"
     }
   }
 }
