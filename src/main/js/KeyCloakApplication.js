@@ -174,6 +174,8 @@ export class KeyCloakApplicationBuilder {
       .duration(7000)
       .styles(this.__themeStyle)
       .build()
+
+    return this
   }
 
   /**
