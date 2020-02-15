@@ -2,7 +2,7 @@ import * as Keycloak from 'keycloak-js'
 import {globalFlexioImport} from '@flexio-oss/global-import-registry'
 import {styleSheetMediaAll} from '@flexio-oss/js-style-theme-interface'
 import {themeAppFlexio} from '@flexio-corp/theme-app-flexio'
-import {SimpleNotifierBuilder} from '@flexio-oss/simple-dom-notifier'
+import {SimpleNotifierBuilder, NotifierBuilder} from '@flexio-oss/simple-dom-notifier'
 import {KeycloakExecutor, XmlHttpRequester} from '@flexio-oss/js-keycloack-http-requester'
 import {EnvironmentService} from '@flexio-corp/hbservice-environment'
 import {ApplicationBuilder, Dispatcher} from '@flexio-oss/hotballoon'
@@ -36,7 +36,7 @@ export class KeyCloakApplicationBuilder {
      * @private
      */
     this.__keycloak = Keycloak(
-        this.__env.config().keycloak().toObject()
+      this.__env.config().keycloak().toObject()
     )
 
     /**
@@ -79,6 +79,12 @@ export class KeyCloakApplicationBuilder {
      * @type {?SimpleNotifierPublic}
      */
     this.__loadingNotifierService = null
+
+    /**
+     *
+     * @type {?NotifierService}
+     */
+    this.__notifierService = null
     /**
      *
      * @type {?EnvironmentService}
@@ -159,6 +165,21 @@ export class KeyCloakApplicationBuilder {
    *
    * @return {KeyCloakApplicationBuilder}
    */
+  withNotifierService() {
+    /**
+     *
+     * @type {NotifierService}
+     */
+    this.__notifierService = new NotifierBuilder()
+      .duration(7000)
+      .styles(this.__themeStyle)
+      .build()
+  }
+
+  /**
+   *
+   * @return {KeyCloakApplicationBuilder}
+   */
   withXhtmlRequester() {
     this.__requester = () => {
       const executor = new KeycloakExecutor(
@@ -209,6 +230,10 @@ export class KeyCloakApplicationBuilder {
 
     if (!isNull(this.__loadingNotifierService)) {
       this.__hotballoonApplication.addService(this.__loadingNotifierService)
+    }
+
+    if (!isNull(this.__notifierService)) {
+      this.__hotballoonApplication.addService(this.__notifierService)
     }
 
     return new KeyCloakApplication(
@@ -471,7 +496,7 @@ class KeyCloakApplication {
     this.__info(this.__config.name() + ':INIT')
 
     this.__config.keycloack()
-      .init( Object.assign(
+      .init(Object.assign(
         {promiseType: 'native'},
         this.__config.env().config().keycloak().toObject()
       ))
