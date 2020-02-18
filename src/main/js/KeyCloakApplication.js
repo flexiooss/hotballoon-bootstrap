@@ -544,14 +544,17 @@ class KeyCloakApplication {
           throw new Error('Access denied')
         }
 
-        const canAccessApp = this.__config.keycloack().hasResourceRole(
-          this.__config.env().config().keycloak().accessRole(),
-          this.__config.env().config().keycloak().clientId()
-        )
+        if (!isNull(this.__config.env().config().keycloak().accessRole())) {
 
-        if (!canAccessApp) {
-          this.__error('Access denied : BAD_ACCESS_ROLE')
-          throw new Error('Access denied')
+          const canAccessApp = this.__config.keycloack().hasResourceRole(
+            this.__config.env().config().keycloak().accessRole(),
+            this.__config.env().config().keycloak().clientId()
+          )
+
+          if (!canAccessApp) {
+            this.__error('Access denied : BAD_ACCESS_ROLE')
+            throw new Error('Access denied')
+          }
         }
 
         this.__info('Authenticated and can access !')
