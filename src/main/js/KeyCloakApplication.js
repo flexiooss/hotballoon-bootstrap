@@ -51,6 +51,9 @@ export class KeyCloakApplicationBuilder {
      * @private
      */
     this.__logger = null
+
+    this.__ensureLogger().__ensureLoggerLevel()
+
     /**
      * @type {?function():XmlHttpRequester}
      * @private
@@ -103,23 +106,55 @@ export class KeyCloakApplicationBuilder {
     return this
   }
 
-  withConsoleLogger() {
-    this.__logger = new ConsoleLogger()
+  /**
+   *
+   * @return {KeyCloakApplicationBuilder}
+   * @private
+   */
+  __ensureLogger() {
+    if (this.__env.config().log() === globalFlexioImport.io.flexio.application_environment_ui.types.envconfig.EnvConfigLog.CONSOLE) {
+
+      this.__logger = new ConsoleLogger()
+    } else if (this.__env.config().log() === globalFlexioImport.io.flexio.application_environment_ui.types.envconfig.EnvConfigLog.SERVICE) {
+      throw new Error('Not implmented yet')
+//      this.__logger = new ConsoleLogger()
+    } else {
+      this.__logger = new FakeLogger()
+    }
+
     return this
   }
 
-  withLoggerLevelDebug() {
-    this.__logger = this.__logger.debug()
+  /**
+   *
+   * @return {KeyCloakApplicationBuilder}
+   * @private
+   */
+  __ensureLoggerLevel() {
+    if (this.__env.config().logLevel() === globalFlexioImport.io.flexio.application_environment_ui.types.envconfig.EnvConfigLogLevel.DEBUG) {
+      this.__logger = this.__logger.debug()
+    } else if (this.__env.config().logLevel() === globalFlexioImport.io.flexio.application_environment_ui.types.envconfig.EnvConfigLogLevel.INFO) {
+      this.__logger = this.__logger.info()
+    } else if (this.__env.config().logLevel() === globalFlexioImport.io.flexio.application_environment_ui.types.envconfig.EnvConfigLogLevel.WARN) {
+      this.__logger = this.__logger.warn()
+    } else {
+      this.__logger = this.__logger.error()
+    }
+
     return this
   }
 
+  /**
+   *
+   * @return {KeyCloakApplicationBuilder}
+   */
   withStylist() {
     this.__stylist = new Stylist(
       this.__logger,
       new globalFlexioImport.io.flexio.stylist.types.StyleSheetMediaArrayBuilder()
         .pushValue(styleSheetMediaAll)
         .build(),
-      this.__env.config().obfuscateCSS()
+      isNull(this.__env.config().obfuscateCSS()) ? false : this.__env.config().obfuscateCSS()
     )
     return this
 
@@ -149,7 +184,7 @@ export class KeyCloakApplicationBuilder {
      * @type {SimpleNotifierPublic}
      */
     this.__loadingNotifierService = new SimpleNotifierBuilder()
-      .message('chargement...')
+      .message('chargement en cours...')
       .styles(this.__themeStyle)
       .build()
 
