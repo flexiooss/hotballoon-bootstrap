@@ -6,7 +6,7 @@ import {SimpleNotifierBuilder, NotifierBuilder} from '@flexio-oss/simple-dom-not
 import {KeycloakExecutor, XmlHttpRequester} from '@flexio-oss/js-keycloack-http-requester'
 import {EnvironmentService} from '@flexio-corp/hbservice-environment'
 import {ApplicationBuilder, Dispatcher} from '@flexio-oss/hotballoon'
-import {assertType, isNull, TypeCheck} from '@flexio-oss/assert'
+import {isNull, TypeCheck} from '@flexio-oss/assert'
 import {ConsoleLogger, FakeLogger} from '@flexio-oss/js-logger'
 import {Stylist} from '@flexio-oss/stylist'
 
@@ -241,7 +241,8 @@ export class KeyCloakApplicationBuilder {
 
     this.__environmentService = new EnvironmentService(
       new globalFlexioImport.io.flexio.hbservice_environment.type.EnvironmentBuilder()
-        .locale('fr-FR')
+        .locale(navigator.language || navigator.userLanguage)
+        .timezone(Intl.DateTimeFormat().resolvedOptions().timeZone)
         .build()
     )
 
