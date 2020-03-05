@@ -1,16 +1,19 @@
 import * as Keycloak from 'keycloak-js'
 import {globalFlexioImport} from '@flexio-oss/global-import-registry'
-import {styleSheetMediaAll} from '@flexio-oss/js-style-theme-interface'
 import {themeAppFlexio} from '@flexio-corp/theme-app-flexio'
-import {SimpleNotifierBuilder, NotifierBuilder} from '@flexio-oss/simple-dom-notifier'
+import {NotifierBuilder, SimpleNotifierBuilder} from '@flexio-oss/simple-dom-notifier'
 import {KeycloakExecutor, XmlHttpRequester} from '@flexio-oss/js-keycloack-http-requester'
 import {EnvironmentService} from '@flexio-corp/hbservice-environment'
 import {ApplicationBuilder, Dispatcher} from '@flexio-oss/hotballoon'
 import {isNull, TypeCheck} from '@flexio-oss/assert'
 import {ConsoleLogger, FakeLogger} from '@flexio-oss/js-logger'
 import {Stylist} from '@flexio-oss/stylist'
-import {styleSheetMediaDesktop, styleSheetMediaTablet} from '../../../../js-style-theme-interface'
-
+import {
+  styleSheetMediaAll,
+  styleSheetMediaDesktop,
+  styleSheetMediaPrint,
+  styleSheetMediaTablet
+} from '@flexio-oss/js-style-theme-interface'
 
 export class KeyCloakApplicationBuilder {
   /**
@@ -154,6 +157,7 @@ export class KeyCloakApplicationBuilder {
       this.__logger,
       new globalFlexioImport.io.flexio.stylist.types.StyleSheetMediaArrayBuilder()
         .pushValue(styleSheetMediaAll)
+        .pushValue(styleSheetMediaPrint)
         .pushValue(styleSheetMediaTablet)
         .pushValue(styleSheetMediaDesktop)
         .build(),
@@ -292,7 +296,6 @@ export class KeyCloakApplicationBuilder {
     )
   }
 }
-
 
 class KeyCloakApplicationConfig {
   /**
@@ -438,7 +441,6 @@ class KeyCloakApplicationConfig {
     this.__themeStyle = themeStyle
   }
 }
-
 
 class KeyCloakApplication {
   /**
