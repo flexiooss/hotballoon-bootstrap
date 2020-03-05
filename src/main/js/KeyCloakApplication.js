@@ -9,6 +9,7 @@ import {ApplicationBuilder, Dispatcher} from '@flexio-oss/hotballoon'
 import {isNull, TypeCheck} from '@flexio-oss/assert'
 import {ConsoleLogger, FakeLogger} from '@flexio-oss/js-logger'
 import {Stylist} from '@flexio-oss/stylist'
+import {styleSheetMediaDesktop, styleSheetMediaTablet} from '../../../../js-style-theme-interface'
 
 
 export class KeyCloakApplicationBuilder {
@@ -153,6 +154,8 @@ export class KeyCloakApplicationBuilder {
       this.__logger,
       new globalFlexioImport.io.flexio.stylist.types.StyleSheetMediaArrayBuilder()
         .pushValue(styleSheetMediaAll)
+        .pushValue(styleSheetMediaTablet)
+        .pushValue(styleSheetMediaDesktop)
         .build(),
       isNull(this.__env.config().obfuscateCSS()) ? false : this.__env.config().obfuscateCSS()
     )
