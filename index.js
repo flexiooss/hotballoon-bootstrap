@@ -1,2 +1,1 @@
-import './src/main/js/bootstrap'
-
+export {KeyCloakApplicationBuilder} from './src/main/js/KeyCloakApplication'

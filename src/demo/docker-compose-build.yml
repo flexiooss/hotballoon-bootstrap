@@ -1,0 +1,7 @@
+version: '3'
+
+services:
+  hotballoon-bootstrap-ui:
+    build:
+      context: .
+    image: ${DOCKER_REGISTRY:-localhost:5000}/flexio/hotballoon-bootstrap-ui:${VERSION}
